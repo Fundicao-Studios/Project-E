@@ -7,6 +7,8 @@ TagManager:
   - LeftHand
   - RightHand
   - Slot
+  - Hittable
+  - Enemy
   layers:
   - Default
   - TransparentFX

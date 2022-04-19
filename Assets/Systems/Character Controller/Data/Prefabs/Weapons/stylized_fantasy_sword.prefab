@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 7922661873268221884}
   - component: {fileID: 1196719384851246943}
   - component: {fileID: 2248869236793186457}
+  - component: {fileID: 7345242783810151340}
+  - component: {fileID: 2865588508198629673}
   m_Layer: 0
   m_Name: stylized_fantasy_sword
   m_TagString: Untagged
@@ -82,6 +84,32 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &7345242783810151340
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1685918844014086909}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.3222432, y: 6.5877724, z: 0.30688176}
+  m_Center: {x: 0.08529085, y: 2.283685, z: -0.00039726435}
+--- !u!114 &2865588508198629673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1685918844014086909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 240422f6a90d22c41b4436d87a846d95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentWeaponDamage: 25
 --- !u!1 &2336464281660163176
 GameObject:
   m_ObjectHideFlags: 0

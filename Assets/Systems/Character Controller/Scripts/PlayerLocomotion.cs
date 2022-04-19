@@ -219,16 +219,13 @@ public class PlayerLocomotion : MonoBehaviour
             }
         }
 
-        if (playerManager.isGrounded)
+        if (playerManager.isInteracting || inputManager.moveAmount > 0)
         {
-            if (playerManager.isInteracting || inputManager.moveAmount > 0)
-            {
-                transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime);
-            }
-            else
-            {
-                transform.position = targetPosition;
-            }
+            transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime / 0.1f);
+        }
+        else
+        {
+            transform.position = targetPosition;
         }
     }
 

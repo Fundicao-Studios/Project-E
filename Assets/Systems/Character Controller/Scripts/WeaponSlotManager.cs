@@ -7,8 +7,15 @@ public class WeaponSlotManager : MonoBehaviour
     WeaponHolderSlot leftHandSlot;
     WeaponHolderSlot rightHandSlot;
 
+    DamageCollider leftHandDamageCollider;
+    DamageCollider rightHandDamageCollider;
+
+    Animator animator;
+
     private void Awake()
     {
+        animator = GetComponent<Animator>();
+
         WeaponHolderSlot[] WeaponHolderSlots = GetComponentsInChildren<WeaponHolderSlot>();
         foreach (WeaponHolderSlot weaponSlot in WeaponHolderSlots)
         {
@@ -28,10 +35,66 @@ public class WeaponSlotManager : MonoBehaviour
         if (isLeft)
         {
             leftHandSlot.LoadWeaponModel(weaponItem);
+            LoadLeftWeaponDamageCollider();
+            #region Controlar As Animações De Idle Da Arma Da Mão Esquerda
+            if (weaponItem != null)
+            {
+                animator.CrossFade(weaponItem.left_hand_idle, 0.2f);
+            }
+            else
+            {
+                animator.CrossFade("Left Arm Empty", 0.2f);
+            }
+            #endregion
         }
         else
         {
             rightHandSlot.LoadWeaponModel(weaponItem);
+            LoadRightWeaponDamageCollider();
+            #region Controlar As Animações De Idle Da Arma Da Mão Direita
+            if (weaponItem != null)
+            {
+                animator.CrossFade(weaponItem.right_hand_idle, 0.2f);
+            }
+            else
+            {
+                animator.CrossFade("Right Arm Empty", 0.2f);
+            }
+            #endregion
         }
     }
+
+    #region Controlar os Damage Colliders das armas
+
+    private void LoadLeftWeaponDamageCollider()
+    {
+        leftHandDamageCollider = leftHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
+    }
+
+    private void LoadRightWeaponDamageCollider()
+    {
+        rightHandDamageCollider = rightHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
+    }
+
+    public void OpenRightDamageCollider()
+    {
+        rightHandDamageCollider.EnableDamageCollider();
+    }
+
+    public void OpenLeftDamageCollider()
+    {
+        leftHandDamageCollider.EnableDamageCollider();
+    }
+
+    public void CloseRightHandDamageCollider()
+    {
+        rightHandDamageCollider.DisableDamageCollider();
+    }
+
+    public void CloseLeftHandDamageCollider()
+    {
+        leftHandDamageCollider.DisableDamageCollider();
+    }
+
+    #endregion
 }
