@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class WeaponSlotManager : MonoBehaviour
 {
+    public WeaponItem attackingWeapon;
+
     WeaponHolderSlot leftHandSlot;
     WeaponHolderSlot rightHandSlot;
 
@@ -12,9 +14,15 @@ public class WeaponSlotManager : MonoBehaviour
 
     Animator animator;
 
+    QuickSlotsUI quickSlotsUI;
+
+    PlayerStats playerStats;
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        quickSlotsUI = FindObjectOfType<QuickSlotsUI>();
+        playerStats = GetComponent<PlayerStats>();
 
         WeaponHolderSlot[] WeaponHolderSlots = GetComponentsInChildren<WeaponHolderSlot>();
         foreach (WeaponHolderSlot weaponSlot in WeaponHolderSlots)
@@ -36,6 +44,7 @@ public class WeaponSlotManager : MonoBehaviour
         {
             leftHandSlot.LoadWeaponModel(weaponItem);
             LoadLeftWeaponDamageCollider();
+            quickSlotsUI.UpdateWeaponQuickSlotsUI(true, weaponItem);
             #region Controlar As Animações De Idle Da Arma Da Mão Esquerda
             if (weaponItem != null)
             {
@@ -51,6 +60,7 @@ public class WeaponSlotManager : MonoBehaviour
         {
             rightHandSlot.LoadWeaponModel(weaponItem);
             LoadRightWeaponDamageCollider();
+            quickSlotsUI.UpdateWeaponQuickSlotsUI(false, weaponItem);
             #region Controlar As Animações De Idle Da Arma Da Mão Direita
             if (weaponItem != null)
             {
@@ -96,5 +106,17 @@ public class WeaponSlotManager : MonoBehaviour
         leftHandDamageCollider.DisableDamageCollider();
     }
 
+    #endregion
+
+    #region Controlar o gasto de Stamina
+    public void DrainStaminaLightAttack()
+    {
+        playerStats.TakeStaminaDamage(Mathf.RoundToInt(attackingWeapon.baseStamina * attackingWeapon.lightAttackMultiplier));
+    }
+
+    public void DrainStaminaHeavyAttack()
+    {
+        playerStats.TakeStaminaDamage(Mathf.RoundToInt(attackingWeapon.baseStamina * attackingWeapon.heavyAttackMultiplier));
+    }
     #endregion
 }

@@ -457,6 +457,10 @@ MonoBehaviour:
   b_Input: 0
   rb_Input: 0
   rt_Input: 0
+  d_Pad_Up: 0
+  d_Pad_Down: 0
+  d_Pad_Left: 0
+  d_Pad_Right: 0
   rollFlag: 0
   sprintFlag: 0
   comboFlag: 0
@@ -579,6 +583,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01aad6c483878c949a4ddb52f2607bc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackingWeapon: {fileID: 0}
 --- !u!114 &1712905941382198905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -593,6 +598,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rightWeapon: {fileID: 11400000, guid: 13c583ffeca27be4b9980b99605a51e2, type: 2}
   leftWeapon: {fileID: 11400000, guid: 13c583ffeca27be4b9980b99605a51e2, type: 2}
+  unarmedWeapon: {fileID: 11400000, guid: 782bb99688fc4a2498c552e0daba48ff, type: 2}
+  weaponsInRightHandSlots:
+  - {fileID: 11400000, guid: 13c583ffeca27be4b9980b99605a51e2, type: 2}
+  weaponsInLeftHandSlots:
+  - {fileID: 11400000, guid: 13c583ffeca27be4b9980b99605a51e2, type: 2}
+  currentRightWeaponIndex: -1
+  currentLeftWeaponIndex: -1
 --- !u!114 &4696056013519498862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -621,7 +633,11 @@ MonoBehaviour:
   healthLevel: 10
   maxHealth: 0
   currentHealth: 0
+  staminaLevel: 10
+  maxStamina: 0
+  currenStamina: 0
   healthBar: {fileID: 0}
+  staminaBar: {fileID: 0}
 --- !u!1 &1861176879314809533
 GameObject:
   m_ObjectHideFlags: 0
@@ -3585,7 +3601,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 50000
   field of view: 60
   orthographic: 0
   orthographic size: 5

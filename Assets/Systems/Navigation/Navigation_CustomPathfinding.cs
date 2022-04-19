@@ -22,6 +22,7 @@ public class Navigation_CustomPathfinding : BaseNavigation
     [SerializeField] float detectDist = 20f;
 
     Rigidbody LinkedRB;
+    Animator anim;
     GameObject playerObj = null;
 
     List<PathdataNode> Path = null;
@@ -30,6 +31,8 @@ public class Navigation_CustomPathfinding : BaseNavigation
     protected override void Initialise()
     {
         LinkedRB = GetComponent<Rigidbody>();
+        anim = GetComponent<Animator>();
+
         if (playerObj == null)
             playerObj = GameObject.FindGameObjectWithTag("Player");
     }
@@ -39,7 +42,12 @@ public class Navigation_CustomPathfinding : BaseNavigation
         float dist = Vector3.Distance(playerObj.transform.position, transform.position);
 
         if (dist <= detectDist)
+        {
             SetDestination(playerObj.transform.position);
+            anim.SetBool("isWalking", true);
+        }
+        else
+            anim.SetBool("isWalking", false);
     }
 
     protected override bool RequestPath()
