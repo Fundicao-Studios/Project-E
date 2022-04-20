@@ -9,6 +9,10 @@ TagManager:
   - Slot
   - Hittable
   - Enemy
+  - Interactable
+  - Pop-Up
+  - Clock
+  - Pop-Up 2
   layers:
   - Default
   - TransparentFX

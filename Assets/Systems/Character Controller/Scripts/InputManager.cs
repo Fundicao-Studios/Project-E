@@ -11,8 +11,12 @@ public class InputManager : MonoBehaviour
     public float mouseY;
 
     public bool b_Input;
+    public bool a_Input;
     public bool rb_Input;
     public bool rt_Input;
+    public bool jump_Input;
+    public bool x_Input;
+
     public bool d_Pad_Up;
     public bool d_Pad_Down;
     public bool d_Pad_Left;
@@ -31,7 +35,7 @@ public class InputManager : MonoBehaviour
     Vector2 movementInput;
     Vector2 cameraInput;
 
-    private void Start()
+    private void Awake()
     {
         playerAttacker = GetComponent<PlayerAttacker>();
         playerInventory = GetComponent<PlayerInventory>();
@@ -61,6 +65,9 @@ public class InputManager : MonoBehaviour
         HandleRollInput(delta);
         HandleAttackInput(delta);
         HandleQuickSlotsInput();
+        HandleInteractingButtonInput();
+        HandleJumpInput();
+        HandleDanceInput();
     }
 
     private void MoveInput(float delta)
@@ -137,5 +144,20 @@ public class InputManager : MonoBehaviour
         {
             playerInventory.ChangeLeftWeapon();
         }
+    }
+
+    private void HandleInteractingButtonInput()
+    {
+        inputActions.PlayerActions.A.performed += i => a_Input = true;
+    }
+
+    private void HandleJumpInput()
+    {
+        inputActions.PlayerActions.Jump.performed += i => jump_Input = true;
+    }
+
+    private void HandleDanceInput()
+    {
+        inputActions.PlayerActions.X.performed += i => x_Input = true;
     }
 }

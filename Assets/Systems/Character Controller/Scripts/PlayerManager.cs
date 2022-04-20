@@ -9,6 +9,10 @@ public class PlayerManager : MonoBehaviour
     CameraManager cameraManager;
     PlayerLocomotion playerLocomotion;
 
+    InteractableUI interactableUI;
+    public GameObject interactableUIGameObject;
+    public GameObject itemInteractableGameObject;
+
     public bool isInteracting;
 
     [Header("Flags do Jogador")]
@@ -27,6 +31,11 @@ public class PlayerManager : MonoBehaviour
         inputManager = GetComponent<InputManager>();
         anim = GetComponentInChildren<Animator>();
         playerLocomotion = GetComponent<PlayerLocomotion>();
+        interactableUI = FindObjectOfType<InteractableUI>();
+        interactableUIGameObject = GameObject.FindGameObjectWithTag("Pop-Up");
+        itemInteractableGameObject = GameObject.FindGameObjectWithTag("Pop-Up 2");
+        interactableUIGameObject.SetActive(false);
+        itemInteractableGameObject.SetActive(false);
     }
 
     void Update()
@@ -34,11 +43,16 @@ public class PlayerManager : MonoBehaviour
         float delta = Time.deltaTime;
         isInteracting = anim.GetBool("isInteracting");
         canDoCombo = anim.GetBool("canDoCombo");
+        anim.SetBool("isInAir", isInAir);
 
         inputManager.TickInput(delta);
         playerLocomotion.HandleMovement(delta);
         playerLocomotion.HandleRollingAndSprinting(delta);
         playerLocomotion.HandleFalling(delta, playerLocomotion.moveDirection);
+        playerLocomotion.HandleJumping();
+        playerLocomotion.HandleDance();
+
+        CheckForInteractableObject();
     }
 
     private void FixedUpdate()
@@ -59,10 +73,50 @@ public class PlayerManager : MonoBehaviour
         inputManager.d_Pad_Down = false;
         inputManager.d_Pad_Left = false;
         inputManager.d_Pad_Right = false;
+        inputManager.a_Input = false;
+        inputManager.jump_Input = false;
+        inputManager.x_Input = false;
 
         if (isInAir)
         {
             playerLocomotion.inAirTimer = playerLocomotion.inAirTimer + Time.deltaTime;
+        }
+    }
+
+    public void CheckForInteractableObject()
+    {
+        RaycastHit hit;
+
+        if (Physics.SphereCast(transform.position, 0.3f, transform.forward, out hit, 1f, cameraManager.ignoreLayers))
+        {
+            if (hit.collider.tag == "Interactable")
+            {
+                Interactable interactableObject = hit.collider.GetComponent<Interactable>();
+
+                if (interactableObject != null)
+                {
+                    string interactableText = interactableObject.interactableText;
+                    interactableUI.interactableText.text = interactableText;
+                    interactableUIGameObject.SetActive(true);
+
+                    if (inputManager.a_Input)
+                    {
+                        hit.collider.GetComponent<Interactable>().Interact(this);
+                    }
+                }
+            }
+        }
+        else
+        {
+            if (interactableUIGameObject != null)
+            {
+                interactableUIGameObject.SetActive(false);
+            }
+
+            if (itemInteractableGameObject != null && inputManager.a_Input)
+            {
+                itemInteractableGameObject.SetActive(false);
+            }
         }
     }
 }

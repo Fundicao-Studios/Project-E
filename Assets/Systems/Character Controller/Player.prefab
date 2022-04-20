@@ -455,6 +455,7 @@ MonoBehaviour:
   mouseX: 0
   mouseY: 0
   b_Input: 0
+  a_Input: 0
   rb_Input: 0
   rt_Input: 0
   d_Pad_Up: 0
@@ -566,6 +567,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b766107f8e6d5c4fa9225b2e230faae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactableUIGameObject: {fileID: 0}
+  itemInteractableGameObject: {fileID: 0}
   isInteracting: 0
   isSprinting: 0
   isInAir: 0
@@ -605,6 +608,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 13c583ffeca27be4b9980b99605a51e2, type: 2}
   currentRightWeaponIndex: -1
   currentLeftWeaponIndex: -1
+  weaponsInventory: []
 --- !u!114 &4696056013519498862
 MonoBehaviour:
   m_ObjectHideFlags: 0
