@@ -1113,6 +1113,36 @@ Transform:
   m_Father: {fileID: 4680172934147734951}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2905061443037066352
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4575004975956311114}
+  m_Layer: 8
+  m_Name: Lock On Target Enemy
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4575004975956311114
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2905061443037066352}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.363, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2823562955753946001}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3084642332058967022
 GameObject:
   m_ObjectHideFlags: 0
@@ -1188,6 +1218,7 @@ GameObject:
   - component: {fileID: 3045138260819718542}
   - component: {fileID: 2188804035994860996}
   - component: {fileID: 3899571632295364785}
+  - component: {fileID: 8548448111644857291}
   m_Layer: 8
   m_Name: Enemy
   m_TagString: Enemy
@@ -1204,7 +1235,7 @@ Transform:
   m_GameObject: {fileID: 3198856599290126635}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 941.77, y: 22.77, z: 847}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.15, y: 1.15, z: 1.15}
   m_Children:
   - {fileID: 5613938413487831314}
   - {fileID: 2834925948783180952}
@@ -1220,6 +1251,7 @@ Transform:
   - {fileID: 5042625122826106055}
   - {fileID: 6035971896951002274}
   - {fileID: 8662770673170285081}
+  - {fileID: 4575004975956311114}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1340,6 +1372,19 @@ MonoBehaviour:
   healthLevel: 10
   maxHealth: 0
   currentHealth: 0
+--- !u!114 &8548448111644857291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3198856599290126635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ecf64af3b50c1d4d9beafa9f2b301a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lockOnTransform: {fileID: 4575004975956311114}
 --- !u!1 &3204348771964095031
 GameObject:
   m_ObjectHideFlags: 0

@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 5840139054696874964}
   - component: {fileID: 3762916288318804755}
   - component: {fileID: 6865105841227341884}
-  - component: {fileID: 3682814007973591080}
+  - component: {fileID: 3913781301965716718}
   m_Layer: 8
   m_Name: Crocodile
   m_TagString: Enemy
@@ -95,6 +95,7 @@ Transform:
   m_Children:
   - {fileID: 8174190334750890742}
   - {fileID: 9180369202494167565}
+  - {fileID: 934591438044427864}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -200,7 +201,7 @@ MonoBehaviour:
   NodeReachedThreshold: 1
   NodeLookAheadLimit: 10
   detectDist: 20
---- !u!114 &3682814007973591080
+--- !u!114 &3913781301965716718
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -209,12 +210,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 471623635293540562}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6170e203167839a4683a4edbb9d5d2f7, type: 3}
+  m_Script: {fileID: 11500000, guid: 8ecf64af3b50c1d4d9beafa9f2b301a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthLevel: 10
-  maxHealth: 0
-  currentHealth: 0
+  lockOnTransform: {fileID: 934591438044427864}
 --- !u!1 &899151112886333768
 GameObject:
   m_ObjectHideFlags: 0
@@ -584,6 +583,36 @@ Transform:
   - {fileID: 7025714863313712823}
   m_Father: {fileID: 8174190334750890742}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6230615242965678679
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 934591438044427864}
+  m_Layer: 8
+  m_Name: Lock On Target Enemy
+  m_TagString: Lock On
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &934591438044427864
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6230615242965678679}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 990892652384340584}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6304139416661584473
 GameObject:

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerLocomotion : MonoBehaviour
 {
+    CameraManager cameraManager;
     PlayerManager playerManager;
     Transform cameraObject;
     InputManager inputManager;
@@ -39,6 +40,11 @@ public class PlayerLocomotion : MonoBehaviour
     [SerializeField]
     float fallingSpeed = 45;
 
+    private void Awake()
+    {
+        cameraManager = FindObjectOfType<CameraManager>();
+    }
+
     void Start()
     {
         playerManager = GetComponent<PlayerManager>();
@@ -59,24 +65,58 @@ public class PlayerLocomotion : MonoBehaviour
 
     private void HandleRotation(float delta)
     {
-        Vector3 targetDir = Vector3.zero;
-        float moveOverride = inputManager.moveAmount;
+        if (inputManager.lockOnFlag)
+        {
+            if (inputManager.sprintFlag || inputManager.rollFlag)
+            {
+                Vector3 targetDirection = Vector3.zero;
+                targetDirection = cameraManager.cameraTransform.forward * inputManager.vertical;
+                targetDirection += cameraManager.cameraTransform.right * inputManager.horizontal;
+                targetDirection.Normalize();
+                targetDirection.y = 0;
 
-        targetDir = cameraObject.forward * inputManager.vertical;
-        targetDir += cameraObject.right * inputManager.horizontal;
+                if (targetDirection == Vector3.zero)
+                {
+                    targetDirection = transform.forward;
+                }
 
-        targetDir.Normalize();
-        targetDir.y = 0;
+                Quaternion tr = Quaternion.LookRotation(targetDirection);
+                Quaternion targetRotation = Quaternion.Slerp(transform.rotation, tr, rotationSpeed * Time.deltaTime);
 
-        if (targetDir == Vector3.zero)
-            targetDir = myTransform.forward;
+                transform.rotation = targetRotation;
+            }
+            else
+            {
+                Vector3 rotationDirection = moveDirection;
+                rotationDirection = cameraManager.currentLockOnTarget.position - transform.position;
+                rotationDirection.y = 0;
+                rotationDirection.Normalize();
+                Quaternion tr = Quaternion.LookRotation(rotationDirection);
+                Quaternion targetRotation = Quaternion.Slerp(transform.rotation, tr, rotationSpeed * Time.deltaTime);
+                transform.rotation = targetRotation;
+            }
+        }
+        else
+        {
+            Vector3 targetDir = Vector3.zero;
+            float moveOverride = inputManager.moveAmount;
 
-        float rs = rotationSpeed;
+            targetDir = cameraObject.forward * inputManager.vertical;
+            targetDir += cameraObject.right * inputManager.horizontal;
 
-        Quaternion tr = Quaternion.LookRotation(targetDir);
-        Quaternion targetRotation = Quaternion.Slerp(myTransform.rotation, tr, rs * delta);
+            targetDir.Normalize();
+            targetDir.y = 0;
 
-        myTransform.rotation = targetRotation;
+            if (targetDir == Vector3.zero)
+                targetDir = myTransform.forward;
+
+            float rs = rotationSpeed;
+
+            Quaternion tr = Quaternion.LookRotation(targetDir);
+            Quaternion targetRotation = Quaternion.Slerp(myTransform.rotation, tr, rs * delta);
+
+            myTransform.rotation = targetRotation;
+        }
     }
 
     public void HandleMovement(float delta)
@@ -117,7 +157,14 @@ public class PlayerLocomotion : MonoBehaviour
         Vector3 projectedVelocity = Vector3.ProjectOnPlane(moveDirection, normalVector);
         rigidbody.velocity = projectedVelocity;
 
-        animatorManager.UpdateAnimatorValues(inputManager.moveAmount, 0, playerManager.isSprinting);
+        if (inputManager.lockOnFlag && inputManager.sprintFlag == false)
+        {
+            animatorManager.UpdateAnimatorValues(inputManager.vertical, inputManager.horizontal, playerManager.isSprinting);
+        }
+        else
+        {
+            animatorManager.UpdateAnimatorValues(inputManager.moveAmount, 0, playerManager.isSprinting);
+        }
 
         if (animatorManager.canRotate)
         {

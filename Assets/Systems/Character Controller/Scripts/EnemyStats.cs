@@ -9,10 +9,12 @@ public class EnemyStats : MonoBehaviour
     public int currentHealth;
 
     Animator animator;
+    Navigation_CustomPathfinding nav;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        nav = GetComponent<Navigation_CustomPathfinding>();
     }
 
     void Start()
@@ -37,11 +39,12 @@ public class EnemyStats : MonoBehaviour
         {
             currentHealth = 0;
             animator.Play("Dead_01");
+            nav.enabled = false;
         }
     }
 
     public void Death()
     {
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 }

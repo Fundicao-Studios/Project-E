@@ -13,6 +13,7 @@ TagManager:
   - Pop-Up
   - Clock
   - Pop-Up 2
+  - Lock On
   layers:
   - Default
   - TransparentFX
