@@ -26,9 +26,9 @@ TagManager:
   - Enemy
   - Player
   - Controller
-  - 
+  - Environment
   - PostProcessing
-  - 
+  - Character
   - 
   - 
   - 

@@ -10,7 +10,14 @@ public class UIManager : MonoBehaviour
     [Header("Janelas do UI")]
     public GameObject hudWindow;
     public GameObject selectWindow;
+    public GameObject equipmentScreenWindow;
     public GameObject weaponInventoryWindow;
+
+    [Header("Slot Da Janela De Equipamento Selecionado")]
+    public bool rightHandSlot01Selected;
+    public bool rightHandSlot02Selected;
+    public bool leftHandSlot01Selected;
+    public bool leftHandSlot02Selected;
 
     [Header("Inventário de Armas")]
     public GameObject weaponInventorySlotPrefab;
@@ -63,6 +70,16 @@ public class UIManager : MonoBehaviour
 
     public void CloseAllInventoryWindows()
     {
+        ResetAllSelectedSlots();
         weaponInventoryWindow.SetActive(false);
+        equipmentScreenWindow.SetActive(false);
+    }
+
+    public void ResetAllSelectedSlots()
+    {
+        rightHandSlot01Selected = false;
+        rightHandSlot02Selected = false;
+        leftHandSlot01Selected = false;
+        leftHandSlot02Selected = false;
     }
 }

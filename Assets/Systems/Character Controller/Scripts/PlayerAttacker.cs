@@ -26,20 +26,41 @@ public class PlayerAttacker : MonoBehaviour
             {
                 animatorManager.PlayTargetAnimation(weapon.oh_light_attack_02, true);
             }
+            else if (lastAttack == weapon.th_light_attack_01)
+            {
+                animatorManager.PlayTargetAnimation(weapon.th_light_attack_02, true);
+            }
         }
     }
 
     public void HandleLightAttack(WeaponItem weapon)
     {
         weaponSlotManager.attackingWeapon = weapon;
-        animatorManager.PlayTargetAnimation(weapon.oh_light_attack_01, true);
-        lastAttack = weapon.oh_light_attack_01;
+
+        if (inputManager.twoHandFlag)
+        {
+            animatorManager.PlayTargetAnimation(weapon.th_light_attack_01, true);
+            lastAttack = weapon.th_light_attack_01;
+        }
+        else
+        {
+            animatorManager.PlayTargetAnimation(weapon.oh_light_attack_01, true);
+            lastAttack = weapon.oh_light_attack_01;
+        }
     }
 
     public void HandleHeavyAttack(WeaponItem weapon)
     {
         weaponSlotManager.attackingWeapon = weapon;
-        animatorManager.PlayTargetAnimation(weapon.oh_heavy_attack_01, true);
-        lastAttack = weapon.oh_heavy_attack_01;
+
+        if (inputManager.twoHandFlag)
+        {
+
+        }
+        else
+        {
+            animatorManager.PlayTargetAnimation(weapon.oh_heavy_attack_01, true);
+            lastAttack = weapon.oh_heavy_attack_01;
+        }
     }
 }

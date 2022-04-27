@@ -105,11 +105,12 @@ MonoBehaviour:
     MaxHeightToSpawn: 30
     CanGoInWater: 0
     CanGoAboveWater: 1
-    Weighting: 0.485
+    Weighting: 1
     Prefabs:
-    - {fileID: 7179399949183866660, guid: bbd8daa44dcb11c4198a3da23975dc7c, type: 3}
+    - {fileID: 6937524468354614976, guid: 2d7e3d18c033f0e4db131691c043d0a6, type: 3}
+    - {fileID: 7023138659955534364, guid: 1c75f4d52ea9f514ca439bbf5521325e, type: 3}
   TargetDensity: 0.1
-  MaxSpawnCount: 10
+  MaxSpawnCount: 100
   MaxInvalidLocationSkips: 10
   MaxPositionJitter: 0.15
   NoiseScale: {x: 0.0078125, y: 0.0078125}

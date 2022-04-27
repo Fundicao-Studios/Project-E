@@ -11,11 +11,14 @@ public class WeaponItem : Item
     [Header("Animações De Idle")]
     public string right_hand_idle;
     public string left_hand_idle;
+    public string th_idle;
 
-    [Header("Ataques De Uma Mão")]
+    [Header("Animações De Ataque")]
     public string oh_light_attack_01;
     public string oh_light_attack_02;
     public string oh_heavy_attack_01;
+    public string th_light_attack_01;
+    public string th_light_attack_02;
 
     [Header("Custos De Stamina")]
     public int baseStamina;

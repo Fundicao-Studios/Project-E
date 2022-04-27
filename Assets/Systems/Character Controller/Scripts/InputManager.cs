@@ -12,6 +12,7 @@ public class InputManager : MonoBehaviour
 
     public bool b_Input;
     public bool a_Input;
+    public bool y_Input;
     public bool rb_Input;
     public bool rt_Input;
     public bool jump_Input;
@@ -27,6 +28,7 @@ public class InputManager : MonoBehaviour
     public bool d_Pad_Right;
 
     public bool rollFlag;
+    public bool twoHandFlag;
     public bool sprintFlag;
     public bool comboFlag;
     public bool lockOnFlag;
@@ -37,6 +39,7 @@ public class InputManager : MonoBehaviour
     PlayerAttacker playerAttacker;
     PlayerInventory playerInventory;
     PlayerManager playerManager;
+    WeaponSlotManager weaponSlotManager;
     CameraManager cameraManager;
     UIManager uiManager;
 
@@ -48,6 +51,7 @@ public class InputManager : MonoBehaviour
         playerAttacker = GetComponent<PlayerAttacker>();
         playerInventory = GetComponent<PlayerInventory>();
         playerManager = GetComponent<PlayerManager>();
+        weaponSlotManager = GetComponent<WeaponSlotManager>();
         uiManager = FindObjectOfType<UIManager>();
         cameraManager = FindObjectOfType<CameraManager>();
     }
@@ -69,7 +73,8 @@ public class InputManager : MonoBehaviour
             inputActions.PlayerActions.Inventory.performed += i => inventory_Input = true;
             inputActions.PlayerActions.LockOn.performed += i => lockOnInput = true;
             inputActions.PlayerMovement.LockOnTargetRight.performed += i => right_Stick_Right_Input = true;
-            inputActions.PlayerMovement.LockOnTargetLeft.performed += i => right_Stick_Left_Input = true; 
+            inputActions.PlayerMovement.LockOnTargetLeft.performed += i => right_Stick_Left_Input = true;
+            inputActions.PlayerActions.Y.performed += i => y_Input = true; 
         }
 
         inputActions.Enable();
@@ -88,6 +93,7 @@ public class InputManager : MonoBehaviour
         HandleQuickSlotsInput();
         HandleInventoryInput();
         HandleLockOnInput();
+        HandleTwoHandInput();
     }
 
     private void HandleMoveInput(float delta)
@@ -221,5 +227,25 @@ public class InputManager : MonoBehaviour
         }
 
         cameraManager.SetCameraHeight();
+    }
+
+    private void HandleTwoHandInput()
+    {
+        if (y_Input)
+        {
+            y_Input = false;
+
+            twoHandFlag = !twoHandFlag;
+
+            if (twoHandFlag)
+            {
+                weaponSlotManager.LoadWeaponOnSlot(playerInventory.rightWeapon, false);
+            }
+            else
+            {
+                weaponSlotManager.LoadWeaponOnSlot(playerInventory.rightWeapon, false);
+                weaponSlotManager.LoadWeaponOnSlot(playerInventory.leftWeapon, true);
+            }
+        }
     }
 }
