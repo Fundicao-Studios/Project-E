@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
 public class Navigation_CustomPathfinding : BaseNavigation
 {
     [Header("Pathfinding")]
@@ -27,7 +26,7 @@ public class Navigation_CustomPathfinding : BaseNavigation
 
     protected override void Initialise()
     {
-        LinkedRB = GetComponent<Rigidbody>();
+        LinkedRB = GetComponentInParent<Rigidbody>();
     }
 
     protected override bool RequestPath()

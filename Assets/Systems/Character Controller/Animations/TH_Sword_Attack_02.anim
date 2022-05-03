@@ -43962,27 +43962,6 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 1
   m_Events:
-  - time: 0.16666667
-    functionName: FootR
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.5681818
-    functionName: FootL
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.60101014
-    functionName: FootR
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
   - time: 0.6338384
     functionName: OpenRightDamageCollider
     data: 
@@ -44006,13 +43985,6 @@ AnimationClip:
     messageOptions: 0
   - time: 1.0333333
     functionName: EnableCombo
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 1.1060606
-    functionName: FootR
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

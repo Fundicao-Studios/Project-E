@@ -6,11 +6,13 @@ public class EnemyStats : CharacterStats
 {
     Animator animator;
     Navigation_CustomPathfinding nav;
+    EnemyLocomotionManager enemyLocomotionManager;
 
     private void Awake()
     {
-        animator = GetComponent<Animator>();
-        nav = GetComponent<Navigation_CustomPathfinding>();
+        animator = GetComponentInChildren<Animator>();
+        nav = GetComponentInChildren<Navigation_CustomPathfinding>();
+        enemyLocomotionManager = GetComponent<EnemyLocomotionManager>();
     }
 
     void Start()
@@ -36,11 +38,7 @@ public class EnemyStats : CharacterStats
             currentHealth = 0;
             animator.Play("Dead_01");
             nav.enabled = false;
+            enemyLocomotionManager.enabled = false;
         }
-    }
-
-    public void Death()
-    {
-        //Destroy(gameObject);
     }
 }

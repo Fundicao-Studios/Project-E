@@ -182,6 +182,7 @@ public class PlayerLocomotion : MonoBehaviour
             moveDirection = cameraObject.forward * inputManager.vertical;
             moveDirection += cameraObject.right * inputManager.horizontal;
 
+
             if (inputManager.moveAmount > 0)
             {
                 animatorManager.PlayTargetAnimation("Rolling", true);
