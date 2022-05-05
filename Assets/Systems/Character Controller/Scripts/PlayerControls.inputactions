@@ -226,6 +226,14 @@
                     "interactions": ""
                 },
                 {
+                    "name": "Critical Attack",
+                    "type": "Button",
+                    "id": "aa2a1478-6fed-4388-8f08-27411957a770",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
                     "name": "A",
                     "type": "Button",
                     "id": "cc7095dc-3d32-4586-ba34-3a732dfa114a",
@@ -275,42 +283,20 @@
                 },
                 {
                     "name": "",
-                    "id": "c8a37284-9fd6-4e08-8327-acb65e1c366d",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "RB",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "4ed12b45-911a-43fe-8932-8ab9578b4b72",
-                    "path": "<Gamepad>/rightTrigger",
-                    "interactions": "",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "Tap",
                     "processors": "",
                     "groups": "",
                     "action": "RB",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "ca8b39f9-d093-4f60-8516-65384386ff6d",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "RT",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
                     "id": "4f391f22-c8ba-4189-afe7-019752bbf925",
-                    "path": "<Gamepad>/leftTrigger",
-                    "interactions": "",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "Tap",
                     "processors": "",
                     "groups": "",
                     "action": "RT",
@@ -435,6 +421,50 @@
                     "processors": "",
                     "groups": "",
                     "action": "Y",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dd0e1abe-a86a-414d-96c0-ac5e497e8266",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "Hold(duration=0.4)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Critical Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7aa82376-15d5-439d-b866-d35301845b62",
+                    "path": "<Keyboard>/e",
+                    "interactions": "Hold(duration=0.4)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Critical Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ca8b39f9-d093-4f60-8516-65384386ff6d",
+                    "path": "<Keyboard>/q",
+                    "interactions": "Tap",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RT",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c8a37284-9fd6-4e08-8327-acb65e1c366d",
+                    "path": "<Keyboard>/e",
+                    "interactions": "Tap",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RB",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -5,10 +5,12 @@ using UnityEngine;
 public class AnimatorHandler : MonoBehaviour
 {
     public Animator anim;
+    public bool canRotate;
 
     public void PlayTargetAnimation(string targetAnim, bool isInteracting)
     {
         anim.applyRootMotion = isInteracting;
+        anim.SetBool("canRotate", false);
         anim.SetBool("isInteracting", isInteracting);
         anim.CrossFade(targetAnim, 0.2f);
     }
@@ -21,5 +23,20 @@ public class AnimatorHandler : MonoBehaviour
     public void DisableCombo()
     {
         anim.SetBool("canDoCombo", false);
+    }
+
+    public void CanRotate()
+    {
+        anim.SetBool("canRotate", true);
+    }
+
+    public void StopRotation()
+    {
+        anim.SetBool("canRotate", false);
+    }
+
+    public virtual void TakeCriticalDamageAnimationEvent()
+    {
+        
     }
 }

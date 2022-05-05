@@ -8,6 +8,10 @@ public class WeaponItem : Item
     public GameObject modelPrefab;
     public bool isUnarmed;
 
+    [Header("Dano")]
+    public int baseDamage = 25;
+    public int criticalDamageMultiplier = 4;
+
     [Header("Animações De Idle")]
     public string right_hand_idle;
     public string left_hand_idle;

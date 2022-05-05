@@ -20,12 +20,12 @@ public class SpellItem : Item
     [TextArea]
     public string spellDescription;
 
-    public virtual void AttemptToCastSpell(AnimatorManager animatorManage, PlayerStats playerStats)
+    public virtual void AttemptToCastSpell(PlayerAnimatorManager animatorManage, PlayerStats playerStats)
     {
         Debug.Log("Tentaste lançar uma magia!");
     }
 
-    public virtual void SuccessfullyCastSpell(AnimatorManager animatorManager, PlayerStats playerStats)
+    public virtual void SuccessfullyCastSpell(PlayerAnimatorManager animatorManager, PlayerStats playerStats)
     {
         Debug.Log("Conseguiste lançar uma magia com sucesso!");
         playerStats.DeductManaPoints(manaPointCost);

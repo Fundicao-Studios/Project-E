@@ -13,7 +13,7 @@ public class PlayerLocomotion : MonoBehaviour
     [HideInInspector]
     public Transform myTransform;
     [HideInInspector]
-    public AnimatorManager animatorManager;
+    public PlayerAnimatorManager animatorManager;
 
     public new Rigidbody rigidbody;
     public GameObject normalCamera;
@@ -53,7 +53,7 @@ public class PlayerLocomotion : MonoBehaviour
         playerManager = GetComponent<PlayerManager>();
         rigidbody = GetComponent<Rigidbody>();
         inputManager = GetComponent<InputManager>();
-        animatorManager = GetComponentInChildren<AnimatorManager>();
+        animatorManager = GetComponentInChildren<PlayerAnimatorManager>();
         cameraObject = Camera.main.transform;
         myTransform = transform;
         animatorManager.Initialize();
@@ -67,59 +67,62 @@ public class PlayerLocomotion : MonoBehaviour
     Vector3 normalVector;
     Vector3 targetPosition;
 
-    private void HandleRotation(float delta)
+    public void HandleRotation(float delta)
     {
-        if (inputManager.lockOnFlag)
+        if (animatorManager.canRotate)
         {
-            if (inputManager.sprintFlag || inputManager.rollFlag)
+            if (inputManager.lockOnFlag)
             {
-                Vector3 targetDirection = Vector3.zero;
-                targetDirection = cameraManager.cameraTransform.forward * inputManager.vertical;
-                targetDirection += cameraManager.cameraTransform.right * inputManager.horizontal;
-                targetDirection.Normalize();
-                targetDirection.y = 0;
-
-                if (targetDirection == Vector3.zero)
+                if (inputManager.sprintFlag || inputManager.rollFlag)
                 {
-                    targetDirection = transform.forward;
+                    Vector3 targetDirection = Vector3.zero;
+                    targetDirection = cameraManager.cameraTransform.forward * inputManager.vertical;
+                    targetDirection += cameraManager.cameraTransform.right * inputManager.horizontal;
+                    targetDirection.Normalize();
+                    targetDirection.y = 0;
+
+                    if (targetDirection == Vector3.zero)
+                    {
+                        targetDirection = transform.forward;
+                    }
+
+                    Quaternion tr = Quaternion.LookRotation(targetDirection);
+                    Quaternion targetRotation = Quaternion.Slerp(transform.rotation, tr, rotationSpeed * Time.deltaTime);
+
+                    transform.rotation = targetRotation;
                 }
-
-                Quaternion tr = Quaternion.LookRotation(targetDirection);
-                Quaternion targetRotation = Quaternion.Slerp(transform.rotation, tr, rotationSpeed * Time.deltaTime);
-
-                transform.rotation = targetRotation;
+                else
+                {
+                    Vector3 rotationDirection = moveDirection;
+                    rotationDirection = cameraManager.currentLockOnTarget.position - transform.position;
+                    rotationDirection.y = 0;
+                    rotationDirection.Normalize();
+                    Quaternion tr = Quaternion.LookRotation(rotationDirection);
+                    Quaternion targetRotation = Quaternion.Slerp(transform.rotation, tr, rotationSpeed * Time.deltaTime);
+                    transform.rotation = targetRotation;
+                }
             }
             else
             {
-                Vector3 rotationDirection = moveDirection;
-                rotationDirection = cameraManager.currentLockOnTarget.position - transform.position;
-                rotationDirection.y = 0;
-                rotationDirection.Normalize();
-                Quaternion tr = Quaternion.LookRotation(rotationDirection);
-                Quaternion targetRotation = Quaternion.Slerp(transform.rotation, tr, rotationSpeed * Time.deltaTime);
-                transform.rotation = targetRotation;
+                Vector3 targetDir = Vector3.zero;
+                float moveOverride = inputManager.moveAmount;
+
+                targetDir = cameraObject.forward * inputManager.vertical;
+                targetDir += cameraObject.right * inputManager.horizontal;
+
+                targetDir.Normalize();
+                targetDir.y = 0;
+
+                if (targetDir == Vector3.zero)
+                    targetDir = myTransform.forward;
+
+                float rs = rotationSpeed;
+
+                Quaternion tr = Quaternion.LookRotation(targetDir);
+                Quaternion targetRotation = Quaternion.Slerp(myTransform.rotation, tr, rs * delta);
+
+                myTransform.rotation = targetRotation;
             }
-        }
-        else
-        {
-            Vector3 targetDir = Vector3.zero;
-            float moveOverride = inputManager.moveAmount;
-
-            targetDir = cameraObject.forward * inputManager.vertical;
-            targetDir += cameraObject.right * inputManager.horizontal;
-
-            targetDir.Normalize();
-            targetDir.y = 0;
-
-            if (targetDir == Vector3.zero)
-                targetDir = myTransform.forward;
-
-            float rs = rotationSpeed;
-
-            Quaternion tr = Quaternion.LookRotation(targetDir);
-            Quaternion targetRotation = Quaternion.Slerp(myTransform.rotation, tr, rs * delta);
-
-            myTransform.rotation = targetRotation;
         }
     }
 
@@ -168,11 +171,6 @@ public class PlayerLocomotion : MonoBehaviour
         else
         {
             animatorManager.UpdateAnimatorValues(inputManager.moveAmount, 0, playerManager.isSprinting);
-        }
-
-        if (animatorManager.canRotate)
-        {
-            HandleRotation(delta);
         }
     }
 

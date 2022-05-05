@@ -35,6 +35,7 @@ public class EnemyManager : CharacterManager
         enemyAnimatorManager = GetComponentInChildren<EnemyAnimatorManager>();
         enemyStats = GetComponent<EnemyStats>();
         enemyRigidBody = GetComponent<Rigidbody>();
+        backStabCollider = GetComponentInChildren<BackStabCollider>();
         navmeshAgent = GetComponentInChildren<Navigation_CustomPathfinding>();
         navmeshAgent.enabled = false;
     }
@@ -49,6 +50,7 @@ public class EnemyManager : CharacterManager
         HandleRecoveryTimer();
 
         isInteracting = enemyAnimatorManager.anim.GetBool("isInteracting");
+        enemyAnimatorManager.anim.SetBool("isDead", enemyStats.isDead);
     }
 
     private void FixedUpdate()

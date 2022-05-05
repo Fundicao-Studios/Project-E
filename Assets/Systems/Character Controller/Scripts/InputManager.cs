@@ -15,6 +15,7 @@ public class InputManager : MonoBehaviour
     public bool y_Input;
     public bool rb_Input;
     public bool rt_Input;
+    public bool critical_Attack_Input;
     public bool jump_Input;
     public bool x_Input;
     public bool inventory_Input;
@@ -35,13 +36,15 @@ public class InputManager : MonoBehaviour
     public bool inventoryFlag;
     public float rollInputTimer;
 
+    public Transform criticalAttackRayCastStartPoint;
+
     PlayerControls inputActions;
     PlayerAttacker playerAttacker;
     PlayerInventory playerInventory;
     PlayerManager playerManager;
     WeaponSlotManager weaponSlotManager;
     CameraManager cameraManager;
-    AnimatorManager animatorManager;
+    PlayerAnimatorManager animatorManager;
     UIManager uiManager;
 
     Vector2 movementInput;
@@ -55,7 +58,7 @@ public class InputManager : MonoBehaviour
         weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
         uiManager = FindObjectOfType<UIManager>();
         cameraManager = FindObjectOfType<CameraManager>();
-        animatorManager = GetComponentInChildren<AnimatorManager>();
+        animatorManager = GetComponentInChildren<PlayerAnimatorManager>();
     }
 
     public void OnEnable()
@@ -76,7 +79,8 @@ public class InputManager : MonoBehaviour
             inputActions.PlayerActions.LockOn.performed += i => lockOnInput = true;
             inputActions.PlayerMovement.LockOnTargetRight.performed += i => right_Stick_Right_Input = true;
             inputActions.PlayerMovement.LockOnTargetLeft.performed += i => right_Stick_Left_Input = true;
-            inputActions.PlayerActions.Y.performed += i => y_Input = true; 
+            inputActions.PlayerActions.Y.performed += i => y_Input = true;
+            inputActions.PlayerActions.CriticalAttack.performed += i => critical_Attack_Input = true;
         }
 
         inputActions.Enable();
@@ -96,6 +100,7 @@ public class InputManager : MonoBehaviour
         HandleInventoryInput();
         HandleLockOnInput();
         HandleTwoHandInput();
+        HandleCriticalAttackInput();
     }
 
     private void HandleMoveInput(float delta)
@@ -233,6 +238,15 @@ public class InputManager : MonoBehaviour
                 weaponSlotManager.LoadWeaponOnSlot(playerInventory.rightWeapon, false);
                 weaponSlotManager.LoadWeaponOnSlot(playerInventory.leftWeapon, true);
             }
+        }
+    }
+
+    private void HandleCriticalAttackInput()
+    {
+        if (critical_Attack_Input)
+        {
+            critical_Attack_Input = false;
+            playerAttacker.AttemptBackStabOrRiposte();
         }
     }
 }

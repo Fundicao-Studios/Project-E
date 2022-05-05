@@ -8,6 +8,7 @@ public class PlayerManager : CharacterManager
     Animator anim;
     CameraManager cameraManager;
     PlayerStats playerStats;
+    PlayerAnimatorManager playerAnimatorManager;
     PlayerLocomotion playerLocomotion;
 
     InteractableUI interactableUI;
@@ -28,11 +29,9 @@ public class PlayerManager : CharacterManager
     private void Awake()
     {
         cameraManager = FindObjectOfType<CameraManager>();
-    }
-
-    void Start()
-    {
+        backStabCollider = GetComponentInChildren<BackStabCollider>();
         inputManager = GetComponent<InputManager>();
+        playerAnimatorManager = GetComponentInChildren<PlayerAnimatorManager>();
         anim = GetComponentInChildren<Animator>();
         playerStats = GetComponent<PlayerStats>();
         playerLocomotion = GetComponent<PlayerLocomotion>();
@@ -51,10 +50,12 @@ public class PlayerManager : CharacterManager
         canDoCombo = anim.GetBool("canDoCombo");
         isUsingRightHand = anim.GetBool("isUsingRightHand");
         isUsingLeftHand = anim.GetBool("isUsingLeftHand");
-        anim.SetBool("isInAir", isInAir);
         isInvulnerable = anim.GetBool("isInvulnerable");
+        anim.SetBool("isInAir", isInAir);
+        anim.SetBool("isDead", playerStats.isDead);
 
         inputManager.TickInput(delta);
+        playerAnimatorManager.canRotate = anim.GetBool("canRotate");
         playerLocomotion.HandleRollingAndSprinting(delta);
         playerLocomotion.HandleJumping();
         playerStats.RegenerateStamina();
@@ -75,6 +76,7 @@ public class PlayerManager : CharacterManager
         playerLocomotion.HandleFalling(delta, playerLocomotion.moveDirection);
         playerLocomotion.HandleMovement(delta);
         playerLocomotion.HandleDance();
+        playerLocomotion.HandleRotation(delta);
     }
 
     private void LateUpdate()

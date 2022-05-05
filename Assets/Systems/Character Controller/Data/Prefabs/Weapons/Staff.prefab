@@ -73,6 +73,8 @@ GameObject:
   - component: {fileID: 7196760521623379894}
   - component: {fileID: 6075316337434267667}
   - component: {fileID: 8334803144369595609}
+  - component: {fileID: 7654194941134611783}
+  - component: {fileID: 4316127138303725084}
   m_Layer: 0
   m_Name: Staff Model
   m_TagString: Untagged
@@ -143,3 +145,29 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &7654194941134611783
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7542358657457636620}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.1765003, y: 0.98489445, z: 0.14545922}
+  m_Center: {x: 0.052512445, y: 0.1737993, z: -0.001926478}
+--- !u!114 &4316127138303725084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7542358657457636620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 240422f6a90d22c41b4436d87a846d95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentWeaponDamage: 0

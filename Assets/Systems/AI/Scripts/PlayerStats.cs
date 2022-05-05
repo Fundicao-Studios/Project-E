@@ -9,7 +9,7 @@ public class PlayerStats : CharacterStats
     public HealthBar healthBar;
     public StaminaBar staminaBar;
     public ManaPointsBar manaPointsBar;
-    AnimatorManager animatorManager;
+    PlayerAnimatorManager animatorManager;
 
     public float staminaRegenerationAmount = 1;
     public float staminaRegenTimer = 0;
@@ -21,7 +21,7 @@ public class PlayerStats : CharacterStats
         healthBar = FindObjectOfType<HealthBar>();
         staminaBar = FindObjectOfType<StaminaBar>();
         manaPointsBar = FindObjectOfType<ManaPointsBar>();
-        animatorManager = GetComponentInChildren<AnimatorManager>();
+        animatorManager = GetComponentInChildren<PlayerAnimatorManager>();
     }
 
     void Start()
@@ -79,6 +79,17 @@ public class PlayerStats : CharacterStats
             animatorManager.PlayTargetAnimation("Dead_01", true);
             isDead = true;
             //HANDLE PLAYER DEATH
+        }
+    }
+
+    public void TakeDamageNoAnimation(int damage)
+    {
+        currentHealth = currentHealth - damage;
+
+        if (currentHealth <= 0)
+        {
+            currentHealth = 0;
+            isDead = true;
         }
     }
 

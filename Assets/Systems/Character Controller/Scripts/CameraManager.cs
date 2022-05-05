@@ -45,7 +45,7 @@ public class CameraManager : MonoBehaviour
         targetTransform = FindObjectOfType<InputManager>().transform;
         cameraTransform = Camera.main.transform;
         defaultPosition = cameraTransform.localPosition.z;
-        ignoreLayers = ~(1 << 8 | 1 << 9 | 1 << 10);
+        ignoreLayers = ~(1 << 9 | 1 << 10 | 1 << 13 | 1 << 14 | 1 << 15 | 1 << 16);
         inputManager = FindObjectOfType<InputManager>();
         playerManager = FindObjectOfType<PlayerManager>();
     }
