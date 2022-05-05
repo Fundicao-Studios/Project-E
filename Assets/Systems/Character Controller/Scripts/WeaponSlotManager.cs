@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class WeaponSlotManager : MonoBehaviour
 {
+    PlayerManager playerManager;
+
     public WeaponItem attackingWeapon;
 
     WeaponHolderSlot leftHandSlot;
@@ -22,13 +24,14 @@ public class WeaponSlotManager : MonoBehaviour
 
     private void Awake()
     {
+        playerManager = GetComponentInParent<PlayerManager>();
         animator = GetComponent<Animator>();
         quickSlotsUI = FindObjectOfType<QuickSlotsUI>();
-        playerStats = GetComponent<PlayerStats>();
+        playerStats = GetComponentInParent<PlayerStats>();
         inputManager = GetComponentInParent<InputManager>();
 
-        WeaponHolderSlot[] WeaponHolderSlots = GetComponentsInChildren<WeaponHolderSlot>();
-        foreach (WeaponHolderSlot weaponSlot in WeaponHolderSlots)
+        WeaponHolderSlot[] weaponHolderSlots = GetComponentsInChildren<WeaponHolderSlot>();
+        foreach (WeaponHolderSlot weaponSlot in weaponHolderSlots)
         {
             if (weaponSlot.isLeftHandSlot)
             {
@@ -110,24 +113,28 @@ public class WeaponSlotManager : MonoBehaviour
         rightHandDamageCollider = rightHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
     }
 
-    public void OpenRightDamageCollider()
+    public void OpenDamageCollider()
     {
-        rightHandDamageCollider.EnableDamageCollider();
+        if (playerManager.isUsingRightHand)
+        {
+            rightHandDamageCollider.EnableDamageCollider();
+        }
+        else if (playerManager.isUsingLeftHand)
+        {
+            leftHandDamageCollider.EnableDamageCollider();
+        }
     }
 
-    public void OpenLeftDamageCollider()
+    public void CloseDamageCollider()
     {
-        leftHandDamageCollider.EnableDamageCollider();
-    }
-
-    public void CloseRightHandDamageCollider()
-    {
-        rightHandDamageCollider.DisableDamageCollider();
-    }
-
-    public void CloseLeftHandDamageCollider()
-    {
-        leftHandDamageCollider.DisableDamageCollider();
+        if (playerManager.isUsingRightHand)
+        {
+            rightHandDamageCollider.DisableDamageCollider();
+        }
+        else if (playerManager.isUsingLeftHand)
+        {
+            leftHandDamageCollider.DisableDamageCollider();
+        }
     }
 
     #endregion

@@ -11,8 +11,11 @@ public class AttackState : State
     public EnemyAttackAction currentAttack;
     public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimatorManager enemyAnimatorManager)
     {
-        Vector3 targetDirection = enemyManager.currentTarget.transform.position - transform.position;
-        float viewableAngle = Vector3.Angle(targetDirection, transform.forward);
+        Vector3 targetDirection = enemyManager.currentTarget.transform.position - enemyManager.transform.position;
+        float distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);
+        float viewableAngle = Vector3.Angle(targetDirection, enemyManager.transform.forward);
+
+        HandleRotateTowardsTarget(enemyManager);
 
         if (enemyManager.isPerformingAction)
             return combatStanceSate;
@@ -20,16 +23,16 @@ public class AttackState : State
         if (currentAttack != null)
         {
             //Se estivermos demasiado longe do inimigo para efetuar um ataque, arranjar outro ataque
-            if (enemyManager.distanceFromTarget < currentAttack.minimumDistanceNeededToAttack)
+            if (distanceFromTarget < currentAttack.minimumDistanceNeededToAttack)
             {
                 return this;
             }
             //Se estiver perto o suficiente para atacar, então deixar proceder
-            else if (enemyManager.distanceFromTarget < currentAttack.maximumDistanceNeededToAttack)
+            else if (distanceFromTarget < currentAttack.maximumDistanceNeededToAttack)
             {
                 //Se o inimigo estiver dentro do ângulo de visão do ataque, atacar
-                if (enemyManager.viewableAngle <= currentAttack.maximumAttackAngle &&
-                    enemyManager.viewableAngle >= currentAttack.minimumAttackAngle)
+                if (viewableAngle <= currentAttack.maximumAttackAngle &&
+                    viewableAngle >= currentAttack.minimumAttackAngle)
                 {
                     if (enemyManager.currentRecoveryTime <= 0 && enemyManager.isPerformingAction == false)
                     {
@@ -54,9 +57,9 @@ public class AttackState : State
 
     private void GetNewAttack(EnemyManager enemyManager)
     {
-        Vector3 targetsDirection = enemyManager.currentTarget.transform.position - transform.position;
-        float viewableAngle = Vector3.Angle(targetsDirection, transform.forward);
-        enemyManager.distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, transform.position);
+        Vector3 targetsDirection = enemyManager.currentTarget.transform.position - enemyManager.transform.position;
+        float viewableAngle = Vector3.Angle(targetsDirection, enemyManager.transform.forward);
+        float distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);
 
         int maxScore = 0;
 
@@ -64,8 +67,8 @@ public class AttackState : State
         {
             EnemyAttackAction enemyAttackAction = enemyAttacks[i];
 
-            if (enemyManager.distanceFromTarget <= enemyAttackAction.maximumDistanceNeededToAttack 
-                && enemyManager.distanceFromTarget >= enemyAttackAction.minimumDistanceNeededToAttack)
+            if (distanceFromTarget <= enemyAttackAction.maximumDistanceNeededToAttack 
+                && distanceFromTarget >= enemyAttackAction.minimumDistanceNeededToAttack)
             {
                 if (viewableAngle <= enemyAttackAction.maximumAttackAngle
                     && viewableAngle >= enemyAttackAction.minimumAttackAngle)
@@ -82,8 +85,8 @@ public class AttackState : State
         {
             EnemyAttackAction enemyAttackAction = enemyAttacks[i];
 
-            if (enemyManager.distanceFromTarget <= enemyAttackAction.maximumDistanceNeededToAttack 
-                && enemyManager.distanceFromTarget >= enemyAttackAction.minimumDistanceNeededToAttack)
+            if (distanceFromTarget <= enemyAttackAction.maximumDistanceNeededToAttack 
+                && distanceFromTarget >= enemyAttackAction.minimumDistanceNeededToAttack)
             {
                 if (viewableAngle <= enemyAttackAction.maximumAttackAngle
                     && viewableAngle >= enemyAttackAction.minimumAttackAngle)
@@ -99,6 +102,35 @@ public class AttackState : State
                     }
                 }
             }
+        }
+    }
+
+    private void HandleRotateTowardsTarget(EnemyManager enemyManager)
+    {
+        //Rotacionar manualmente
+        if (enemyManager.isPerformingAction)
+        {
+            Vector3 direction = enemyManager.currentTarget.transform.position - enemyManager.transform.position;
+            direction.y = 0;
+            direction.Normalize();
+
+            if (direction == Vector3.zero)
+            {
+                direction = enemyManager.transform.forward;
+            }
+
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            enemyManager.transform.rotation = Quaternion.Slerp(enemyManager.transform.rotation, targetRotation, enemyManager.rotationSpeed / Time.deltaTime);
+        }
+        //Rotacionar com o Pathfinding (navmesh)
+        else
+        {
+            Vector3 targetVelocity = enemyManager.enemyRigidBody.velocity;
+
+            enemyManager.navmeshAgent.enabled = true;
+            enemyManager.navmeshAgent.SetDestination(enemyManager.currentTarget.transform.position);
+            enemyManager.enemyRigidBody.velocity = targetVelocity;
+            enemyManager.transform.rotation = Quaternion.Slerp(enemyManager.transform.rotation, enemyManager.navmeshAgent.transform.rotation, enemyManager.rotationSpeed / Time.deltaTime);
         }
     }
 }

@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-using sc.terrain.vegetationspawner;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -26,11 +25,9 @@ public class ProcGenManager : MonoBehaviour
     [SerializeField] Terrain TargetTerrain;
     [SerializeField] Texture2D Output_BiomeMap;
     [SerializeField] Texture2D Output_SlopeMap;
-    [SerializeField] PathdataManager PathManager;
+    [SerializeField] PathdataManager navMesh;
 
     ProcGenData WorkingData;
-
-    VegetationSpawner grassSpawner;
 
     [Header("Debugging")]
     [SerializeField] bool DEBUG_TurnOffObjectPlacers = false;
@@ -106,17 +103,17 @@ public class ProcGenManager : MonoBehaviour
         // pintar o terreno
         Perform_TerrainPainting(mapResolution, alphaMapResolution);
 
-        if (reportStatusFn != null) reportStatusFn.Invoke(7, 8, "A gerar a Pathdata");
-        yield return new WaitForSeconds(1f);
-
-        // gera a pathdata
-        PathManager.Internal_BuildPathdata();
-
-        if (reportStatusFn != null) reportStatusFn.Invoke(8, 8, "A posicionar objetos");
+        if (reportStatusFn != null) reportStatusFn.Invoke(7, 8, "A posicionar objetos");
         yield return new WaitForSeconds(1f);
 
         // posiciona os objetos
         Perform_ObjectPlacement(mapResolution, alphaMapResolution);
+
+        if (reportStatusFn != null) reportStatusFn.Invoke(8, 8, "A gerar a PathData");
+        yield return new WaitForSeconds(1f);
+
+        // gera a pathdata
+        navMesh.Internal_BuildPathdata();
 
         if (reportStatusFn != null) reportStatusFn.Invoke(8, 8, "Geração Concluída");
     }

@@ -6,6 +6,7 @@ public class PlayerInventory : MonoBehaviour
 {
     WeaponSlotManager weaponSlotManager;
 
+    public SpellItem currentSpell;
     public WeaponItem rightWeapon;
     public WeaponItem leftWeapon;
 
@@ -21,7 +22,7 @@ public class PlayerInventory : MonoBehaviour
 
     private void Awake()
     {
-        weaponSlotManager = GetComponent<WeaponSlotManager>();
+        weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
     }
 
     private void Start()

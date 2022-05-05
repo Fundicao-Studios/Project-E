@@ -41,6 +41,7 @@ public class InputManager : MonoBehaviour
     PlayerManager playerManager;
     WeaponSlotManager weaponSlotManager;
     CameraManager cameraManager;
+    AnimatorManager animatorManager;
     UIManager uiManager;
 
     Vector2 movementInput;
@@ -48,12 +49,13 @@ public class InputManager : MonoBehaviour
 
     private void Awake()
     {
-        playerAttacker = GetComponent<PlayerAttacker>();
+        playerAttacker = GetComponentInChildren<PlayerAttacker>();
         playerInventory = GetComponent<PlayerInventory>();
         playerManager = GetComponent<PlayerManager>();
-        weaponSlotManager = GetComponent<WeaponSlotManager>();
+        weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
         uiManager = FindObjectOfType<UIManager>();
         cameraManager = FindObjectOfType<CameraManager>();
+        animatorManager = GetComponentInChildren<AnimatorManager>();
     }
 
     public void OnEnable()
@@ -130,22 +132,7 @@ public class InputManager : MonoBehaviour
     {
         if (rb_Input)
         {
-            if (playerManager.canDoCombo)
-            {
-                comboFlag = true;
-                playerAttacker.HandleWeaponCombo(playerInventory.rightWeapon);
-                comboFlag = false;
-            }
-            else
-            {
-                if (playerManager.isInteracting)
-                    return;
-
-                if (playerManager.canDoCombo)
-                    return;
-                    
-                playerAttacker.HandleLightAttack(playerInventory.rightWeapon);
-            }
+            playerAttacker.HandleRBAction();
         }
 
         if (rt_Input)

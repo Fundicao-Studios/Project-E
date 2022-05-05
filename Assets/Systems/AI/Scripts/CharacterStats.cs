@@ -9,6 +9,12 @@ public class CharacterStats : MonoBehaviour
     public int currentHealth;
 
     public int staminaLevel = 10;
-    public int maxStamina;
-    public int currenStamina;
+    public float maxStamina;
+    public float currenStamina;
+
+    public int manaLevel = 10;
+    public float maxManaPoints;
+    public float currentManaPoints;
+
+    public bool isDead;
 }

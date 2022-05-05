@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1164635408182985062}
   - component: {fileID: 3580093782207186160}
-  - component: {fileID: 4403690495601020022}
   m_Layer: 0
   m_Name: ObjectPlacer_Rainforest
   m_TagString: Untagged
@@ -58,31 +57,4 @@ MonoBehaviour:
   MaxInvalidLocationSkips: 10
   MaxPositionJitter: 0.15
   NoiseScale: {x: 0.015625, y: 0.015625}
-  NoiseThreshold: 0.5
---- !u!114 &4403690495601020022
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7176466217255236742}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c2c4f873e385d440b8d2d7f16edc9f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Objects:
-  - HasHeightLimits: 1
-    MinHeightToSpawn: 0
-    MaxHeightToSpawn: 30
-    CanGoInWater: 0
-    CanGoAboveWater: 1
-    Weighting: 1
-    Prefabs:
-    - {fileID: 8586544683520923469, guid: eea6d0541d0e6d84197e4da0d3f1837a, type: 3}
-  TargetDensity: 0.1
-  MaxSpawnCount: 300
-  MaxInvalidLocationSkips: 10
-  MaxPositionJitter: 0.15
-  NoiseScale: {x: 0.0078125, y: 0.0078125}
   NoiseThreshold: 0.5

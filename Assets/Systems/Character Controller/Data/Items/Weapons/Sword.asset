@@ -27,3 +27,7 @@ MonoBehaviour:
   baseStamina: 20
   lightAttackMultiplier: 1
   heavyAttackMultiplier: 2
+  isShockCaster: 0
+  isFireCaster: 0
+  isWaterCaster: 0
+  isMeleeWeapon: 1

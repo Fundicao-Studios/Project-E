@@ -22,7 +22,7 @@ public class WeaponPickup : Interactable
 
         playerInventory = playerManager.GetComponent<PlayerInventory>();
         playerLocomotion = playerManager.GetComponent<PlayerLocomotion>();
-        animatorManager = playerManager.GetComponent<AnimatorManager>();
+        animatorManager = playerManager.GetComponentInChildren<AnimatorManager>();
 
         playerLocomotion.rigidbody.velocity = Vector3.zero; //Para o jogador quando este apanha um item
         animatorManager.PlayTargetAnimation("Pick Up Item", true); //Começar a animação de apanhar item

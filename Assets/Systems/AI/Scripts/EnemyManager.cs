@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyManager : CharacterManager
 {
@@ -14,7 +15,7 @@ public class EnemyManager : CharacterManager
     public Rigidbody enemyRigidBody;
 
     public bool isPerformingAction;
-    public float distanceFromTarget;
+    public bool isInteracting;
     public float rotationSpeed = 15;
     public float maximumAttackRange = 1.5f;
 
@@ -24,8 +25,9 @@ public class EnemyManager : CharacterManager
     public float maximumDetectionAngle = 50;
     public float minimumDetectionAngle = -50;
     public float viewableAngle;
+    public float detectionDistance;
 
-    public float currentRecoveryTime = 0;
+    public float currentRecoveryTime = 5;
 
     private void Awake()
     {
@@ -45,10 +47,15 @@ public class EnemyManager : CharacterManager
     private void Update()
     {
         HandleRecoveryTimer();
+
+        isInteracting = enemyAnimatorManager.anim.GetBool("isInteracting");
     }
 
     private void FixedUpdate()
     {
+        if (enemyStats.isDead)
+            return;
+
         HandleStateMachine();
     }
 

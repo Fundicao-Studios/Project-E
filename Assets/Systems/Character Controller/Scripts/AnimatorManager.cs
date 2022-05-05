@@ -13,9 +13,9 @@ public class AnimatorManager : AnimatorHandler
 
     public void Initialize()
     {
-        playerManager = GetComponent<PlayerManager>();
+        playerManager = GetComponentInParent<PlayerManager>();
         anim = GetComponent<Animator>();
-        inputManager = GetComponent<InputManager>();
+        inputManager = GetComponentInParent<InputManager>();
         playerLocomotion = GetComponentInParent<PlayerLocomotion>();
         vertical = Animator.StringToHash("Vertical");
         horizontal = Animator.StringToHash("Horizontal");
@@ -91,6 +91,16 @@ public class AnimatorManager : AnimatorHandler
     public void StopRotation()
     {
         canRotate = false;
+    }
+
+    public void EnableIsInvulnerable()
+    {
+        anim.SetBool("isInvulnerable", true);
+    }
+
+    public void DisableIsInvulnerable()
+    {
+        anim.SetBool("isInvulnerable", false);
     }
 
     private void OnAnimatorMove()

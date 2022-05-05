@@ -7,6 +7,7 @@ public class PlayerManager : CharacterManager
     InputManager inputManager;
     Animator anim;
     CameraManager cameraManager;
+    PlayerStats playerStats;
     PlayerLocomotion playerLocomotion;
 
     InteractableUI interactableUI;
@@ -20,6 +21,9 @@ public class PlayerManager : CharacterManager
     public bool isInAir;
     public bool isGrounded;
     public bool canDoCombo;
+    public bool isUsingRightHand;
+    public bool isUsingLeftHand;
+    public bool isInvulnerable;
 
     private void Awake()
     {
@@ -30,6 +34,7 @@ public class PlayerManager : CharacterManager
     {
         inputManager = GetComponent<InputManager>();
         anim = GetComponentInChildren<Animator>();
+        playerStats = GetComponent<PlayerStats>();
         playerLocomotion = GetComponent<PlayerLocomotion>();
         interactableUI = FindObjectOfType<InteractableUI>();
         interactableUIGameObject = GameObject.FindGameObjectWithTag("Pop-Up");
@@ -41,13 +46,18 @@ public class PlayerManager : CharacterManager
     void Update()
     {
         float delta = Time.deltaTime;
+        
         isInteracting = anim.GetBool("isInteracting");
         canDoCombo = anim.GetBool("canDoCombo");
+        isUsingRightHand = anim.GetBool("isUsingRightHand");
+        isUsingLeftHand = anim.GetBool("isUsingLeftHand");
         anim.SetBool("isInAir", isInAir);
+        isInvulnerable = anim.GetBool("isInvulnerable");
 
         inputManager.TickInput(delta);
         playerLocomotion.HandleRollingAndSprinting(delta);
         playerLocomotion.HandleJumping();
+        playerStats.RegenerateStamina();
 
         CheckForInteractableObject();
     }

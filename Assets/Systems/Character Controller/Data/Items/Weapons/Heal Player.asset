@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dad29e3c22b10fa4eb9150a69af4a2fa, type: 3}
+  m_Name: Heal Player
+  m_EditorClassIdentifier: 
+  itemIcon: {fileID: 0}
+  itemName: Heal Player
+  spellWarmUpFX: {fileID: 5647483091453839311, guid: 49bb34b1eca34ac4f9ffac15f079717d, type: 3}
+  spellCastFX: {fileID: 4592591421982559658, guid: a8a0f524cbf0254449a0fcb571d1f934, type: 3}
+  spellAnimation: SpellCast
+  manaPointCost: 35
+  isShockSpell: 1
+  isFireSpell: 0
+  isWaterSpell: 0
+  spellDescription: 
+  healAmount: 50
