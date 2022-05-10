@@ -11,7 +11,9 @@ public class PlayerAttacker : MonoBehaviour
     InputManager inputManager;
     WeaponSlotManager weaponSlotManager;
     public string lastAttack;
+
     LayerMask backStabLayer = 1 << 16;
+    LayerMask riposteLayer = 1 << 17;
 
     private void Awake()
     {
@@ -25,6 +27,9 @@ public class PlayerAttacker : MonoBehaviour
 
     public void HandleWeaponCombo(WeaponItem weapon)
     {
+        if (playerStats.currenStamina <= 0)
+            return;
+
         if (inputManager.comboFlag)
         {
             animatorManager.anim.SetBool("canDoCombo", false);
@@ -42,6 +47,9 @@ public class PlayerAttacker : MonoBehaviour
 
     public void HandleLightAttack(WeaponItem weapon)
     {
+        if (playerStats.currenStamina <= 0)
+            return;
+
         weaponSlotManager.attackingWeapon = weapon;
 
         if (inputManager.twoHandFlag)
@@ -58,6 +66,9 @@ public class PlayerAttacker : MonoBehaviour
 
     public void HandleHeavyAttack(WeaponItem weapon)
     {
+        if (playerStats.currenStamina <= 0)
+            return;
+
         weaponSlotManager.attackingWeapon = weapon;
 
         if (inputManager.twoHandFlag)
@@ -82,6 +93,19 @@ public class PlayerAttacker : MonoBehaviour
         {
             PerformRBMagicAction(playerInventory.rightWeapon);
         }
+    }
+
+    public void HandleLTAction()
+    {
+        if (playerInventory.leftWeapon.isShieldWeapon)
+        {
+            PerformLTWeaponArt(inputManager.twoHandFlag);
+        }
+        else if (playerInventory.leftWeapon.isMeleeWeapon)
+        {
+            //Fazer um light attack
+        }
+
     }
     #endregion
 
@@ -127,7 +151,22 @@ public class PlayerAttacker : MonoBehaviour
             }
         }
     }
-    
+
+    private void PerformLTWeaponArt(bool isTwoHanding)
+    {
+        if (playerManager.isInteracting)
+            return;
+
+        if (isTwoHanding)
+        {
+            //Se estivermos a usar as duas mãos numa arma ativar as animações para a arma direita
+        }
+        else
+        {
+            animatorManager.PlayTargetAnimation(playerInventory.leftWeapon.weapon_art, true);
+        }
+    }
+
     private void SuccessfullyCastSpell()
     {
         playerInventory.currentSpell.SuccessfullyCastSpell(animatorManager, playerStats);
@@ -137,6 +176,9 @@ public class PlayerAttacker : MonoBehaviour
 
     public void AttemptBackStabOrRiposte()
     {
+        if (playerStats.currenStamina <= 0)
+            return;
+
         RaycastHit hit;
 
         if (Physics.Raycast(inputManager.criticalAttackRayCastStartPoint.position,
@@ -148,7 +190,7 @@ public class PlayerAttacker : MonoBehaviour
             if (enemyCharacterManager != null)
             {
                 //VERIFICAR PELO ID DE EQUIPA (Para não poder fazer back stab a amigos ou ti próprio?)
-                playerManager.transform.position = enemyCharacterManager.backStabCollider.backStabberStandPoint.position;
+                playerManager.transform.position = enemyCharacterManager.backStabCollider.criticalDamagerStandPosition.position;
 
                 Vector3 rotationDirection = playerManager.transform.root.eulerAngles;
                 rotationDirection = hit.transform.position - playerManager.transform.position;
@@ -164,6 +206,31 @@ public class PlayerAttacker : MonoBehaviour
                 animatorManager.PlayTargetAnimation("Back Stab", true);
                 enemyCharacterManager.GetComponentInChildren<AnimatorHandler>().PlayTargetAnimation("Back Stabbed", true);
                 //Dar dano
+            }
+        }
+        else if (Physics.Raycast(inputManager.criticalAttackRayCastStartPoint.position, transform.TransformDirection(Vector3.forward), out hit, 0.7f, riposteLayer))
+        {
+            //VERIFICAR PELO ID DE EQUIPA
+            CharacterManager enemyCharacterManager = hit.transform.gameObject.GetComponentInParent<CharacterManager>();
+            DamageCollider rightWeapon = weaponSlotManager.rightHandDamageCollider;
+
+            if (enemyCharacterManager != null && enemyCharacterManager.canBeRiposted)
+            {
+                playerManager.transform.position = enemyCharacterManager.riposteCollider.criticalDamagerStandPosition.position;
+
+                Vector3 rotationDirection = playerManager.transform.root.eulerAngles;
+                rotationDirection = hit.transform.position - playerManager.transform.position;
+                rotationDirection.y = 0;
+                rotationDirection.Normalize();
+                Quaternion tr = Quaternion.LookRotation(rotationDirection);
+                Quaternion targetRotation = Quaternion.Slerp(playerManager.transform.rotation, tr, 500 * Time.deltaTime);
+                playerManager.transform.rotation = targetRotation;
+
+                int criticalDamage = playerInventory.rightWeapon.criticalDamageMultiplier * rightWeapon.currentWeaponDamage;
+                enemyCharacterManager.pendingCriticalDamage = criticalDamage;
+
+                animatorManager.PlayTargetAnimation("Riposte", true);
+                enemyCharacterManager.GetComponentInChildren<AnimatorHandler>().PlayTargetAnimation("Riposte_Stabbed", true);
             }
         }
     }

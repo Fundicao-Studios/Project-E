@@ -8,8 +8,13 @@ public class CharacterManager : MonoBehaviour
     public Transform lockOnTransform;
 
     [Header("Colliders De Combate")]
-    public BoxCollider backStabBoxCollider;
-    public BackStabCollider backStabCollider;
+    public CriticalDamageCollider backStabCollider;
+    public CriticalDamageCollider riposteCollider;
+
+    [Header("Flags De Combate")]
+    public bool canBeRiposted;
+    public bool canBeParried;
+    public bool isParrying;
 
     //O dano será feito durante o evento da animação
     //Usado nas animações de backstab e riposte 

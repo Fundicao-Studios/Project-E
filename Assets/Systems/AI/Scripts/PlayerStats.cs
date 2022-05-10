@@ -93,7 +93,7 @@ public class PlayerStats : CharacterStats
         }
     }
 
-    public void TakeStaminaDamage(int damage)
+    public void TakeStaminaDamage(float damage)
     {
         currenStamina = currenStamina - damage;
         staminaBar.SetCurrentStamina(currenStamina);

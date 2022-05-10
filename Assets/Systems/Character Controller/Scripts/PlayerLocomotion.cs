@@ -6,6 +6,7 @@ public class PlayerLocomotion : MonoBehaviour
 {
     CameraManager cameraManager;
     PlayerManager playerManager;
+    PlayerStats playerStats;
     Transform cameraObject;
     InputManager inputManager;
     public Vector3 moveDirection;
@@ -40,20 +41,27 @@ public class PlayerLocomotion : MonoBehaviour
     [SerializeField]
     float fallingSpeed = 45;
 
+    [Header("Custos De Stamina")]
+    [SerializeField]
+    int rollStaminaCost = 15;
+    int backstepStaminaCost = 12;
+    float sprintStaminaCost = 0.5f;
+ 
     public CapsuleCollider characterCollider;
     public CapsuleCollider characterCollisionBlockerCollider;
 
     private void Awake()
     {
         cameraManager = FindObjectOfType<CameraManager>();
+        playerManager = GetComponent<PlayerManager>();
+        playerStats = GetComponent<PlayerStats>();
+        rigidbody = GetComponent<Rigidbody>();
+        inputManager = GetComponent<InputManager>();
+        animatorManager = GetComponentInChildren<PlayerAnimatorManager>();
     }
 
     void Start()
     {
-        playerManager = GetComponent<PlayerManager>();
-        rigidbody = GetComponent<Rigidbody>();
-        inputManager = GetComponent<InputManager>();
-        animatorManager = GetComponentInChildren<PlayerAnimatorManager>();
         cameraObject = Camera.main.transform;
         myTransform = transform;
         animatorManager.Initialize();
@@ -146,6 +154,7 @@ public class PlayerLocomotion : MonoBehaviour
             speed = sprintSpeed;
             playerManager.isSprinting = true;
             moveDirection *= speed;
+            playerStats.TakeStaminaDamage(sprintStaminaCost);
         }
         else
         {
@@ -179,6 +188,9 @@ public class PlayerLocomotion : MonoBehaviour
         if (animatorManager.anim.GetBool("isInteracting"))
             return;
 
+        if (playerStats.currenStamina <= 0)
+            return;
+
         if (inputManager.rollFlag)
         {
             moveDirection = cameraObject.forward * inputManager.vertical;
@@ -191,10 +203,12 @@ public class PlayerLocomotion : MonoBehaviour
                 moveDirection.y = 0;
                 Quaternion rollRotation = Quaternion.LookRotation(moveDirection);
                 myTransform.rotation = rollRotation;
+                playerStats.TakeStaminaDamage(rollStaminaCost);
             }
             else
             {
                 animatorManager.PlayTargetAnimation("Backstep", true);
+                playerStats.TakeStaminaDamage(backstepStaminaCost);
             }
         }
     }
@@ -282,6 +296,9 @@ public class PlayerLocomotion : MonoBehaviour
     public void HandleJumping()
     {
         if (playerManager.isInteracting)
+            return;
+
+        if (playerStats.currenStamina <= 0)
             return;
 
         if (inputManager.jump_Input)

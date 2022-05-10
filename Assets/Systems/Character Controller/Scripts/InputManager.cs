@@ -15,6 +15,7 @@ public class InputManager : MonoBehaviour
     public bool y_Input;
     public bool rb_Input;
     public bool rt_Input;
+    public bool lt_Input;
     public bool critical_Attack_Input;
     public bool jump_Input;
     public bool x_Input;
@@ -42,6 +43,7 @@ public class InputManager : MonoBehaviour
     PlayerAttacker playerAttacker;
     PlayerInventory playerInventory;
     PlayerManager playerManager;
+    PlayerStats playerStats;
     WeaponSlotManager weaponSlotManager;
     CameraManager cameraManager;
     PlayerAnimatorManager animatorManager;
@@ -55,6 +57,7 @@ public class InputManager : MonoBehaviour
         playerAttacker = GetComponentInChildren<PlayerAttacker>();
         playerInventory = GetComponent<PlayerInventory>();
         playerManager = GetComponent<PlayerManager>();
+        playerStats = GetComponent<PlayerStats>();
         weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
         uiManager = FindObjectOfType<UIManager>();
         cameraManager = FindObjectOfType<CameraManager>();
@@ -70,9 +73,12 @@ public class InputManager : MonoBehaviour
             inputActions.PlayerMovement.Camera.performed += i => cameraInput = i.ReadValue<Vector2>();
             inputActions.PlayerActions.RB.performed += i => rb_Input = true;
             inputActions.PlayerActions.RT.performed += i => rt_Input = true;
+            inputActions.PlayerActions.LT.performed += i => lt_Input = true;
             inputActions.PlayerQuickSlots.DPadRight.performed += i => d_Pad_Right = true;
             inputActions.PlayerQuickSlots.DPadLeft.performed += i => d_Pad_Left = true;
             inputActions.PlayerActions.A.performed += i => a_Input = true;
+            inputActions.PlayerActions.Roll.performed += i => b_Input = true;
+            inputActions.PlayerActions.Roll.canceled += i => b_Input = false;
             inputActions.PlayerActions.Jump.performed += i => jump_Input = true;
             inputActions.PlayerActions.X.performed += i => x_Input = true;
             inputActions.PlayerActions.Inventory.performed += i => inventory_Input = true;
@@ -114,18 +120,27 @@ public class InputManager : MonoBehaviour
 
     private void HandleRollInput(float delta)
     {
-        b_Input = inputActions.PlayerActions.Roll.phase == UnityEngine.InputSystem.InputActionPhase.Started;
-        sprintFlag = b_Input;
-
         if (b_Input)
         {
             rollInputTimer += delta;
+
+            if (playerStats.currenStamina <= 0)
+            {
+                b_Input = false;
+                sprintFlag = false;
+            }
+
+            if (moveAmount > 0.5f && playerStats.currenStamina > 0)
+            {
+                sprintFlag = true;
+            }
         }
         else
         {
+            sprintFlag = false;
+
             if (rollInputTimer > 0 && rollInputTimer < 0.5f)
             {
-                sprintFlag = false;
                 rollFlag = true;
             }
 
@@ -143,6 +158,18 @@ public class InputManager : MonoBehaviour
         if (rt_Input)
         {
             playerAttacker.HandleHeavyAttack(playerInventory.rightWeapon);
+        }
+
+        if (lt_Input)
+        {
+            if (twoHandFlag)
+            {
+                //se estiver a usar o modelo da arma com duas mãos
+            }
+            else
+            {
+                playerAttacker.HandleLTAction();
+            }
         }
     }
 

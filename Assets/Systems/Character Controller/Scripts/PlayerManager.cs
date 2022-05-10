@@ -29,7 +29,7 @@ public class PlayerManager : CharacterManager
     private void Awake()
     {
         cameraManager = FindObjectOfType<CameraManager>();
-        backStabCollider = GetComponentInChildren<BackStabCollider>();
+        backStabCollider = GetComponentInChildren<CriticalDamageCollider>();
         inputManager = GetComponent<InputManager>();
         playerAnimatorManager = GetComponentInChildren<PlayerAnimatorManager>();
         anim = GetComponentInChildren<Animator>();
@@ -84,6 +84,7 @@ public class PlayerManager : CharacterManager
         inputManager.rollFlag = false;
         inputManager.rb_Input = false;
         inputManager.rt_Input = false;
+        inputManager.lt_Input = false;
         inputManager.d_Pad_Up = false;
         inputManager.d_Pad_Down = false;
         inputManager.d_Pad_Left = false;
@@ -99,11 +100,13 @@ public class PlayerManager : CharacterManager
         }
     }
 
+    #region Interações Do Jogador
+
     public void CheckForInteractableObject()
     {
         RaycastHit hit;
 
-        if (Physics.SphereCast(transform.position, 0.3f, transform.forward, out hit, 1f, cameraManager.ignoreLayers))
+        if (Physics.SphereCast(transform.position, 0.5f, transform.forward, out hit, 2f, cameraManager.ignoreLayers))
         {
             if (hit.collider.tag == "Interactable")
             {
@@ -135,4 +138,13 @@ public class PlayerManager : CharacterManager
             }
         }
     }
+
+    public void OpenChestInteraction(Transform playerStandsHereWhenOpeningChest)
+    {
+        playerLocomotion.rigidbody.velocity = Vector3.zero; //Evitar o jogador de deslizar
+        transform.position = playerStandsHereWhenOpeningChest.transform.position;
+        playerAnimatorManager.PlayTargetAnimation("Pick Up Item", true);
+    }
+
+    #endregion
 }

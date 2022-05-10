@@ -23,6 +23,7 @@ public class WeaponItem : Item
     public string oh_heavy_attack_01;
     public string th_light_attack_01;
     public string th_light_attack_02;
+    public string weapon_art;
 
     [Header("Custos De Stamina")]
     public int baseStamina;
@@ -34,4 +35,5 @@ public class WeaponItem : Item
     public bool isFireCaster;
     public bool isWaterCaster;
     public bool isMeleeWeapon;
+    public bool isShieldWeapon;
 }

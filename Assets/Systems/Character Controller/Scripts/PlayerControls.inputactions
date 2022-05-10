@@ -194,17 +194,33 @@
                     "interactions": ""
                 },
                 {
-                    "name": "LockOn",
+                    "name": "A",
                     "type": "Button",
-                    "id": "782def45-6914-460e-aa96-ccc9f6dddee7",
+                    "id": "cc7095dc-3d32-4586-ba34-3a732dfa114a",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
                 },
                 {
-                    "name": "Roll",
+                    "name": "X",
                     "type": "Button",
-                    "id": "098134b6-4da3-4660-beed-2472f54c77b1",
+                    "id": "ef60726e-c374-440e-b7e0-486a6be4530b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "74393930-716d-4c38-9672-96eae15556b8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "LT",
+                    "type": "Button",
+                    "id": "a1fc0da3-1a61-4b66-a111-c5c248b358dd",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -234,130 +250,23 @@
                     "interactions": ""
                 },
                 {
-                    "name": "A",
+                    "name": "LockOn",
                     "type": "Button",
-                    "id": "cc7095dc-3d32-4586-ba34-3a732dfa114a",
+                    "id": "782def45-6914-460e-aa96-ccc9f6dddee7",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
                 },
                 {
-                    "name": "Jump",
+                    "name": "Roll",
                     "type": "Button",
-                    "id": "74393930-716d-4c38-9672-96eae15556b8",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "X",
-                    "type": "Button",
-                    "id": "ef60726e-c374-440e-b7e0-486a6be4530b",
+                    "id": "098134b6-4da3-4660-beed-2472f54c77b1",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "050f74e4-174d-4b3c-a2fb-16554e9f2ed4",
-                    "path": "<Gamepad>/buttonEast",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Roll",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "ec70ba0c-d56f-4e15-8908-3834de3f1fd8",
-                    "path": "<Keyboard>/leftShift",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Roll",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "4ed12b45-911a-43fe-8932-8ab9578b4b72",
-                    "path": "<Gamepad>/rightShoulder",
-                    "interactions": "Tap",
-                    "processors": "",
-                    "groups": "",
-                    "action": "RB",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "4f391f22-c8ba-4189-afe7-019752bbf925",
-                    "path": "<Gamepad>/leftShoulder",
-                    "interactions": "Tap",
-                    "processors": "",
-                    "groups": "",
-                    "action": "RT",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "f41c13e1-066e-4beb-a909-e846ea587ba3",
-                    "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "A",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "bcd3de97-6cea-4bea-96b6-8ba07a32fda0",
-                    "path": "<Keyboard>/f",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "A",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "276b74a9-17fa-4d38-a7e6-c0b22848db8a",
-                    "path": "<Gamepad>/buttonNorth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "a1c2c14f-fe5e-4ef1-8323-52dfa5c16be5",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "f4ecfbce-1797-499f-aece-17d7a1747f70",
-                    "path": "<Keyboard>/k",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "X",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "",
                     "id": "c3a8c5a6-71d4-4374-bf2e-1d29a2fcb70c",
@@ -426,6 +335,149 @@
                 },
                 {
                     "name": "",
+                    "id": "050f74e4-174d-4b3c-a2fb-16554e9f2ed4",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Roll",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ec70ba0c-d56f-4e15-8908-3834de3f1fd8",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Roll",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f41c13e1-066e-4beb-a909-e846ea587ba3",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "A",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bcd3de97-6cea-4bea-96b6-8ba07a32fda0",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "A",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f4ecfbce-1797-499f-aece-17d7a1747f70",
+                    "path": "<Keyboard>/k",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "X",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "276b74a9-17fa-4d38-a7e6-c0b22848db8a",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a1c2c14f-fe5e-4ef1-8323-52dfa5c16be5",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "eb46c027-86c5-4397-b55c-c7cb7a0a848f",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LT",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f6a5e2b6-b32e-4cb1-bcde-858ac7956c65",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LT",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4ed12b45-911a-43fe-8932-8ab9578b4b72",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "Tap",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RB",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c8a37284-9fd6-4e08-8327-acb65e1c366d",
+                    "path": "<Keyboard>/e",
+                    "interactions": "Tap",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RB",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4f391f22-c8ba-4189-afe7-019752bbf925",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "Tap",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RT",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ca8b39f9-d093-4f60-8516-65384386ff6d",
+                    "path": "<Keyboard>/q",
+                    "interactions": "Tap",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RT",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "dd0e1abe-a86a-414d-96c0-ac5e497e8266",
                     "path": "<Gamepad>/rightShoulder",
                     "interactions": "Hold(duration=0.4)",
@@ -443,28 +495,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "Critical Attack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "ca8b39f9-d093-4f60-8516-65384386ff6d",
-                    "path": "<Keyboard>/q",
-                    "interactions": "Tap",
-                    "processors": "",
-                    "groups": "",
-                    "action": "RT",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "c8a37284-9fd6-4e08-8327-acb65e1c366d",
-                    "path": "<Keyboard>/e",
-                    "interactions": "Tap",
-                    "processors": "",
-                    "groups": "",
-                    "action": "RB",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

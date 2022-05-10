@@ -35,7 +35,6 @@ public class EnemyManager : CharacterManager
         enemyAnimatorManager = GetComponentInChildren<EnemyAnimatorManager>();
         enemyStats = GetComponent<EnemyStats>();
         enemyRigidBody = GetComponent<Rigidbody>();
-        backStabCollider = GetComponentInChildren<BackStabCollider>();
         navmeshAgent = GetComponentInChildren<Navigation_CustomPathfinding>();
         navmeshAgent.enabled = false;
     }
