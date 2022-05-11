@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerAttacker : MonoBehaviour
 {
     PlayerAnimatorManager animatorManager;
+    PlayerEquipmentManager playerEquipmentManager;
     PlayerManager playerManager;
     PlayerStats playerStats;
     PlayerInventory playerInventory;
@@ -18,6 +19,7 @@ public class PlayerAttacker : MonoBehaviour
     private void Awake()
     {
         animatorManager = GetComponent<PlayerAnimatorManager>();
+        playerEquipmentManager = GetComponent<PlayerEquipmentManager>();
         playerManager = GetComponentInParent<PlayerManager>();
         playerStats = GetComponentInParent<PlayerStats>();
         playerInventory = GetComponentInParent<PlayerInventory>();
@@ -93,6 +95,11 @@ public class PlayerAttacker : MonoBehaviour
         {
             PerformRBMagicAction(playerInventory.rightWeapon);
         }
+    }
+
+    public void HandleLBAction()
+    {
+        PerformLBBlockingAction();
     }
 
     public void HandleLTAction()
@@ -172,6 +179,21 @@ public class PlayerAttacker : MonoBehaviour
         playerInventory.currentSpell.SuccessfullyCastSpell(animatorManager, playerStats);
     }
 
+    #endregion
+
+    #region Ações Defensivas
+    private void PerformLBBlockingAction()
+    {
+        if (playerManager.isInteracting)
+            return;
+
+        if (playerManager.isBlocking)
+            return;
+
+        animatorManager.PlayTargetAnimation("Block_Loop", false, true);
+        playerEquipmentManager.OpenBlockingCollider();
+        playerManager.isBlocking = true;
+    }
     #endregion
 
     public void AttemptBackStabOrRiposte()

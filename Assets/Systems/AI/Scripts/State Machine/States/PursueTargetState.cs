@@ -30,8 +30,6 @@ public class PursueTargetState : State
         }
 
         HandleRotateTowardsTarget(enemyManager);
-        enemyManager.navmeshAgent.transform.localPosition = Vector3.zero;
-        enemyManager.navmeshAgent.transform.localRotation = Quaternion.identity;
 
         float distance = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);
 

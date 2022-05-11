@@ -19,6 +19,9 @@ public class EnemyManager : CharacterManager
     public float rotationSpeed = 15;
     public float maximumAttackRange = 1.5f;
 
+    [Header("Combat Flags")]
+    public bool canDoCombo;
+
     [Header("Definições do AI")]
     public float detectionRadius = 20;
     //Quanto maior, e menor, respetivamente forem estes ângulos, maior a deteção CAMPO DE VISÃO (basicamente visão periférica)
@@ -47,17 +50,20 @@ public class EnemyManager : CharacterManager
     private void Update()
     {
         HandleRecoveryTimer();
+        HandleStateMachine();
 
         isInteracting = enemyAnimatorManager.anim.GetBool("isInteracting");
+        canDoCombo = enemyAnimatorManager.anim.GetBool("canDoCombo");
         enemyAnimatorManager.anim.SetBool("isDead", enemyStats.isDead);
     }
 
-    private void FixedUpdate()
+    private void LateUpdate()
     {
         if (enemyStats.isDead)
             return;
 
-        HandleStateMachine();
+        navmeshAgent.transform.localPosition = Vector3.zero;
+        navmeshAgent.transform.localRotation = Quaternion.identity;
     }
 
     private void HandleStateMachine()

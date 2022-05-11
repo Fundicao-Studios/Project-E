@@ -60,7 +60,7 @@ public class PlayerStats : CharacterStats
         return maxStamina;
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, string damageAnimation = "Damage_01")
     {
         if (playerManager.isInvulnerable)
             return;
@@ -71,7 +71,7 @@ public class PlayerStats : CharacterStats
         currentHealth = currentHealth - damage;
         healthBar.SetCurrentHealth(currentHealth);
 
-        animatorManager.PlayTargetAnimation("Damage_01", true);
+        animatorManager.PlayTargetAnimation(damageAnimation, true);
 
         if (currentHealth <= 0)
         {

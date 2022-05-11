@@ -226,6 +226,14 @@
                     "interactions": ""
                 },
                 {
+                    "name": "LB",
+                    "type": "Button",
+                    "id": "aeff1191-b169-4602-8564-3726ba1cc408",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
                     "name": "RB",
                     "type": "Button",
                     "id": "88e25b15-6972-41d2-a2d1-aa913c652bcc",
@@ -495,6 +503,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Critical Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "480f8da6-a069-4549-b9d6-3c77166330b8",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LB",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "de8cfe46-3e9a-494f-be2c-66c02d55ef8a",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LB",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

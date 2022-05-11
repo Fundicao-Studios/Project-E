@@ -7,10 +7,10 @@ public class AnimatorHandler : MonoBehaviour
     public Animator anim;
     public bool canRotate;
 
-    public void PlayTargetAnimation(string targetAnim, bool isInteracting)
+    public void PlayTargetAnimation(string targetAnim, bool isInteracting, bool canRotate = false)
     {
         anim.applyRootMotion = isInteracting;
-        anim.SetBool("canRotate", false);
+        anim.SetBool("canRotate", canRotate);
         anim.SetBool("isInteracting", isInteracting);
         anim.CrossFade(targetAnim, 0.2f);
     }
@@ -34,6 +34,17 @@ public class AnimatorHandler : MonoBehaviour
     {
         anim.SetBool("canRotate", false);
     }
+
+    public void EnableIsInvulnerable()
+    {
+        anim.SetBool("isInvulnerable", true);
+    }
+
+    public void DisableIsInvulnerable()
+    {
+        anim.SetBool("isInvulnerable", false);
+    }
+
 
     public virtual void TakeCriticalDamageAnimationEvent()
     {
