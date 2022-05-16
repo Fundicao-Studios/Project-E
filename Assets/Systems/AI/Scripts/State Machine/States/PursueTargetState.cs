@@ -31,15 +31,9 @@ public class PursueTargetState : State
 
         HandleRotateTowardsTarget(enemyManager);
 
-        float distance = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);
-
         if (distanceFromTarget <= enemyManager.maximumAttackRange)
         {
             return combatStanceSate;
-        }
-        else if (distance < enemyManager.detectionDistance)
-        {
-            return idleState;
         }
         else
         {

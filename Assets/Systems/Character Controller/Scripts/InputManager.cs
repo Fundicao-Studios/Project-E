@@ -104,6 +104,9 @@ public class InputManager : MonoBehaviour
 
     public void TickInput(float delta)
     {
+        if (playerStats.isDead)
+            return;
+
         HandleMoveInput(delta);
         HandleRollInput(delta);
         HandleCombatInput(delta);

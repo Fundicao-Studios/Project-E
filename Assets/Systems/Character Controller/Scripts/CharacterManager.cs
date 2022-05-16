@@ -17,6 +17,9 @@ public class CharacterManager : MonoBehaviour
     public bool isParrying;
     public bool isBlocking;
 
+    [Header("Magias")]
+    public bool isFiringSpell;
+
     //O dano será feito durante o evento da animação
     //Usado nas animações de backstab e riposte 
     public int pendingCriticalDamage;

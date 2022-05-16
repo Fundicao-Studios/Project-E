@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffeea5f1a74e6ff41b4cb0f4dd6fc026, type: 3}
+  m_Name: Shock Ball
+  m_EditorClassIdentifier: 
+  itemIcon: {fileID: 0}
+  itemName: Shock Ball
+  spellWarmUpFX: {fileID: 4430043294319130835, guid: 68ddfc28936458a4d9add0549f90472c, type: 3}
+  spellCastFX: {fileID: 4430043294319130835, guid: e564a73c5755d9d4e936e18c8d7b66a7, type: 3}
+  spellAnimation: Spell_Throw_Start
+  manaPointCost: 0
+  isShockSpell: 1
+  isFireSpell: 0
+  isWaterSpell: 0
+  spellDescription: 
+  baseDamage: 75
+  projectileForwardVelocity: 500
+  projectileUpwardVelocity: 0
+  projectileMass: 25
+  isEffectedByGravity: 0

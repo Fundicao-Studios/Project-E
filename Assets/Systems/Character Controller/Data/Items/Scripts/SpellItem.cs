@@ -8,7 +8,7 @@ public class SpellItem : Item
     public GameObject spellCastFX;
     public string spellAnimation;
 
-    [Header("Custa Da Magia")]
+    [Header("Custo Da Magia")]
     public int manaPointCost;
 
     [Header("Tipo De Magia")]
@@ -20,12 +20,19 @@ public class SpellItem : Item
     [TextArea]
     public string spellDescription;
 
-    public virtual void AttemptToCastSpell(PlayerAnimatorManager animatorManage, PlayerStats playerStats)
+    public virtual void AttemptToCastSpell(
+        PlayerAnimatorManager animatorManage, 
+        PlayerStats playerStats, 
+        WeaponSlotManager weaponSlotManager)
     {
         Debug.Log("Tentaste lançar uma magia!");
     }
 
-    public virtual void SuccessfullyCastSpell(PlayerAnimatorManager animatorManager, PlayerStats playerStats)
+    public virtual void SuccessfullyCastSpell(
+        PlayerAnimatorManager animatorManager, 
+        PlayerStats playerStats,
+        CameraManager cameraManager,
+        WeaponSlotManager weaponSlotManager)
     {
         Debug.Log("Conseguiste lançar uma magia com sucesso!");
         playerStats.DeductManaPoints(manaPointCost);

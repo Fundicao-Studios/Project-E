@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dad29e3c22b10fa4eb9150a69af4a2fa, type: 3}
+  m_Script: {fileID: 11500000, guid: 90cb3bc3b1c56594d94183715d468b63, type: 3}
   m_Name: Heal Player
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 0}
@@ -18,8 +18,7 @@ MonoBehaviour:
   spellCastFX: {fileID: 4592591421982559658, guid: a8a0f524cbf0254449a0fcb571d1f934, type: 3}
   spellAnimation: SpellCast
   manaPointCost: 35
-  isShockSpell: 1
+  isShockSpell: 0
   isFireSpell: 0
-  isWaterSpell: 0
+  isWaterSpell: 1
   spellDescription: 
-  healAmount: 50

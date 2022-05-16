@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerAttacker : MonoBehaviour
 {
+    CameraManager cameraManager;
     PlayerAnimatorManager animatorManager;
     PlayerEquipmentManager playerEquipmentManager;
     PlayerManager playerManager;
@@ -18,6 +19,7 @@ public class PlayerAttacker : MonoBehaviour
 
     private void Awake()
     {
+        cameraManager = FindObjectOfType<CameraManager>();
         animatorManager = GetComponent<PlayerAnimatorManager>();
         playerEquipmentManager = GetComponent<PlayerEquipmentManager>();
         playerManager = GetComponentInParent<PlayerManager>();
@@ -143,13 +145,27 @@ public class PlayerAttacker : MonoBehaviour
         if (playerManager.isInteracting)
             return;
             
-        if (weapon.isShockCaster)
+        if (weapon.isWaterCaster)
+        {
+            if (playerInventory.currentSpell != null && playerInventory.currentSpell.isWaterSpell)
+            {
+                if (playerStats.currentManaPoints >= playerInventory.currentSpell.manaPointCost)
+                {
+                    playerInventory.currentSpell.AttemptToCastSpell(animatorManager, playerStats, weaponSlotManager);
+                }
+                else
+                {
+                    animatorManager.PlayTargetAnimation("Shrug", true);
+                }
+            }
+        }
+        else if (weapon.isShockCaster)
         {
             if (playerInventory.currentSpell != null && playerInventory.currentSpell.isShockSpell)
             {
                 if (playerStats.currentManaPoints >= playerInventory.currentSpell.manaPointCost)
                 {
-                    playerInventory.currentSpell.AttemptToCastSpell(animatorManager, playerStats);
+                    playerInventory.currentSpell.AttemptToCastSpell(animatorManager, playerStats, weaponSlotManager);
                 }
                 else
                 {
@@ -176,7 +192,8 @@ public class PlayerAttacker : MonoBehaviour
 
     private void SuccessfullyCastSpell()
     {
-        playerInventory.currentSpell.SuccessfullyCastSpell(animatorManager, playerStats);
+        playerInventory.currentSpell.SuccessfullyCastSpell(animatorManager, playerStats, cameraManager, weaponSlotManager);
+        animatorManager.anim.SetBool("isFiringSpell", true);
     }
 
     #endregion

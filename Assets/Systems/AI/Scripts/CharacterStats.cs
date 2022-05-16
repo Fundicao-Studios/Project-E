@@ -17,4 +17,9 @@ public class CharacterStats : MonoBehaviour
     public float currentManaPoints;
 
     public bool isDead;
+
+    public virtual void TakeDamage(int damage, string damageAnimation = "Damage_01")
+    {
+
+    }
 }

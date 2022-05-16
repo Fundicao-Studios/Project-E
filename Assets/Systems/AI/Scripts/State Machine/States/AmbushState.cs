@@ -52,12 +52,7 @@ public class AmbushState : State
         #region Controlar A Mudança De Estado
         if (enemyManager.currentTarget != null)
         {
-            float distance = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);
-
-            if (distance < enemyManager.detectionDistance)
-                return pursueTargetState;
-            else
-                return idleState;
+            return pursueTargetState;
         }
         else
         {

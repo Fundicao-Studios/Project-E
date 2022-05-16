@@ -8,6 +8,8 @@ public class EnemyStats : CharacterStats
     Navigation_CustomPathfinding nav;
     EnemyLocomotionManager enemyLocomotionManager;
 
+    public UIEnemyHealthBar enemyHealthBar;
+
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
@@ -19,6 +21,7 @@ public class EnemyStats : CharacterStats
     {
         maxHealth = SetMaxHealthFromHealthLevel();
         currentHealth = maxHealth;
+        enemyHealthBar.SetMaxHealth(maxHealth);
     }
 
     private int SetMaxHealthFromHealthLevel()
@@ -30,6 +33,7 @@ public class EnemyStats : CharacterStats
     public void TakeDamageNoAnimation(int damage)
     {
         currentHealth = currentHealth - damage;
+        enemyHealthBar.SetHealth(currentHealth);
 
         if (currentHealth <= 0)
         {
@@ -38,12 +42,13 @@ public class EnemyStats : CharacterStats
         }
     }
 
-    public void TakeDamage(int damage)
+    public override void TakeDamage(int damage, string damageAnimation = "Damage_01")
     {
         if (isDead)
             return;
             
         currentHealth = currentHealth - damage;
+        enemyHealthBar.SetHealth(currentHealth);
 
         animator.Play("Damage_01");
 

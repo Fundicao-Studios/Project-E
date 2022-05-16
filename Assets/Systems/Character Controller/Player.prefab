@@ -1668,6 +1668,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackingWeapon: {fileID: 0}
+  leftHandSlot: {fileID: 0}
+  rightHandSlot: {fileID: 0}
   leftHandDamageCollider: {fileID: 0}
   rightHandDamageCollider: {fileID: 0}
 --- !u!114 &4214842334581123397
@@ -2710,13 +2712,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7f5b1bcd9a5a2d45b4ed2964192274f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentSpell: {fileID: 11400000, guid: be1cfbfa0d8c5bb48ab6a342c804c7de, type: 2}
+  currentSpell: {fileID: 11400000, guid: 3a5f531ac413d5149a69620f85869ba5, type: 2}
   rightWeapon: {fileID: 11400000, guid: 1183b982eac1f1b4db04e9a68afbe683, type: 2}
   leftWeapon: {fileID: 11400000, guid: 6ae7bf8fb0b272c489c1a7dd02bfb39e, type: 2}
   unarmedWeapon: {fileID: 11400000, guid: 782bb99688fc4a2498c552e0daba48ff, type: 2}
   weaponsInRightHandSlots:
+  - {fileID: 11400000, guid: fa947fd37624e5f47a360aac64682f63, type: 2}
   - {fileID: 11400000, guid: 1183b982eac1f1b4db04e9a68afbe683, type: 2}
-  - {fileID: 11400000, guid: 1c6b30ea63ae613429b486f63c3522ea, type: 2}
   weaponsInLeftHandSlots:
   - {fileID: 11400000, guid: 6ae7bf8fb0b272c489c1a7dd02bfb39e, type: 2}
   - {fileID: 11400000, guid: d26efb1b3910b0247be1dfa87a122c43, type: 2}
@@ -2798,6 +2800,7 @@ MonoBehaviour:
   canBeParried: 0
   isParrying: 0
   isBlocking: 0
+  isFiringSpell: 0
   pendingCriticalDamage: 0
   interactableUIGameObject: {fileID: 6617243846279705121}
   itemInteractableGameObject: {fileID: 5822472731630174351}
@@ -4056,7 +4059,7 @@ GameObject:
   - component: {fileID: 5764093830992348441}
   - component: {fileID: 6779740306249054077}
   - component: {fileID: 5691301314454105164}
-  m_Layer: 9
+  m_Layer: 18
   m_Name: Blocking Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5961,7 +5964,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 7219362551324442433}
   ignoreLayers:
     serializedVersion: 2
-    m_Bits: 91840
+    m_Bits: 468672
   environmentLayer:
     serializedVersion: 2
     m_Bits: 0

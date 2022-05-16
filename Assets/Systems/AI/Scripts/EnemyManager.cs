@@ -29,8 +29,11 @@ public class EnemyManager : CharacterManager
     public float minimumDetectionAngle = -50;
     public float viewableAngle;
     public float detectionDistance;
-
     public float currentRecoveryTime = 5;
+
+    [Header("Definições De Combate Do AI")]
+    public bool allowAIToPerformCombos;
+    public float comboLikelyHood;
 
     private void Awake()
     {
