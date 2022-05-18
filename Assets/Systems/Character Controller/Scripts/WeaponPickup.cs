@@ -25,7 +25,7 @@ public class WeaponPickup : Interactable
         animatorManager = playerManager.GetComponentInChildren<PlayerAnimatorManager>();
 
         playerLocomotion.rigidbody.velocity = Vector3.zero; //Para o jogador quando este apanha um item
-        animatorManager.PlayTargetAnimation("Pick Up Item", true); //Começar a animação de apanhar item
+        animatorManager.PlayTargetAnimation("Pick Up Item", true); //Começar a animação de apanhar o item
         playerInventory.weaponsInventory.Add(weapon);
         playerManager.itemInteractableGameObject.GetComponentInChildren<Text>().text = weapon.itemName;
         playerManager.itemInteractableGameObject.GetComponentInChildren<RawImage>().texture = weapon.itemIcon.texture;

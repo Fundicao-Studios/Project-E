@@ -50,6 +50,12 @@ public class WeaponSlotManager : MonoBehaviour
         }
     }
 
+    public void LoadBothWeaponsOnSlots()
+    {
+        LoadWeaponOnSlot(playerInventory.rightWeapon, false);
+        LoadWeaponOnSlot(playerInventory.leftWeapon, true);
+    }
+
     public void LoadWeaponOnSlot(WeaponItem weaponItem, bool isLeft)
     {
         if (isLeft)

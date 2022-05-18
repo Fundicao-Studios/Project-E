@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyStats : CharacterStats
 {
-    Animator animator;
+    EnemyAnimatorManager enemyAnimatorManager;
     Navigation_CustomPathfinding nav;
     EnemyLocomotionManager enemyLocomotionManager;
 
@@ -12,7 +12,7 @@ public class EnemyStats : CharacterStats
 
     private void Awake()
     {
-        animator = GetComponentInChildren<Animator>();
+        enemyAnimatorManager = GetComponentInChildren<EnemyAnimatorManager>();
         nav = GetComponentInChildren<Navigation_CustomPathfinding>();
         enemyLocomotionManager = GetComponent<EnemyLocomotionManager>();
     }
@@ -44,19 +44,20 @@ public class EnemyStats : CharacterStats
 
     public override void TakeDamage(int damage, string damageAnimation = "Damage_01")
     {
-        if (isDead)
-            return;
-            
-        currentHealth = currentHealth - damage;
+        base.TakeDamage(damage, damageAnimation = "Damage_01");
         enemyHealthBar.SetHealth(currentHealth);
-
-        animator.Play("Damage_01");
+        enemyAnimatorManager.PlayTargetAnimation(damageAnimation, true);
 
         if (currentHealth <= 0)
         {
-            currentHealth = 0;
-            animator.Play("Dead_01");
-            isDead = true;
+            HandleDeath();
         }
+    }
+
+    private void HandleDeath()
+    {
+        currentHealth = 0;
+        enemyAnimatorManager.PlayTargetAnimation("Dead_01", true);
+        isDead = true;
     }
 }

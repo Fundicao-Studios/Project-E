@@ -17,7 +17,7 @@ MonoBehaviour:
   spellWarmUpFX: {fileID: 4430043294319130835, guid: 68ddfc28936458a4d9add0549f90472c, type: 3}
   spellCastFX: {fileID: 4430043294319130835, guid: e564a73c5755d9d4e936e18c8d7b66a7, type: 3}
   spellAnimation: Spell_Throw_Start
-  manaPointCost: 0
+  manaPointCost: 35
   isShockSpell: 1
   isFireSpell: 0
   isWaterSpell: 0

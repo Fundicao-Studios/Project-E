@@ -16,10 +16,44 @@ public class CharacterStats : MonoBehaviour
     public float maxManaPoints;
     public float currentManaPoints;
 
+    [Header("Abrorção De Armadura")]
+    public float physicalDamageAbsorptionHead;
+    public float physicalDamageAbsorptionBody;
+    public float physicalDamageAbsorptionLegs;
+    public float physicalDamageAbsorptionFeet;
+
+    //Absorção De Fogo
+    //Absorção De Choque
+    //Absorção De Água
+    //Absorção De Escuridão
+
     public bool isDead;
 
-    public virtual void TakeDamage(int damage, string damageAnimation = "Damage_01")
+    public virtual void TakeDamage(int physicalDamage, string damageAnimation = "Damage_01")
     {
+        if (isDead)
+            return;
 
+        float totalPhysicalDamageAbsorption = 1 - 
+            (1 - physicalDamageAbsorptionHead / 100) * 
+            (1 - physicalDamageAbsorptionBody / 100) * 
+            (1 - physicalDamageAbsorptionLegs / 100) *
+            (1 - physicalDamageAbsorptionFeet / 100);
+
+        physicalDamage = Mathf.RoundToInt(physicalDamage - (physicalDamage * totalPhysicalDamageAbsorption));
+
+        Debug.Log("Total De Absorção De Dano é " + totalPhysicalDamageAbsorption + "%");
+
+        float finalDamage = physicalDamage; //+ fireDamage + darkDamage + lightningDamage + waterDamage
+
+        currentHealth = Mathf.RoundToInt(currentHealth - finalDamage);
+
+        Debug.Log("Dano Total Foi " + finalDamage);
+
+        if (currentHealth <= 0)
+        {
+            currentHealth = 0;
+            isDead = true;
+        }
     }
 }

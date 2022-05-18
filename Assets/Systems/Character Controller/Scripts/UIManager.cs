@@ -12,17 +12,25 @@ public class UIManager : MonoBehaviour
     public GameObject selectWindow;
     public GameObject equipmentScreenWindow;
     public GameObject weaponInventoryWindow;
+    public GameObject consumableInventoryWindow;
 
     [Header("Slot Da Janela De Equipamento Selecionado")]
     public bool rightHandSlot01Selected;
     public bool rightHandSlot02Selected;
     public bool leftHandSlot01Selected;
     public bool leftHandSlot02Selected;
+    public bool consumableSlot01Selected;
+    public bool consumableSlot02Selected;
 
     [Header("Inventário de Armas")]
     public GameObject weaponInventorySlotPrefab;
     public Transform weaponInventorySlotsParent;
     WeaponInventorySlot[] weaponInventorySlots;
+
+    [Header("Inventário De Consumíveis")]
+    public GameObject consumableInventorySlotPrefab;
+    public Transform consumableInventorySlotsParent;
+    ConsumableInventorySlot[] consumableInventorySlots;
 
     private void Awake()
     {
@@ -32,6 +40,7 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         weaponInventorySlots = weaponInventorySlotsParent.GetComponentsInChildren<WeaponInventorySlot>();
+        consumableInventorySlots = consumableInventorySlotsParent.GetComponentsInChildren<ConsumableInventorySlot>();
         equipmentWindowUI.LoadWeaponOnEquipmentScreen(playerInventory);
     }
 
@@ -54,7 +63,25 @@ public class UIManager : MonoBehaviour
                 weaponInventorySlots[i].ClearInventorySlot();
             }
         }
+        #endregion
 
+        #region Slots Do Inventário De Consumíveis
+        for (int i = 0; i < consumableInventorySlots.Length; i++)
+        {
+            if (i < playerInventory.consumablesInventory.Count)
+            {
+                if (consumableInventorySlots.Length < playerInventory.consumablesInventory.Count)
+                {
+                    Instantiate(consumableInventorySlotPrefab, consumableInventorySlotsParent);
+                    consumableInventorySlots = consumableInventorySlotsParent.GetComponentsInChildren<ConsumableInventorySlot>();
+                }
+                consumableInventorySlots[i].AddItem(playerInventory.consumablesInventory[i]);
+            }
+            else
+            {
+                consumableInventorySlots[i].ClearInventorySlot();
+            }
+        }
         #endregion
     }
 
@@ -72,6 +99,7 @@ public class UIManager : MonoBehaviour
     {
         ResetAllSelectedSlots();
         weaponInventoryWindow.SetActive(false);
+        consumableInventoryWindow.SetActive(false);
         equipmentScreenWindow.SetActive(false);
     }
 
@@ -81,5 +109,7 @@ public class UIManager : MonoBehaviour
         rightHandSlot02Selected = false;
         leftHandSlot01Selected = false;
         leftHandSlot02Selected = false;
+        consumableSlot01Selected = false;
+        consumableSlot02Selected = false;
     }
 }

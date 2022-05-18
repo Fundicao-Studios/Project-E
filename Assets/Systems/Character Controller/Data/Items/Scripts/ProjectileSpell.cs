@@ -15,7 +15,8 @@ public class ProjectileSpell : SpellItem
     public bool isEffectedByGravity;
     Rigidbody rigidBody;
 
-    public override void AttemptToCastSpell(PlayerAnimatorManager animatorManager, 
+    public override void AttemptToCastSpell(
+        PlayerAnimatorManager animatorManager, 
         PlayerStats playerStats, 
         WeaponSlotManager weaponSlotManager)
     {

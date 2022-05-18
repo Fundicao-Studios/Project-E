@@ -12,6 +12,7 @@ public class InputManager : MonoBehaviour
 
     public bool b_Input;
     public bool a_Input;
+    public bool x_Input;
     public bool y_Input;
     public bool rb_Input;
     public bool rt_Input;
@@ -19,7 +20,6 @@ public class InputManager : MonoBehaviour
     public bool lt_Input;
     public bool critical_Attack_Input;
     public bool jump_Input;
-    public bool x_Input;
     public bool inventory_Input;
     public bool lockOnInput;
     public bool right_Stick_Right_Input;
@@ -39,11 +39,15 @@ public class InputManager : MonoBehaviour
     public float rollInputTimer;
 
     public Transform criticalAttackRayCastStartPoint;
+    public ConsumableItem emptyBottle;
+    ConsumableInventorySlot consumableInventorySlot;
 
     PlayerControls inputActions;
     PlayerAttacker playerAttacker;
     PlayerInventory playerInventory;
     PlayerManager playerManager;
+    PlayerAnimatorManager playerAnimatorManager;
+    PlayerEffectsManager playerEffectsManager;
     PlayerStats playerStats;
     BlockingCollider blockingCollider;
     WeaponSlotManager weaponSlotManager;
@@ -58,8 +62,11 @@ public class InputManager : MonoBehaviour
     {
         playerAttacker = GetComponentInChildren<PlayerAttacker>();
         playerInventory = GetComponent<PlayerInventory>();
+        consumableInventorySlot = GetComponentInChildren<ConsumableInventorySlot>();
         playerManager = GetComponent<PlayerManager>();
         playerStats = GetComponent<PlayerStats>();
+        playerEffectsManager = GetComponentInChildren<PlayerEffectsManager>();
+        playerAnimatorManager = GetComponentInChildren<PlayerAnimatorManager>();
         weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
         blockingCollider = GetComponentInChildren<BlockingCollider>();
         uiManager = FindObjectOfType<UIManager>();
@@ -81,11 +88,12 @@ public class InputManager : MonoBehaviour
             inputActions.PlayerActions.LT.performed += i => lt_Input = true;
             inputActions.PlayerQuickSlots.DPadRight.performed += i => d_Pad_Right = true;
             inputActions.PlayerQuickSlots.DPadLeft.performed += i => d_Pad_Left = true;
+            inputActions.PlayerQuickSlots.DPadUp.performed += i => d_Pad_Up = true;
             inputActions.PlayerActions.A.performed += i => a_Input = true;
+            inputActions.PlayerActions.X.performed += i => x_Input = true;
             inputActions.PlayerActions.Roll.performed += i => b_Input = true;
             inputActions.PlayerActions.Roll.canceled += i => b_Input = false;
             inputActions.PlayerActions.Jump.performed += i => jump_Input = true;
-            inputActions.PlayerActions.X.performed += i => x_Input = true;
             inputActions.PlayerActions.Inventory.performed += i => inventory_Input = true;
             inputActions.PlayerActions.LockOn.performed += i => lockOnInput = true;
             inputActions.PlayerMovement.LockOnTargetRight.performed += i => right_Stick_Right_Input = true;
@@ -107,6 +115,8 @@ public class InputManager : MonoBehaviour
         if (playerStats.isDead)
             return;
 
+        uiManager.UpdateUI();
+
         HandleMoveInput(delta);
         HandleRollInput(delta);
         HandleCombatInput(delta);
@@ -115,6 +125,7 @@ public class InputManager : MonoBehaviour
         HandleLockOnInput();
         HandleTwoHandInput();
         HandleCriticalAttackInput();
+        HandleUseConsumableInput();
     }
 
     private void HandleMoveInput(float delta)
@@ -205,6 +216,10 @@ public class InputManager : MonoBehaviour
         {
             playerInventory.ChangeLeftWeapon();
         }
+        else if (d_Pad_Up)
+        {
+            playerInventory.ChangeConsumable();
+        }
     }
 
     private void HandleInventoryInput()
@@ -215,12 +230,13 @@ public class InputManager : MonoBehaviour
 
             if (inventoryFlag)
             {
+                Cursor.visible = true;
                 uiManager.OpenSelectWindow();
-                uiManager.UpdateUI();
                 uiManager.hudWindow.SetActive(false);
             }
             else
             {
+                Cursor.visible = false;
                 uiManager.CloseSelectWindow();
                 uiManager.CloseAllInventoryWindows();
                 uiManager.hudWindow.SetActive(true);
@@ -296,6 +312,19 @@ public class InputManager : MonoBehaviour
         {
             critical_Attack_Input = false;
             playerAttacker.AttemptBackStabOrRiposte();
+        }
+    }
+
+    private void HandleUseConsumableInput()
+    {
+        if (x_Input)
+        {
+            if (playerInventory.currentConsumable == null)
+                return;
+                
+            x_Input = false;
+            playerInventory.currentConsumable.AttemptToConsumeItem(playerAnimatorManager, weaponSlotManager, playerEffectsManager);
+            playerInventory.currentConsumable = emptyBottle;
         }
     }
 }

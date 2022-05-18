@@ -68,16 +68,15 @@ public class PlayerStats : CharacterStats
         if (isDead)
             return;
 
-        currentHealth = currentHealth - damage;
+        base.TakeDamage(damage, damageAnimation = "Damage_01");
         healthBar.SetCurrentHealth(currentHealth);
-
         animatorManager.PlayTargetAnimation(damageAnimation, true);
 
         if (currentHealth <= 0)
         {
             currentHealth = 0;
-            animatorManager.PlayTargetAnimation("Dead_01", true);
             isDead = true;
+            animatorManager.PlayTargetAnimation("Dead_01", true);
             //HANDLE PLAYER DEATH
         }
     }

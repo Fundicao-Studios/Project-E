@@ -7,6 +7,7 @@ public class QuickSlotsUI : MonoBehaviour
 {
     public Image leftWeaponIcon;
     public Image rightWeaponIcon;
+    public Image consumableIcon;
 
     public void UpdateWeaponQuickSlotsUI(bool isLeft, WeaponItem weapon)
     {
@@ -35,6 +36,20 @@ public class QuickSlotsUI : MonoBehaviour
                 leftWeaponIcon.sprite = null;
                 leftWeaponIcon.enabled = false;
             }
+        }
+    }
+
+    public void UpdateConsumableQuickSlotsUI(ConsumableItem potion)
+    {
+        if (potion.itemIcon != null)
+        {
+            consumableIcon.sprite = potion.itemIcon;
+            consumableIcon.enabled = true;
+        }
+        else
+        {
+            consumableIcon.sprite = null;
+            consumableIcon.enabled = false;
         }
     }
 }

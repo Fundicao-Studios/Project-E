@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90cb3bc3b1c56594d94183715d468b63, type: 3}
+  m_Script: {fileID: 11500000, guid: f515eeb435e658f42ad428a32d200d08, type: 3}
   m_Name: Heal Player
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 0}
+  itemIcon: {fileID: -186343322299716006, guid: 9061e98e3e59343abb561c58c425b8b8, type: 3}
   itemName: Heal Player
   spellWarmUpFX: {fileID: 5647483091453839311, guid: 49bb34b1eca34ac4f9ffac15f079717d, type: 3}
   spellCastFX: {fileID: 4592591421982559658, guid: a8a0f524cbf0254449a0fcb571d1f934, type: 3}
@@ -22,3 +22,4 @@ MonoBehaviour:
   isFireSpell: 0
   isWaterSpell: 1
   spellDescription: 
+  healAmount: 0

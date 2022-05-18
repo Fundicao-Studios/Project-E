@@ -8,8 +8,11 @@ public class EquipmentWindowUI : MonoBehaviour
     public bool rightHandSlot02Selected;
     public bool leftHandSlot01Selected;
     public bool leftHandSlot02Selected;
+    public bool consumableSlot01Selected;
+    public bool consumableSlot02Selected;
 
     public HandEquipmentSlotUI[] handEquipmentSlotUI;
+    public ConsumableEquipmentSlotUI[] consumableEquipmentSlotUI;
 
     public void LoadWeaponOnEquipmentScreen(PlayerInventory playerInventory)
     {
@@ -34,6 +37,21 @@ public class EquipmentWindowUI : MonoBehaviour
         }
     }
 
+    public void LoadConsumableOnEquipmentScreen(PlayerInventory playerInventory)
+    {
+        for (int i = 0; i < consumableEquipmentSlotUI.Length; i++)
+        {
+            if (consumableEquipmentSlotUI[i].consumableSlot01)
+            {
+                consumableEquipmentSlotUI[i].AddItem(playerInventory.consumablesInSlots[0]);
+            }
+            else if (consumableEquipmentSlotUI[i].consumableSlot02)
+            {
+                consumableEquipmentSlotUI[i].AddItem(playerInventory.consumablesInSlots[1]);
+            }
+        }
+    }
+
     public void SelectRightHandSlot01()
     {
         rightHandSlot01Selected = true;
@@ -52,5 +70,15 @@ public class EquipmentWindowUI : MonoBehaviour
     public void SelectLeftHandSlot02()
     {
         leftHandSlot02Selected = true;
+    }
+
+    public void SelectConsumableSlot01()
+    {
+        consumableSlot01Selected = true;
+    }
+
+    public void SelectConsumableSlot02()
+    {
+        consumableSlot02Selected = true;
     }
 }
