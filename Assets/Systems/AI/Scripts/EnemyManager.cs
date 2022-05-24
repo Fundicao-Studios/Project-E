@@ -17,7 +17,7 @@ public class EnemyManager : CharacterManager
     public bool isPerformingAction;
     public bool isInteracting;
     public float rotationSpeed = 15;
-    public float maximumAttackRange = 1.5f;
+    public float maximumAggroRadius = 1.5f;
 
     [Header("Combat Flags")]
     public bool canDoCombo;
@@ -57,20 +57,21 @@ public class EnemyManager : CharacterManager
 
         isInteracting = enemyAnimatorManager.anim.GetBool("isInteracting");
         canDoCombo = enemyAnimatorManager.anim.GetBool("canDoCombo");
+        canRotate = enemyAnimatorManager.anim.GetBool("canRotate");
         enemyAnimatorManager.anim.SetBool("isDead", enemyStats.isDead);
     }
 
     private void LateUpdate()
     {
-        if (enemyStats.isDead)
-            return;
-
         navmeshAgent.transform.localPosition = Vector3.zero;
         navmeshAgent.transform.localRotation = Quaternion.identity;
     }
 
     private void HandleStateMachine()
     {
+        if (enemyStats.isDead)
+            return;
+
         if (currentState != null)
         {
             State nextState = currentState.Tick(this, enemyStats, enemyAnimatorManager);

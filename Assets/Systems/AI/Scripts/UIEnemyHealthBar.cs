@@ -22,7 +22,7 @@ public class UIEnemyHealthBar : MonoBehaviour
     public void SetMaxHealth(int maxHealth)
     {
         slider.maxValue = maxHealth;
-        slider.value = maxHealth = maxHealth;
+        slider.value = maxHealth;
     }
 
     private void Update()

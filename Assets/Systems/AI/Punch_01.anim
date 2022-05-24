@@ -20842,7 +20842,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 2.625
+  - time: 1.9583334
     functionName: CloseRightDamageCollider
     data: 
     objectReferenceParameter: {fileID: 0}

@@ -10,6 +10,10 @@ public class OpenChest : Interactable
     public Transform playerStandingPosition;
     public GameObject[] itemSpawners;
     public WeaponItem[] itemsInChest;
+    public GameObject[] consumableSpawners;
+    public ConsumableItem[] consumableInChest;
+    public float consumableChance;
+    public float weaponChance; 
 
     public void Awake()
     {
@@ -29,16 +33,35 @@ public class OpenChest : Interactable
 
         playerManager.OpenChestInteraction(playerStandingPosition);
         animator.Play("Chest Open");
-        StartCoroutine(SpawnItemInChest());
+        int favChance = Random.Range(0, 100);
 
-        for (int i = 0; i < itemSpawners.Length - 1; i++)
+        if (weaponChance >= favChance)
         {
-            WeaponPickup[] weaponPickups = itemSpawners[i].GetComponents<WeaponPickup>();
+            StartCoroutine(SpawnItemInChest());
 
-            if (weaponPickups[i] != null)
+            for (int i = 0; i < itemSpawners.Length - 1; i++)
             {
-                weaponPickups[i].weapon = itemsInChest[i];
-            } 
+                WeaponPickup[] weaponPickups = itemSpawners[i].GetComponents<WeaponPickup>();
+
+                if (weaponPickups[i] != null)
+                {
+                    weaponPickups[i].weapon = itemsInChest[i];
+                } 
+            }
+        }
+        else
+        {
+            StartCoroutine(SpawnConsumableInChest());
+
+            for (int i = 0; i < consumableSpawners.Length - 1; i++)
+            {
+                ConsumablePickup[] consumablePickups = consumableSpawners[i].GetComponents<ConsumablePickup>();
+
+                if (consumablePickups[i] != null)
+                {
+                    consumablePickups[i].potion = consumableInChest[i];
+                } 
+            }
         }
     }
 
@@ -49,6 +72,16 @@ public class OpenChest : Interactable
         
         yield return new WaitForSeconds(1f);
         Instantiate(itemToSpawn, transform);
+        Destroy(openChest);
+    }
+
+    private IEnumerator SpawnConsumableInChest()
+    {
+        int consumableIndex = Random.Range(0, consumableSpawners.Length);
+        GameObject consumableToSpawn = consumableSpawners[consumableIndex];
+        
+        yield return new WaitForSeconds(1f);
+        Instantiate(consumableToSpawn, transform);
         Destroy(openChest);
     }
 }

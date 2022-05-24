@@ -155,7 +155,7 @@ public class PlayerAttacker : MonoBehaviour
                 }
                 else
                 {
-                    animatorManager.PlayTargetAnimation("Shrug", true);
+                    animatorManager.PlayTargetAnimation("Shrug", false, true);
                 }
             }
         }
@@ -169,7 +169,7 @@ public class PlayerAttacker : MonoBehaviour
                 }
                 else
                 {
-                    animatorManager.PlayTargetAnimation("Shrug", true);
+                    animatorManager.PlayTargetAnimation("Shrug", false, true);
                 }
             }
         }

@@ -138,7 +138,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2380227311654748726}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8340645170726526562
 MonoBehaviour:
@@ -153,7 +153,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   combatStanceSate: {fileID: 6817660653957464943}
-  idleState: {fileID: 4228396381160770999}
 --- !u!1 &737053505577810991
 GameObject:
   m_ObjectHideFlags: 0
@@ -319,7 +318,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1412558168977373247}
-  - {fileID: 8071202306565573496}
   - {fileID: 3818500656170740657}
   - {fileID: 4984556603953836645}
   - {fileID: 2582732673363510891}
@@ -449,8 +447,13 @@ MonoBehaviour:
   manaLevel: 10
   maxManaPoints: 0
   currentManaPoints: 0
+  physicalDamageAbsorptionHead: 0
+  physicalDamageAbsorptionBody: 0
+  physicalDamageAbsorptionLegs: 0
+  physicalDamageAbsorptionFeet: 0
   isDead: 0
   enemyHealthBar: {fileID: 118552406227998933}
+  isBoss: 0
 --- !u!114 &8548448111644857291
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -470,15 +473,17 @@ MonoBehaviour:
   canBeParried: 0
   isParrying: 0
   isBlocking: 0
+  canRotate: 0
+  isFiringSpell: 0
   pendingCriticalDamage: 0
-  currentState: {fileID: 4228396381160770999}
+  currentState: {fileID: 361538472842513782}
   currentTarget: {fileID: 0}
-  navmeshAgent: {fileID: 0}
+  navmeshAgent: {fileID: 1805464059391418330}
   enemyRigidBody: {fileID: 0}
   isPerformingAction: 0
   isInteracting: 0
-  rotationSpeed: 25
-  maximumAttackRange: 2.5
+  rotationSpeed: 50
+  maximumAggroRadius: 1.5
   canDoCombo: 0
   detectionRadius: 20
   maximumDetectionAngle: 50
@@ -600,7 +605,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2380227311654748726}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5376528730843335450
 MonoBehaviour:
@@ -615,10 +620,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   combatStanceSate: {fileID: 6817660653957464943}
-  enemyAttacks:
-  - {fileID: 11400000, guid: 47253867feb710f489fc1dcfc3783465, type: 2}
-  - {fileID: 11400000, guid: 0be4ef98793cc634c87691370540d2ab, type: 2}
+  pursueTargetState: {fileID: 8340645170726526562}
   currentAttack: {fileID: 0}
+  hasPerformedAttack: 0
 --- !u!1 &4208354948882183708
 GameObject:
   m_ObjectHideFlags: 0
@@ -669,7 +673,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -4912517912777439874, guid: 397aa59f0840d8140afa2e2c9fcc659a, type: 3}
+  - {fileID: 2100000, guid: fec73c492c04073439bccb2f4b0d3e6c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -758,7 +762,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 3066010511120593483, guid: 397aa59f0840d8140afa2e2c9fcc659a, type: 3}
+  - {fileID: 2100000, guid: 232c839603155644ab47697a0f469f29, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1131,7 +1135,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2892581231227945594, guid: 397aa59f0840d8140afa2e2c9fcc659a, type: 3}
+  - {fileID: 2100000, guid: 8dfd5c23d8dd44c45ac676f1d83682c3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1254,7 +1258,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   pursueTargetState: {fileID: 8340645170726526562}
-  idleState: {fileID: 4228396381160770999}
 --- !u!1 &5989723435447778242
 GameObject:
   m_ObjectHideFlags: 0
@@ -1405,7 +1408,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2504525506778435629, guid: 397aa59f0840d8140afa2e2c9fcc659a, type: 3}
+  - {fileID: 2100000, guid: 03b209878ccda8044837f0474dabc914, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1671,53 +1674,6 @@ Transform:
   m_Father: {fileID: 2823562955753946001}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &7628687679169289400
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8071202306565573496}
-  - component: {fileID: 4228396381160770999}
-  m_Layer: 0
-  m_Name: Idle State
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8071202306565573496
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7628687679169289400}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2380227311654748726}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4228396381160770999
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7628687679169289400}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efa37ae272779de4fa6f3cf5001895a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pursueTargetState: {fileID: 8340645170726526562}
-  detectionLayer:
-    serializedVersion: 2
-    m_Bits: 512
 --- !u!1 &7829872101944003242
 GameObject:
   m_ObjectHideFlags: 0
@@ -1920,7 +1876,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 950255288551412072, guid: 397aa59f0840d8140afa2e2c9fcc659a, type: 3}
+  - {fileID: 2100000, guid: 9d6376933c99406419cd19df22620225, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1988,7 +1944,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2380227311654748726}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6817660653957464943
 MonoBehaviour:
@@ -2003,6 +1959,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackState: {fileID: 5376528730843335450}
+  enemyAttacks:
+  - {fileID: 11400000, guid: 47253867feb710f489fc1dcfc3783465, type: 2}
+  - {fileID: 11400000, guid: 0be4ef98793cc634c87691370540d2ab, type: 2}
   pursueTargetState: {fileID: 8340645170726526562}
 --- !u!1 &8743606655782535487
 GameObject:
@@ -2013,7 +1972,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5381450590923209427}
-  - component: {fileID: 1505656945313873272}
+  - component: {fileID: 1805464059391418330}
   m_Layer: 0
   m_Name: NavMesh Agent
   m_TagString: Untagged
@@ -2035,7 +1994,7 @@ Transform:
   m_Father: {fileID: 2823562955753946001}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1505656945313873272
+--- !u!114 &1805464059391418330
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2137,7 +2096,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 6719245597448002910, guid: 397aa59f0840d8140afa2e2c9fcc659a, type: 3}
+  - {fileID: 2100000, guid: 22137c97641e5724eac6e51a4891ab96, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

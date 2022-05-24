@@ -12,7 +12,7 @@ public class PlayerEquipmentManager : MonoBehaviour
     HelmetModelChanger helmetModelChanger;
     TorsoModelChanger torsoModelChanger;
     FeetModelChanger feetModelChanger;
-    LegModelChanger legModelChanger;
+    LegsModelChanger legModelChanger;
 
     [Header("Modelos Nus Predefinidos")]
     public GameObject nakedHeadModel;
@@ -30,7 +30,7 @@ public class PlayerEquipmentManager : MonoBehaviour
         helmetModelChanger = GetComponentInChildren<HelmetModelChanger>();
         torsoModelChanger = GetComponentInChildren<TorsoModelChanger>();
         feetModelChanger = GetComponentInChildren<FeetModelChanger>();
-        legModelChanger = GetComponentInChildren<LegModelChanger>();
+        legModelChanger = GetComponentInChildren<LegsModelChanger>();
     }
 
     private void Start()

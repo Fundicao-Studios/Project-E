@@ -60,8 +60,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Strength: 1
   HeightDelta: 5
-  XScale: 0.0078125
-  YScale: 0.0078125
+  XScale: 0.0018125
+  YScale: 0.0018125
   NumPasses: 3
   XScaleVariationPerPass: 2
   YScaleVariationPerPass: 2

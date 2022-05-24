@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7048907277493978754}
   - component: {fileID: -4915164547664094885}
   - component: {fileID: -1178906639434471240}
-  - component: {fileID: -3239313833653146531}
+  - component: {fileID: 6572662844431400588}
   m_Layer: 0
   m_Name: ObjectPlacer_Swamp
   m_TagString: Untagged
@@ -87,7 +87,7 @@ MonoBehaviour:
   MaxPositionJitter: 0.15
   NoiseScale: {x: 0.0078125, y: 0.0078125}
   NoiseThreshold: 0.5
---- !u!114 &-3239313833653146531
+--- !u!114 &6572662844431400588
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -107,9 +107,9 @@ MonoBehaviour:
     CanGoAboveWater: 1
     Weighting: 1
     Prefabs:
-    - {fileID: 8568879338158937565, guid: b60a0bf999e00044ca2825e18e5b2a2b, type: 3}
+    - {fileID: 4824397021466181147, guid: 27aedfc6d57635b418c62b2a8982b737, type: 3}
   TargetDensity: 0.1
-  MaxSpawnCount: 1000
+  MaxSpawnCount: 500
   MaxInvalidLocationSkips: 10
   MaxPositionJitter: 0.15
   NoiseScale: {x: 0.0078125, y: 0.0078125}

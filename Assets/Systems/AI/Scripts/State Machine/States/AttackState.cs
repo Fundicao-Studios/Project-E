@@ -5,158 +5,73 @@ using UnityEngine;
 public class AttackState : State
 {
     public CombatStanceSate combatStanceSate;
-    public EnemyAttackAction[] enemyAttacks;
+    public PursueTargetState pursueTargetState;
     public EnemyAttackAction currentAttack;
 
     bool willDoComboOnNextAttack = false;
+    public bool hasPerformedAttack = false;
 
     public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimatorManager enemyAnimatorManager)
     {
-        if (enemyManager.isInteracting && enemyManager.canDoCombo == false)
-        {
-            return this;
-        }
-        else if (enemyManager.isInteracting && enemyManager.canDoCombo)
-        {
-            if (willDoComboOnNextAttack)
-            {
-                willDoComboOnNextAttack = false;
-                enemyAnimatorManager.PlayTargetAnimation(currentAttack.actionAnimation, true);
-            }
-        }
-
-        Vector3 targetDirection = enemyManager.currentTarget.transform.position - enemyManager.transform.position;
         float distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);
-        float viewableAngle = Vector3.Angle(targetDirection, enemyManager.transform.forward);
 
-        HandleRotateTowardsTarget(enemyManager);
+        RotateTowardsTargetWhilstAttacking(enemyManager);
 
-        if (enemyManager.isPerformingAction)
+        if (distanceFromTarget > enemyManager.maximumAggroRadius)
         {
-            return combatStanceSate;
+            return pursueTargetState;
         }
 
-        if (currentAttack != null)
+        if (willDoComboOnNextAttack && enemyManager.canDoCombo)
         {
-            //Se estivermos demasiado longe do inimigo para efetuar um ataque, arranjar outro ataque
-            if (distanceFromTarget < currentAttack.minimumDistanceNeededToAttack)
-            {
-                return this;
-            }
-            //Se estiver perto o suficiente para atacar, então deixar proceder
-            else if (distanceFromTarget < currentAttack.maximumDistanceNeededToAttack)
-            {
-                //Se o inimigo estiver dentro do ângulo de visão do ataque, atacar
-                if (viewableAngle <= currentAttack.maximumAttackAngle &&
-                    viewableAngle >= currentAttack.minimumAttackAngle)
-                {
-                    if (enemyManager.currentRecoveryTime <= 0 && enemyManager.isPerformingAction == false)
-                    {
-                        enemyAnimatorManager.anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
-                        enemyAnimatorManager.anim.SetFloat("Horizontal", 0, 0.1f, Time.deltaTime);
-                        enemyAnimatorManager.PlayTargetAnimation(currentAttack.actionAnimation, true);
-                        enemyManager.isPerformingAction = true;
-                        RollForComboChance(enemyManager);
-
-                        if (currentAttack.canCombo && willDoComboOnNextAttack)
-                        {
-                            currentAttack = currentAttack.comboAction;
-                            return this;
-                        }
-                        else
-                        {
-                            enemyManager.currentRecoveryTime = currentAttack.recoveryTime;
-                            currentAttack = null;
-                            return combatStanceSate;
-                        }
-                    }
-                }
-            }
+            AttackTargetWithCombo(enemyAnimatorManager, enemyManager);
         }
-        else
+
+        if (!hasPerformedAttack)
         {
-            GetNewAttack(enemyManager);
+            AttackTarget(enemyAnimatorManager, enemyManager);
+            RollForComboChance(enemyManager);
+        }
+
+        if (willDoComboOnNextAttack && hasPerformedAttack)
+        {
+            return this; //VOLTA A FAZER O COMBO
         }
 
         return combatStanceSate;
     }
 
-    private void GetNewAttack(EnemyManager enemyManager)
+    private void AttackTarget(EnemyAnimatorManager enemyAnimatorManager, EnemyManager enemyManager)
     {
-        Vector3 targetsDirection = enemyManager.currentTarget.transform.position - enemyManager.transform.position;
-        float viewableAngle = Vector3.Angle(targetsDirection, enemyManager.transform.forward);
-        float distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);
-
-        int maxScore = 0;
-
-        for (int i = 0; i < enemyAttacks.Length; i++)
-        {
-            EnemyAttackAction enemyAttackAction = enemyAttacks[i];
-
-            if (distanceFromTarget <= enemyAttackAction.maximumDistanceNeededToAttack 
-                && distanceFromTarget >= enemyAttackAction.minimumDistanceNeededToAttack)
-            {
-                if (viewableAngle <= enemyAttackAction.maximumAttackAngle
-                    && viewableAngle >= enemyAttackAction.minimumAttackAngle)
-                {
-                    maxScore += enemyAttackAction.attackScore;
-                }
-            }
-        }
-
-        int randomValue = Random.Range(0, maxScore);
-        int temporaryScore = 0;
-
-        for (int i = 0; i < enemyAttacks.Length; i++)
-        {
-            EnemyAttackAction enemyAttackAction = enemyAttacks[i];
-
-            if (distanceFromTarget <= enemyAttackAction.maximumDistanceNeededToAttack 
-                && distanceFromTarget >= enemyAttackAction.minimumDistanceNeededToAttack)
-            {
-                if (viewableAngle <= enemyAttackAction.maximumAttackAngle
-                    && viewableAngle >= enemyAttackAction.minimumAttackAngle)
-                {
-                    if (currentAttack != null)
-                        return;
-
-                    temporaryScore += enemyAttackAction.attackScore;
-
-                    if (temporaryScore > randomValue)
-                    {
-                        currentAttack = enemyAttackAction;
-                    }
-                }
-            }
-        }
+        enemyAnimatorManager.PlayTargetAnimation(currentAttack.actionAnimation, true);
+        enemyManager.currentRecoveryTime = currentAttack.recoveryTime;
+        hasPerformedAttack = true;
     }
 
-    private void HandleRotateTowardsTarget(EnemyManager enemyManager)
+    private void AttackTargetWithCombo(EnemyAnimatorManager enemyAnimatorManager, EnemyManager enemyManager)
+    {
+        willDoComboOnNextAttack = false;
+        enemyAnimatorManager.PlayTargetAnimation(currentAttack.actionAnimation, true);
+        enemyManager.currentRecoveryTime = currentAttack.recoveryTime;
+        //currentAttack = null;
+    }
+
+    private void RotateTowardsTargetWhilstAttacking(EnemyManager enemyManager)
     {
         //Rotacionar manualmente
-        if (enemyManager.isPerformingAction)
+        if (enemyManager.canRotate && enemyManager.isInteracting)
         {
-            Vector3 direction = enemyManager.currentTarget.transform.position - enemyManager.transform.position;
+            Vector3 direction = enemyManager.currentTarget.transform.position - transform.position;
             direction.y = 0;
             direction.Normalize();
 
             if (direction == Vector3.zero)
             {
-                direction = enemyManager.transform.forward;
+                direction = transform.forward;
             }
 
             Quaternion targetRotation = Quaternion.LookRotation(direction);
-            enemyManager.transform.rotation = Quaternion.Slerp(enemyManager.transform.rotation, targetRotation, enemyManager.rotationSpeed / Time.deltaTime);
-        }
-        //Rotacionar com o Pathfinding (navmesh)
-        else
-        {
-            Vector3 targetVelocity = enemyManager.enemyRigidBody.velocity;
-
-            enemyManager.navmeshAgent.enabled = true;
-            enemyManager.navmeshAgent.SetDestination(enemyManager.currentTarget.transform.position);
-            enemyManager.enemyRigidBody.velocity = targetVelocity;
-            enemyManager.transform.rotation = Quaternion.Slerp(enemyManager.transform.rotation, enemyManager.navmeshAgent.transform.rotation, enemyManager.rotationSpeed / Time.deltaTime);
+            enemyManager.transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, enemyManager.rotationSpeed / Time.deltaTime);
         }
     }
 
@@ -166,7 +81,16 @@ public class AttackState : State
 
         if (enemyManager.allowAIToPerformCombos && comboChance <= enemyManager.comboLikelyHood)
         {
-            willDoComboOnNextAttack = true;
+            if (currentAttack.comboAction != null)
+            {
+                willDoComboOnNextAttack = true;
+                currentAttack = currentAttack.comboAction;
+            }
+            else
+            {
+                willDoComboOnNextAttack = false;
+                currentAttack = null;
+            }
         }
     }
 }

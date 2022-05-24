@@ -64,6 +64,7 @@ public class DamageCollider : MonoBehaviour
         if (collision.tag == "Enemy")
         {
             EnemyStats enemyStats = collision.GetComponent<EnemyStats>();
+            GolemStats golemStats = collision.GetComponent<GolemStats>();
             CharacterManager enemyCharacterManager = collision.GetComponent<CharacterManager>();
 
             if (enemyCharacterManager != null)
@@ -78,6 +79,10 @@ public class DamageCollider : MonoBehaviour
             if (enemyStats != null)
             {
                 enemyStats.TakeDamage(currentWeaponDamage);
+            }
+            else if (golemStats != null)
+            {
+                golemStats.TakeDamage(currentWeaponDamage);
             }
         }
     }

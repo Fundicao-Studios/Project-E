@@ -45,7 +45,6 @@ public class AnimatorHandler : MonoBehaviour
         anim.SetBool("isInvulnerable", false);
     }
 
-
     public virtual void TakeCriticalDamageAnimationEvent()
     {
         
