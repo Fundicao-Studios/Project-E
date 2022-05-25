@@ -4205,7 +4205,7 @@ MonoBehaviour:
   movementSpeed: 5
   sprintSpeed: 7
   rotationSpeed: 15
-  fallingSpeed: 300
+  fallingSpeed: 600
   rollStaminaCost: 15
   characterCollider: {fileID: 7108204248759744146}
   characterCollisionBlockerCollider: {fileID: 6743741501624526860}

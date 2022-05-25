@@ -67,7 +67,7 @@ public class PlayerLocomotion : MonoBehaviour
         animatorManager.Initialize();
 
         playerManager.isGrounded = true;
-        ignoreForGroundCheck = ~(1 << 8 | 1 << 11);
+        ignoreForGroundCheck = ~(1 << 8);
         Physics.IgnoreCollision(characterCollider, characterCollisionBlockerCollider, true);
     }
 
@@ -228,7 +228,7 @@ public class PlayerLocomotion : MonoBehaviour
         if (playerManager.isInAir)
         {
             rigidbody.AddForce(-Vector3.up * fallingSpeed);
-            rigidbody.AddForce(moveDirection * fallingSpeed / 5f);
+            rigidbody.AddForce(moveDirection * fallingSpeed / 10f);
         }
 
         Vector3 dir = moveDirection;

@@ -7,6 +7,8 @@ public class EnemyAnimatorManager : AnimatorHandler
     EnemyManager enemyManager;
     EnemyStats enemyStats;
 
+    public bool isPunch01;
+
     private void Awake()
     {
         anim = GetComponent<Animator>();
@@ -38,6 +40,16 @@ public class EnemyAnimatorManager : AnimatorHandler
     public void DisableCanBeRiposted()
     {
         enemyManager.canBeRiposted = false;
+    }
+
+    public void EnablePunch01()
+    {
+        isPunch01 = true;
+    }
+
+    public void DisablePunch01()
+    {
+        isPunch01 = false;
     }
 
     private void OnAnimatorMove()

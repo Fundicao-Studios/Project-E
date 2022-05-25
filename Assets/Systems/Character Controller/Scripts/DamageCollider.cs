@@ -65,6 +65,7 @@ public class DamageCollider : MonoBehaviour
         {
             EnemyStats enemyStats = collision.GetComponent<EnemyStats>();
             GolemStats golemStats = collision.GetComponent<GolemStats>();
+            CrocStats crocStats = collision.GetComponent<CrocStats>();
             CharacterManager enemyCharacterManager = collision.GetComponent<CharacterManager>();
 
             if (enemyCharacterManager != null)
@@ -83,6 +84,10 @@ public class DamageCollider : MonoBehaviour
             else if (golemStats != null)
             {
                 golemStats.TakeDamage(currentWeaponDamage);
+            }
+            else if (crocStats != null)
+            {
+                crocStats.TakeDamage(currentWeaponDamage);
             }
         }
     }

@@ -56,7 +56,10 @@ public class EnemyStats : CharacterStats
             enemyBossManager.UpdateBossHealthBar(currentHealth);
         }
         
-        enemyAnimatorManager.PlayTargetAnimation(damageAnimation, true);
+        if (!enemyAnimatorManager.isPunch01)
+        {
+            enemyAnimatorManager.PlayTargetAnimation(damageAnimation, true);
+        }
 
         if (currentHealth <= 0)
         {
