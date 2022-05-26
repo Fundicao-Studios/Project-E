@@ -4198,7 +4198,7 @@ MonoBehaviour:
   rigidbody: {fileID: 0}
   normalCamera: {fileID: 0}
   groundDetectionRayStartPoint: 0.5
-  minimumDistanceNeededToBeginFall: 1
+  minimumDistanceNeededToBeginFall: 10
   groundDirectionRayDistance: 0.2
   inAirTimer: 0
   walkingSpeed: 1
@@ -4221,7 +4221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1be6332d1c274443bce0b6636b6669a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthLevel: 10
+  healthLevel: 100
   maxHealth: 0
   currentHealth: 0
   staminaLevel: 10
@@ -4230,6 +4230,11 @@ MonoBehaviour:
   manaLevel: 10
   maxManaPoints: 0
   currentManaPoints: 0
+  totalPoiseDefense: 0
+  offensivePoiseBonus: 0
+  armorPoiseBonus: 0
+  totalPoiseResetTime: 0
+  poiseResetTimer: 0
   physicalDamageAbsorptionHead: 0
   physicalDamageAbsorptionBody: 0
   physicalDamageAbsorptionLegs: 0
@@ -4259,6 +4264,7 @@ MonoBehaviour:
   canBeParried: 0
   isParrying: 0
   isBlocking: 0
+  isInvulnerable: 0
   canRotate: 0
   isFiringSpell: 0
   pendingCriticalDamage: 0
@@ -4271,7 +4277,6 @@ MonoBehaviour:
   canDoCombo: 0
   isUsingRightHand: 0
   isUsingLeftHand: 0
-  isInvulnerable: 0
 --- !u!114 &4126030345490669699
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6796,7 +6801,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5495935230247848036}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalPosition: {x: -550.34, y: 328.02, z: 5.45}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2340297436494710493}

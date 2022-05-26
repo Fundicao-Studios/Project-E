@@ -16,7 +16,14 @@ public class CharacterStats : MonoBehaviour
     public float maxManaPoints;
     public float currentManaPoints;
 
-    [Header("Abrorção De Armadura")]
+    [Header("Poise")]
+    public float totalPoiseDefense; //O TOTAL de poise durante o cálculo
+    public float offensivePoiseBonus; //O poise que se GANHA durante um ataque com uma arma
+    public float armorPoiseBonus; //O poise que se GANHA por estar a usar o que quer que seja que se tenha equipado
+    public float totalPoiseResetTime = 15;
+    public float poiseResetTimer = 0;
+
+    [Header("Absorção De Armadura")]
     public float physicalDamageAbsorptionHead;
     public float physicalDamageAbsorptionBody;
     public float physicalDamageAbsorptionLegs;
@@ -28,6 +35,16 @@ public class CharacterStats : MonoBehaviour
     //Absorção De Escuridão
 
     public bool isDead;
+
+    protected virtual void Update()
+    {
+        HandlePoiseResetTimer();
+    }
+
+    private void Start()
+    {
+        totalPoiseDefense = armorPoiseBonus;
+    }
 
     public virtual void TakeDamage(int physicalDamage, string damageAnimation = "Damage_01")
     {
@@ -54,6 +71,18 @@ public class CharacterStats : MonoBehaviour
         {
             currentHealth = 0;
             isDead = true;
+        }
+    }
+
+    public virtual void HandlePoiseResetTimer()
+    {
+        if (poiseResetTimer > 0)
+        {
+            poiseResetTimer = poiseResetTimer - Time.deltaTime;
+        }
+        else
+        {
+            totalPoiseDefense = armorPoiseBonus;
         }
     }
 }

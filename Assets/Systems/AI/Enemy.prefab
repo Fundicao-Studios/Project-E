@@ -987,7 +987,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4689699476643563141}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 397aa59f0840d8140afa2e2c9fcc659a, type: 3}
+  m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: b02fc7f412bc0024b99e37610c9d74d8, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
@@ -1009,8 +1009,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23b0ac4a9ecdbbc478e2ef27ddc35797, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 0}
-  canRotate: 0
+  anim: {fileID: 2071326712483890757}
+  canRotate: 1
+  isPunch01: 0
 --- !u!114 &4840666812466357004
 MonoBehaviour:
   m_ObjectHideFlags: 0

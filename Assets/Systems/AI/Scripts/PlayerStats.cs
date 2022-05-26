@@ -41,6 +41,18 @@ public class PlayerStats : CharacterStats
         manaPointsBar.SetCurrentManaPoints(currentManaPoints);
     }
 
+    public override void HandlePoiseResetTimer()
+    {
+        if (poiseResetTimer > 0)
+        {
+            poiseResetTimer = poiseResetTimer - Time.deltaTime;
+        }
+        else if (poiseResetTimer <= 0 && !playerManager.isInteracting)
+        {
+            totalPoiseDefense = armorPoiseBonus;
+        }
+    }
+
     private int SetMaxHealthFromHealthLevel()
     {
         maxHealth = healthLevel * 10;
@@ -83,11 +95,13 @@ public class PlayerStats : CharacterStats
     public void TakeDamageNoAnimation(int damage)
     {
         currentHealth = currentHealth - damage;
+        healthBar.SetCurrentHealth(currentHealth);
 
         if (currentHealth <= 0)
         {
             currentHealth = 0;
             isDead = true;
+            animatorManager.PlayTargetAnimation("Dead_01", true);
         }
     }
 

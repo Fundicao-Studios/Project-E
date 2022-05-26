@@ -16,6 +16,7 @@ public class CharacterManager : MonoBehaviour
     public bool canBeParried;
     public bool isParrying;
     public bool isBlocking;
+    public bool isInvulnerable;
 
     [Header("Flags De Movimento")]
     public bool canRotate;

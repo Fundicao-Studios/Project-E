@@ -13,7 +13,20 @@ public class GolemWeaponSlotManager : MonoBehaviour
     DamageCollider leftHandDamageCollider;
     DamageCollider rightHandDamageCollider;
 
+    GolemStats golemStats;
+
     private void Awake()
+    {
+        golemStats = GetComponentInParent<GolemStats>();
+        LoadWeaponHolderSlots();
+    }
+
+    private void Start()
+    {
+        LoadWeaponsOnBothHands();
+    }
+
+    private void LoadWeaponHolderSlots()
     {
         WeaponHolderSlot[] weaponHolderSlots = GetComponentsInChildren<WeaponHolderSlot>();
         foreach (WeaponHolderSlot weaponSlot in weaponHolderSlots)
@@ -27,11 +40,6 @@ public class GolemWeaponSlotManager : MonoBehaviour
                 rightHandSlot = weaponSlot;
             }
         }
-    }
-
-    private void Start()
-    {
-        LoadWeaponsOnBothHands();
     }
 
     public void LoadWeaponOnSlot(WeaponItem weapon, bool isLeft)
@@ -115,4 +123,18 @@ public class GolemWeaponSlotManager : MonoBehaviour
     {
         
     }
+
+    #region Controlar O Bonus De Poise Da Arma
+
+    public void GrantWeaponAttackingPoiseBonus()
+    {
+        golemStats.totalPoiseDefense = golemStats.totalPoiseDefense + golemStats.offensivePoiseBonus;
+    }
+
+    public void ResetWeaponAttackingPoiseBonus()
+    {
+        golemStats.totalPoiseDefense = golemStats.armorPoiseBonus;
+    }
+
+    #endregion
 }

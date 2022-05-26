@@ -8,6 +8,11 @@ public class DamageCollider : MonoBehaviour
     Collider damageCollider;
     public bool enabledDamageColliderOnStartUp = false;
 
+    [Header("Poise")]
+    public float poiseBreak;
+    public float offensivePoiseBonus;
+
+    [Header("Dano")]
     public int currentWeaponDamage = 25;
 
     private void Awake()
@@ -57,7 +62,18 @@ public class DamageCollider : MonoBehaviour
 
             if (playerStats != null)
             {
-                playerStats.TakeDamage(currentWeaponDamage);
+                playerStats.poiseResetTimer = playerStats.totalPoiseResetTime;
+                playerStats.totalPoiseDefense = playerStats.totalPoiseDefense - poiseBreak;
+                Debug.Log("Poise do jogador está atualmente em " + playerStats.totalPoiseDefense);
+
+                if (playerStats.totalPoiseDefense > poiseBreak)
+                {
+                    playerStats.TakeDamageNoAnimation(currentWeaponDamage);
+                }
+                else
+                {
+                    playerStats.TakeDamage(currentWeaponDamage);
+                }
             }
         }
 
@@ -66,6 +82,7 @@ public class DamageCollider : MonoBehaviour
             EnemyStats enemyStats = collision.GetComponent<EnemyStats>();
             GolemStats golemStats = collision.GetComponent<GolemStats>();
             CrocStats crocStats = collision.GetComponent<CrocStats>();
+            BossStats bossStats = collision.GetComponent<BossStats>();
             CharacterManager enemyCharacterManager = collision.GetComponent<CharacterManager>();
 
             if (enemyCharacterManager != null)
@@ -79,15 +96,64 @@ public class DamageCollider : MonoBehaviour
 
             if (enemyStats != null)
             {
-                enemyStats.TakeDamage(currentWeaponDamage);
+                enemyStats.poiseResetTimer = enemyStats.totalPoiseResetTime;
+                enemyStats.totalPoiseDefense = enemyStats.totalPoiseDefense - poiseBreak;
+                Debug.Log("Poise do inimigo está atualmente em " + enemyStats.totalPoiseDefense);
+
+                if (enemyStats.totalPoiseDefense > poiseBreak)
+                {
+                    enemyStats.TakeDamageNoAnimation(currentWeaponDamage);
+                }
+                else
+                {
+                    enemyStats.TakeDamage(currentWeaponDamage);
+                }
             }
             else if (golemStats != null)
             {
-                golemStats.TakeDamage(currentWeaponDamage);
+                golemStats.poiseResetTimer = golemStats.totalPoiseResetTime;
+                golemStats.totalPoiseDefense = golemStats.totalPoiseDefense - poiseBreak;
+                Debug.Log("Poise do golem está atualmente em " + golemStats.totalPoiseDefense);
+
+                if (golemStats.totalPoiseDefense > poiseBreak)
+                {
+                    golemStats.TakeDamageNoAnimation(currentWeaponDamage);
+                }
+                else
+                {
+                    golemStats.TakeDamage(currentWeaponDamage);
+                }
             }
             else if (crocStats != null)
             {
-                crocStats.TakeDamage(currentWeaponDamage);
+                crocStats.poiseResetTimer = crocStats.totalPoiseResetTime;
+                crocStats.totalPoiseDefense = crocStats.totalPoiseDefense - poiseBreak;
+                Debug.Log("Poise do crocodilo está atualmente em " + crocStats.totalPoiseDefense);
+
+                if (crocStats.totalPoiseDefense > poiseBreak)
+                {
+                    crocStats.TakeDamageNoAnimation(currentWeaponDamage);
+                }
+                else
+                {
+                    crocStats.TakeDamage(currentWeaponDamage);
+                }
+            }
+            else if (bossStats != null)
+            {
+                bossStats.poiseResetTimer = bossStats.totalPoiseResetTime;
+                bossStats.totalPoiseDefense = bossStats.totalPoiseDefense - poiseBreak;
+                Debug.Log("Poise do boss está atualmente em " + bossStats.totalPoiseDefense);
+
+                if (bossStats.totalPoiseDefense > poiseBreak)
+                {
+                    bossStats.TakeDamageNoAnimation(currentWeaponDamage);
+                }
+                else
+                {
+                    bossStats.TakeDamageNoAnimation(currentWeaponDamage);
+                    bossStats.BreakGuard();
+                }
             }
         }
     }

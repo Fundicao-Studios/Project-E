@@ -5,24 +5,31 @@ using UnityEngine;
 public class GolemStats : CharacterStats
 {
     GolemAnimatorManager enemyAnimatorManager;
-    EnemyBossManager enemyBossManager;
+    GolemManager enemyManager;
     public UIEnemyHealthBar enemyHealthBar;
-
-    public bool isBoss;
 
     private void Awake()
     {
         enemyAnimatorManager = GetComponentInChildren<GolemAnimatorManager>();
-        enemyBossManager = GetComponent<EnemyBossManager>();
+        enemyManager = GetComponent<GolemManager>();
         maxHealth = SetMaxHealthFromHealthLevel();
         currentHealth = maxHealth;
     }
 
     void Start()
     {
-        if (!isBoss)
+        enemyHealthBar.SetMaxHealth(maxHealth);
+    }
+
+    public override void HandlePoiseResetTimer()
+    {
+        if (poiseResetTimer > 0)
         {
-            enemyHealthBar.SetMaxHealth(maxHealth);
+            poiseResetTimer = poiseResetTimer - Time.deltaTime;
+        }
+        else if (poiseResetTimer <= 0 && !enemyManager.isInteracting)
+        {
+            totalPoiseDefense = armorPoiseBonus;
         }
     }
 
@@ -44,17 +51,16 @@ public class GolemStats : CharacterStats
         }
     }
 
+    public void BreakGuard()
+    {
+        enemyAnimatorManager.PlayTargetAnimation("Break Guard", true);
+    }
+
     public override void TakeDamage(int damage, string damageAnimation = "Damage_01")
     {
         base.TakeDamage(damage, damageAnimation = "Damage_01");
-        if (!isBoss)
-        {
-            enemyHealthBar.SetHealth(currentHealth);
-        }
-        else if (isBoss && enemyBossManager != null)
-        {
-            enemyBossManager.UpdateBossHealthBar(currentHealth);
-        }
+
+        enemyHealthBar.SetHealth(currentHealth);
         
         if (!enemyAnimatorManager.isPunch01)
         {

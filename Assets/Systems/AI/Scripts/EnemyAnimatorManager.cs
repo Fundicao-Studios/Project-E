@@ -11,7 +11,6 @@ public class EnemyAnimatorManager : AnimatorHandler
 
     private void Awake()
     {
-        anim = GetComponent<Animator>();
         enemyManager = GetComponentInParent<EnemyManager>();
         enemyStats = GetComponentInParent<EnemyStats>();
     }

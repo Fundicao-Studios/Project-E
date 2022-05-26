@@ -440,8 +440,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d914d9f65bd8f4445a819231d895fc33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 0}
-  canRotate: 0
+  anim: {fileID: 852197909381045813}
+  canRotate: 1
+  isPunch01: 0
 --- !u!114 &1470722458015858035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1274,6 +1275,7 @@ MonoBehaviour:
   canBeParried: 0
   isParrying: 0
   isBlocking: 0
+  isInvulnerable: 0
   canRotate: 1
   isFiringSpell: 0
   pendingCriticalDamage: 0
