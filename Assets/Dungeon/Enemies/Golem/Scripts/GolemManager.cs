@@ -7,20 +7,16 @@ public class GolemManager : CharacterManager
 {
     GolemLocomotionManager enemyLocomotionManager;
     GolemAnimatorManager enemyAnimatorManager;
-    GolemStats enemyStats;
+    GolemStatsManager golemStatsManager;
 
     public GolemState currentState;
-    public CharacterStats currentTarget;
+    public CharacterStatsManager currentTarget;
     public NavMeshAgent navmeshAgent;
     public Rigidbody enemyRigidBody;
 
     public bool isPerformingAction;
-    public bool isInteracting;
     public float rotationSpeed = 15;
     public float maximumAggroRadius;
-
-    [Header("Combat Flags")]
-    public bool canDoCombo;
 
     [Header("Definições do AI")]
     public float detectionRadius = 20;
@@ -39,7 +35,7 @@ public class GolemManager : CharacterManager
     {
         enemyLocomotionManager = GetComponent<GolemLocomotionManager>();
         enemyAnimatorManager = GetComponentInChildren<GolemAnimatorManager>();
-        enemyStats = GetComponent<GolemStats>();
+        golemStatsManager = GetComponent<GolemStatsManager>();
         enemyRigidBody = GetComponent<Rigidbody>();
         navmeshAgent = GetComponentInChildren<NavMeshAgent>();
     }
@@ -49,20 +45,20 @@ public class GolemManager : CharacterManager
         HandleRecoveryTimer();
         HandleStateMachine();
 
-        isInteracting = enemyAnimatorManager.anim.GetBool("isInteracting");
-        canDoCombo = enemyAnimatorManager.anim.GetBool("canDoCombo");
-        canRotate = enemyAnimatorManager.anim.GetBool("canRotate");
-        enemyAnimatorManager.anim.SetBool("isDead", enemyStats.isDead);
+        isInteracting = enemyAnimatorManager.animator.GetBool("isInteracting");
+        canDoCombo = enemyAnimatorManager.animator.GetBool("canDoCombo");
+        canRotate = enemyAnimatorManager.animator.GetBool("canRotate");
+        enemyAnimatorManager.animator.SetBool("isDead", golemStatsManager.isDead);
     }
 
     private void HandleStateMachine()
     {
-        if (enemyStats.isDead)
+        if (golemStatsManager.isDead)
             return;
 
         if (currentState != null)
         {
-            GolemState nextState = currentState.Tick(this, enemyStats, enemyAnimatorManager);
+            GolemState nextState = currentState.Tick(this, golemStatsManager, enemyAnimatorManager);
 
             if (nextState != null)
             {

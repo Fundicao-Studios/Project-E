@@ -13,7 +13,7 @@ public class BossAmbushState : BossState
 
     public BossPursueTargetState golemPursueTargetState;
 
-    public override BossState Tick(EnemyBossManager golemManager, BossStats enemyStats, BossAnimatorManager enemyAnimatorManager)
+    public override BossState Tick(BossManager golemManager, BossStatsManager enemyStats, BossAnimatorManager enemyAnimatorManager)
     {
         if (isSleeping && golemManager.isInteracting == false)
         {
@@ -26,7 +26,7 @@ public class BossAmbushState : BossState
 
         for (int i = 0; i < colliders.Length; i++)
         {
-            CharacterStats characterStats = colliders[i].transform.GetComponent<CharacterStats>();
+            CharacterStatsManager characterStats = colliders[i].transform.GetComponent<CharacterStatsManager>();
 
             if (characterStats != null)
             {

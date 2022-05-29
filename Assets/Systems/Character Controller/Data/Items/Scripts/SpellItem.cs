@@ -22,17 +22,17 @@ public class SpellItem : Item
 
     public virtual void AttemptToCastSpell(
         PlayerAnimatorManager animatorManage, 
-        PlayerStats playerStats, 
-        WeaponSlotManager weaponSlotManager)
+        PlayerStatsManager playerStats, 
+        PlayerWeaponSlotManager weaponSlotManager)
     {
         Debug.Log("Tentaste lançar uma magia!");
     }
 
     public virtual void SuccessfullyCastSpell(
         PlayerAnimatorManager animatorManager, 
-        PlayerStats playerStats,
+        PlayerStatsManager playerStats,
         CameraManager cameraManager,
-        WeaponSlotManager weaponSlotManager)
+        PlayerWeaponSlotManager weaponSlotManager)
     {
         Debug.Log("Conseguiste lançar uma magia com sucesso!");
         playerStats.DeductManaPoints(manaPointCost);

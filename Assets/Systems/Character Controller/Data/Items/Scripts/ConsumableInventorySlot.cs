@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ConsumableInventorySlot : MonoBehaviour
 {
-    PlayerInventory playerInventory;
+    PlayerInventoryManager playerInventory;
     ConsumableSlotManager consumableSlotManager;
     UIManager uiManager;
     public Image icon;
@@ -13,17 +13,24 @@ public class ConsumableInventorySlot : MonoBehaviour
 
     private void Awake()
     {
-        playerInventory = FindObjectOfType<PlayerInventory>();
+        playerInventory = FindObjectOfType<PlayerInventoryManager>();
         consumableSlotManager = FindObjectOfType<ConsumableSlotManager>();
         uiManager = FindObjectOfType<UIManager>();
     }
 
     public void AddItem(ConsumableItem newItem)
     {
-        item = newItem;
-        icon.sprite = item.itemIcon;
-        icon.enabled = true;
-        gameObject.SetActive(true);
+        if (newItem != null)
+        {
+            item = newItem;
+            icon.sprite = item.itemIcon;
+            icon.enabled = true;
+            gameObject.SetActive(true);
+        }
+        else
+        {
+            ClearInventorySlot();
+        }
     }
 
     public void ClearInventorySlot()
@@ -31,7 +38,6 @@ public class ConsumableInventorySlot : MonoBehaviour
         item = null;
         icon.sprite = null;
         icon.enabled = false;
-        gameObject.SetActive(false);
     }
 
     public void EquipThisItem()
@@ -53,7 +59,14 @@ public class ConsumableInventorySlot : MonoBehaviour
             return;
         }
 
-        playerInventory.currentConsumable = playerInventory.consumablesInSlots[playerInventory.currentConsumableIndex];
+        if (playerInventory.currentConsumableIndex == - 1)
+        {
+            playerInventory.currentConsumable = playerInventory.consumablesInSlots[playerInventory.currentConsumableIndex + 1];
+        }
+        else
+        {
+            playerInventory.currentConsumable = playerInventory.consumablesInSlots[playerInventory.currentConsumableIndex];
+        }
 
         consumableSlotManager.LoadConsumableOnSlot(playerInventory.currentConsumable);
     

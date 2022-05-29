@@ -6,7 +6,7 @@ public class GolemPursueTargetState : GolemState
 {
     public GolemCombatStanceSate golemCombatStanceSate;
 
-    public override GolemState Tick(GolemManager golemManager, GolemStats enemyStats, GolemAnimatorManager enemyAnimatorManager)
+    public override GolemState Tick(GolemManager golemManager, GolemStatsManager enemyStats, GolemAnimatorManager enemyAnimatorManager)
     {
         float distanceFromTarget = Vector3.Distance(golemManager.currentTarget.transform.position, golemManager.transform.position);
 

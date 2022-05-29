@@ -17,7 +17,7 @@ public class CrocProjectileSpell : CrocSpellItem
 
     public override void AttemptToCastSpell(
         CrocAnimatorManager animatorManager, 
-        CrocStats playerStats, 
+        CrocStatsManager playerStats, 
         CrocWeaponSlotManager weaponSlotManager)
     {
         base.AttemptToCastSpell(animatorManager, playerStats, weaponSlotManager);
@@ -28,7 +28,7 @@ public class CrocProjectileSpell : CrocSpellItem
 
     public override void SuccessfullyCastSpell(
         CrocAnimatorManager animatorManager, 
-        CrocStats playerStats,
+        CrocStatsManager playerStats,
         CrocWeaponSlotManager weaponSlotManager)
     {
         base.SuccessfullyCastSpell(animatorManager, playerStats, weaponSlotManager);

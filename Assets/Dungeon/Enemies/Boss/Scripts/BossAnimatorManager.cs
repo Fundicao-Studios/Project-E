@@ -4,42 +4,23 @@ using UnityEngine;
 
 public class BossAnimatorManager : AnimatorHandler
 {
-    EnemyBossManager enemyBossManager;
-    BossStats enemyStats;
+    BossManager bossManager;
+    BossStatsManager bossStats;
 
     public bool isPunch01;
 
-    private void Awake()
+    protected override void Awake()
     {
-        anim = GetComponent<Animator>();
-        enemyBossManager = GetComponentInParent<EnemyBossManager>();
-        enemyStats = GetComponentInParent<BossStats>();
+        base.Awake();
+        bossStats = GetComponentInParent<BossStatsManager>();
+        animator = GetComponent<Animator>();
+        bossManager = GetComponentInParent<BossManager>();
     }
 
     public override void TakeCriticalDamageAnimationEvent()
     {
-        enemyStats.TakeDamageNoAnimation(enemyBossManager.pendingCriticalDamage);
-        enemyBossManager.pendingCriticalDamage = 0;
-    }
-
-    public void EnableIsParrying()
-    {
-        enemyBossManager.isParrying = true;
-    }
-
-    public void DisableIsParrying()
-    {
-        enemyBossManager.isParrying = false;
-    }
-
-    public void EnableCanBeRiposted()
-    {
-        enemyBossManager.canBeRiposted = true;
-    }
-
-    public void DisableCanBeRiposted()
-    {
-        enemyBossManager.canBeRiposted = false;
+        bossStats.TakeDamageNoAnimation(bossManager.pendingCriticalDamage);
+        bossManager.pendingCriticalDamage = 0;
     }
 
     public void EnablePunch01()
@@ -55,6 +36,6 @@ public class BossAnimatorManager : AnimatorHandler
     public void InstantiateBossParticleFX()
     {
         BossFXTransform bossFXTransform = GetComponentInChildren<BossFXTransform>();
-        GameObject phaseFX = Instantiate(enemyBossManager.particleFX, bossFXTransform.transform);
+        GameObject phaseFX = Instantiate(bossManager.particleFX, bossFXTransform.transform);
     }
 }

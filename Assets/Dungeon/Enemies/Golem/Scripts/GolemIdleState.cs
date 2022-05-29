@@ -7,13 +7,13 @@ public class GolemIdleState : GolemState
     public GolemPursueTargetState golemPursueTargetState;
     public LayerMask detectionLayer;
 
-    public override GolemState Tick(GolemManager golemManager, GolemStats enemyStats, GolemAnimatorManager enemyAnimatorManager)
+    public override GolemState Tick(GolemManager golemManager, GolemStatsManager enemyStats, GolemAnimatorManager enemyAnimatorManager)
     {
         #region Controlar A Deteção De Alvos Do Inimigo
         Collider[] colliders = Physics.OverlapSphere(transform.position, golemManager.detectionRadius, detectionLayer);
         for (int i = 0; i < colliders.Length; i++)
         {
-            CharacterStats characterStats = colliders[i].transform.GetComponent<CharacterStats>();
+            CharacterStatsManager characterStats = colliders[i].transform.GetComponent<CharacterStatsManager>();
 
             if (characterStats != null)
             {

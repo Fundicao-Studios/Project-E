@@ -7,20 +7,16 @@ public class EnemyManager : CharacterManager
 {
     EnemyLocomotionManager enemyLocomotionManager;
     EnemyAnimatorManager enemyAnimatorManager;
-    EnemyStats enemyStats;
+    EnemyStatsManager enemyStatsManager;
 
     public State currentState;
-    public CharacterStats currentTarget;
+    public CharacterStatsManager currentTarget;
     public Navigation_CustomPathfinding navmeshAgent;
     public Rigidbody enemyRigidBody;
 
     public bool isPerformingAction;
-    public bool isInteracting;
     public float rotationSpeed = 15;
     public float maximumAggroRadius = 1.5f;
-
-    [Header("Combat Flags")]
-    public bool canDoCombo;
 
     [Header("Definições do AI")]
     public float detectionRadius = 20;
@@ -39,7 +35,7 @@ public class EnemyManager : CharacterManager
     {
         enemyLocomotionManager = GetComponent<EnemyLocomotionManager>();
         enemyAnimatorManager = GetComponentInChildren<EnemyAnimatorManager>();
-        enemyStats = GetComponent<EnemyStats>();
+        enemyStatsManager = GetComponent<EnemyStatsManager>();
         enemyRigidBody = GetComponent<Rigidbody>();
         navmeshAgent = GetComponentInChildren<Navigation_CustomPathfinding>();
         navmeshAgent.enabled = false;
@@ -55,10 +51,10 @@ public class EnemyManager : CharacterManager
         HandleRecoveryTimer();
         HandleStateMachine();
 
-        isInteracting = enemyAnimatorManager.anim.GetBool("isInteracting");
-        canDoCombo = enemyAnimatorManager.anim.GetBool("canDoCombo");
-        canRotate = enemyAnimatorManager.anim.GetBool("canRotate");
-        enemyAnimatorManager.anim.SetBool("isDead", enemyStats.isDead);
+        isInteracting = enemyAnimatorManager.animator.GetBool("isInteracting");
+        canDoCombo = enemyAnimatorManager.animator.GetBool("canDoCombo");
+        canRotate = enemyAnimatorManager.animator.GetBool("canRotate");
+        enemyAnimatorManager.animator.SetBool("isDead", enemyStatsManager.isDead);
     }
 
     private void LateUpdate()
@@ -69,12 +65,12 @@ public class EnemyManager : CharacterManager
 
     private void HandleStateMachine()
     {
-        if (enemyStats.isDead)
+        if (enemyStatsManager.isDead)
             return;
 
         if (currentState != null)
         {
-            State nextState = currentState.Tick(this, enemyStats, enemyAnimatorManager);
+            State nextState = currentState.Tick(this, enemyStatsManager, enemyAnimatorManager);
 
             if (nextState != null)
             {

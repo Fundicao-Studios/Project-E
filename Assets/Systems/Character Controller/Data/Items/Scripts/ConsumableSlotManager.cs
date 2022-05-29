@@ -5,25 +5,46 @@ using UnityEngine;
 public class ConsumableSlotManager : MonoBehaviour
 {
     PlayerManager playerManager;
-    PlayerInventory playerInventory;
+    Animator animator;
+    PlayerInventoryManager playerInventoryManager;
+
+    public ConsumableItem emptyBottle;
+
+    public ConsumableHolderSlot consumableHandSlot;
 
     QuickSlotsUI quickSlotsUI;
 
-    PlayerStats playerStats;
+    PlayerStatsManager playerStatsManager;
     InputManager inputManager;
 
     private void Awake()
     {
         playerManager = GetComponentInParent<PlayerManager>();
-        playerInventory = GetComponentInParent<PlayerInventory>();
+        playerInventoryManager = GetComponentInParent<PlayerInventoryManager>();
         quickSlotsUI = FindObjectOfType<QuickSlotsUI>();
-        playerStats = GetComponentInParent<PlayerStats>();
+        playerStatsManager = GetComponentInParent<PlayerStatsManager>();
+        animator = GetComponent<Animator>();
         inputManager = GetComponentInParent<InputManager>();
     }
 
     public void LoadConsumableOnSlot(ConsumableItem consumableItem)
     {
-        playerInventory.currentConsumable = consumableItem;
-        quickSlotsUI.UpdateConsumableQuickSlotsUI(consumableItem);
+        if (consumableItem != null)
+        {
+            consumableHandSlot.currentConsumable = consumableItem;
+            consumableHandSlot.LoadConsumableModel(consumableItem);
+            quickSlotsUI.UpdateConsumableQuickSlotsUI(consumableItem);
+            animator.CrossFade(consumableItem.hand_idle, 0.2f);  
+        }
+        else
+        {
+            consumableItem = emptyBottle;
+
+            animator.CrossFade("Both Arms Empty", 0.2f);
+            playerInventoryManager.currentConsumable = emptyBottle;
+            consumableHandSlot.currentConsumable = consumableItem;
+            consumableHandSlot.LoadConsumableModel(consumableItem);
+            quickSlotsUI.UpdateConsumableQuickSlotsUI(consumableItem);
+        }
     }
 }

@@ -4,22 +4,23 @@ using UnityEngine;
 
 public class PlayerEffectsManager : MonoBehaviour
 {
-    PlayerStats playerStats;
-    WeaponSlotManager weaponSlotManager;
+    PlayerStatsManager playerStatsManager;
+    PlayerWeaponSlotManager weaponSlotManager;
+    
     public GameObject currentParticleFX; //As pertículas que serão usadas no efeito atual que está a afetar o jogador (beber poção de vida, veneno etc)
     public GameObject instantiadedFXModel;
     public int amountToBeHealed;
 
     private void Awake()
     {
-        playerStats = GetComponentInParent<PlayerStats>();
-        weaponSlotManager = GetComponent<WeaponSlotManager>();
+        playerStatsManager = GetComponentInParent<PlayerStatsManager>();
+        weaponSlotManager = GetComponent<PlayerWeaponSlotManager>();
     }
 
     public void HealPlayerFromEffect()
     {
-        playerStats.HealPlayer(amountToBeHealed);
-        GameObject healParticles = Instantiate(currentParticleFX, playerStats.transform);
+        playerStatsManager.HealPlayer(amountToBeHealed);
+        GameObject healParticles = Instantiate(currentParticleFX, playerStatsManager.transform);
         Destroy(instantiadedFXModel.gameObject, 1f);
         weaponSlotManager.LoadBothWeaponsOnSlots();
     }

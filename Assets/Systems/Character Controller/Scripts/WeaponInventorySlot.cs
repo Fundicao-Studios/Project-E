@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class WeaponInventorySlot : MonoBehaviour
 {
-    PlayerInventory playerInventory;
-    WeaponSlotManager weaponSlotManager;
+    PlayerInventoryManager playerInventory;
+    PlayerWeaponSlotManager weaponSlotManager;
     UIManager uiManager;
 
     public Image icon;
@@ -14,17 +14,24 @@ public class WeaponInventorySlot : MonoBehaviour
 
     private void Awake()
     {
-        playerInventory = FindObjectOfType<PlayerInventory>();
-        weaponSlotManager = FindObjectOfType<WeaponSlotManager>();
+        playerInventory = FindObjectOfType<PlayerInventoryManager>();
+        weaponSlotManager = FindObjectOfType<PlayerWeaponSlotManager>();
         uiManager = FindObjectOfType<UIManager>();
     }
 
     public void AddItem(WeaponItem newItem)
     {
-        item = newItem;
-        icon.sprite = item.itemIcon;
-        icon.enabled = true;
-        gameObject.SetActive(true);
+        if (newItem != null)
+        {
+            item = newItem;
+            icon.sprite = item.itemIcon;
+            icon.enabled = true;
+            gameObject.SetActive(true);
+        }
+        else
+        {
+            ClearInventorySlot();
+        }
     }
 
     public void ClearInventorySlot()
@@ -32,7 +39,6 @@ public class WeaponInventorySlot : MonoBehaviour
         item = null;
         icon.sprite = null;
         icon.enabled = false;
-        gameObject.SetActive(false);
     }
 
     public void EquipThisItem()
@@ -66,8 +72,25 @@ public class WeaponInventorySlot : MonoBehaviour
             return;
         }
 
-        playerInventory.rightWeapon = playerInventory.weaponsInRightHandSlots[playerInventory.currentRightWeaponIndex];
-        playerInventory.leftWeapon = playerInventory.weaponsInLeftHandSlots[playerInventory.currentLeftWeaponIndex];
+        /*
+        if (playerInventory.currentRightWeaponIndex == - 1)
+        {
+            playerInventory.rightWeapon = playerInventory.weaponsInRightHandSlots[playerInventory.currentRightWeaponIndex + 1];
+        }
+        else
+        {
+            playerInventory.rightWeapon = playerInventory.weaponsInRightHandSlots[playerInventory.currentRightWeaponIndex];
+        }
+        
+        if (playerInventory.currentLeftWeaponIndex == - 1)
+        {
+            playerInventory.leftWeapon = playerInventory.weaponsInLeftHandSlots[playerInventory.currentLeftWeaponIndex + 1];
+        }
+        else
+        {
+            playerInventory.leftWeapon = playerInventory.weaponsInLeftHandSlots[playerInventory.currentLeftWeaponIndex];
+        }
+        */
 
         weaponSlotManager.LoadWeaponOnSlot(playerInventory.rightWeapon, false);
         weaponSlotManager.LoadWeaponOnSlot(playerInventory.leftWeapon, true);

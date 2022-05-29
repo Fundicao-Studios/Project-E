@@ -13,7 +13,7 @@ public class GolemAmbushState : GolemState
 
     public GolemPursueTargetState golemPursueTargetState;
 
-    public override GolemState Tick(GolemManager golemManager, GolemStats enemyStats, GolemAnimatorManager enemyAnimatorManager)
+    public override GolemState Tick(GolemManager golemManager, GolemStatsManager enemyStats, GolemAnimatorManager enemyAnimatorManager)
     {
         if (isSleeping && golemManager.isInteracting == false)
         {
@@ -26,7 +26,7 @@ public class GolemAmbushState : GolemState
 
         for (int i = 0; i < colliders.Length; i++)
         {
-            CharacterStats characterStats = colliders[i].transform.GetComponent<CharacterStats>();
+            CharacterStatsManager characterStats = colliders[i].transform.GetComponent<CharacterStatsManager>();
 
             if (characterStats != null)
             {

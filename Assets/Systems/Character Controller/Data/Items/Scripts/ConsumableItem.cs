@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class ConsumableItem : Item
 {
+    public GameObject modelPrefab;
+    public bool isEmpty;
+
     [Header("Quantide De Items")]
     public int maxItemAmount;
 
-    [Header("Modelo Do Item")]
-    public GameObject itemModel;
-
     [Header("Animações")]
     public string consumableAnimation;
+    public string hand_idle;
     public bool isInteracting;
 
     public FlaskItem typeOfPotion;
@@ -21,7 +22,7 @@ public class ConsumableItem : Item
         typeOfPotion = FindObjectOfType<FlaskItem>();
     }
 
-    public virtual void AttemptToConsumeItem(PlayerAnimatorManager playerAnimatorManager, WeaponSlotManager weaponSlotManager, PlayerEffectsManager playerEffectsManager)
+    public virtual void AttemptToConsumeItem(PlayerAnimatorManager playerAnimatorManager, PlayerWeaponSlotManager weaponSlotManager, PlayerEffectsManager playerEffectsManager)
     {
         if (maxItemAmount > 0)
         {

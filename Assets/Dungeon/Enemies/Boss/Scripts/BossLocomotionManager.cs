@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BossLocomotionManager : MonoBehaviour
 {
-    EnemyBossManager enemyManager;
+    BossManager enemyManager;
     BossAnimatorManager enemyAnimatorManager;
 
     public CapsuleCollider characterCollider;
@@ -14,7 +14,7 @@ public class BossLocomotionManager : MonoBehaviour
 
     private void Awake()
     {
-        enemyManager = GetComponent<EnemyBossManager>();
+        enemyManager = GetComponent<BossManager>();
         enemyAnimatorManager = GetComponentInChildren<BossAnimatorManager>();
     }
 

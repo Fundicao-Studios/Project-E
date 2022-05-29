@@ -5,7 +5,7 @@ using UnityEngine;
 public class WorldEventManager : MonoBehaviour
 {
     public UIBossHealthBar bossHealthBar;
-    public EnemyBossManager boss;
+    public BossManager boss;
 
     public bool bossFightIsActive;   //Está atualmente a lutar contra o boss
     public bool bossHasBeenAwakened; //Acordou o boss/viu a cutscene mas morreu durante a luta

@@ -7,13 +7,13 @@ public class CrocIdleState : CrocState
     public CrocPursueTargetState golemPursueTargetState;
     public LayerMask detectionLayer;
 
-    public override CrocState Tick(CrocManager golemManager, CrocStats enemyStats, CrocAnimatorManager enemyAnimatorManager)
+    public override CrocState Tick(CrocManager golemManager, CrocStatsManager enemyStats, CrocAnimatorManager enemyAnimatorManager)
     {
         #region Controlar A Deteção De Alvos Do Inimigo
         Collider[] colliders = Physics.OverlapSphere(transform.position, golemManager.detectionRadius, detectionLayer);
         for (int i = 0; i < colliders.Length; i++)
         {
-            CharacterStats characterStats = colliders[i].transform.GetComponent<CharacterStats>();
+            CharacterStatsManager characterStats = colliders[i].transform.GetComponent<CharacterStatsManager>();
 
             if (characterStats != null)
             {

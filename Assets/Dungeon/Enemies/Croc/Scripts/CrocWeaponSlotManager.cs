@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CrocWeaponSlotManager : MonoBehaviour
+public class CrocWeaponSlotManager : CharacterWeaponSlotsManager
 {
     public WeaponItem mouthWeapon;
     public GameObject spellCastFX;
@@ -11,11 +11,11 @@ public class CrocWeaponSlotManager : MonoBehaviour
 
     DamageCollider mouthDamageCollider;
 
-    CrocStats crocStats;
+    CrocStatsManager crocStats;
 
     private void Awake()
     {
-        crocStats = GetComponentInParent<CrocStats>();
+        crocStats = GetComponentInParent<CrocStatsManager>();
         LoadWeaponHolderSlots();
     }
 
@@ -73,12 +73,12 @@ public class CrocWeaponSlotManager : MonoBehaviour
 
     public void EnableCombo()
     {
-        
+        //anim.SetBool("canCombo", true);
     }
 
     public void DisableCombo()
     {
-        
+        //anim.SetBool("canCombo", true);
     }
 
     #region Controlar O Bonus De Poise Da Arma

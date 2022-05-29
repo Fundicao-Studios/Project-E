@@ -447,13 +447,17 @@ MonoBehaviour:
   manaLevel: 10
   maxManaPoints: 0
   currentManaPoints: 0
+  totalPoiseDefense: 0
+  offensivePoiseBonus: 0
+  armorPoiseBonus: 0
+  totalPoiseResetTime: 15
+  poiseResetTimer: 0
   physicalDamageAbsorptionHead: 0
   physicalDamageAbsorptionBody: 0
   physicalDamageAbsorptionLegs: 0
   physicalDamageAbsorptionFeet: 0
   isDead: 0
   enemyHealthBar: {fileID: 118552406227998933}
-  isBoss: 0
 --- !u!114 &8548448111644857291
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -473,6 +477,7 @@ MonoBehaviour:
   canBeParried: 0
   isParrying: 0
   isBlocking: 0
+  isInvulnerable: 0
   canRotate: 0
   isFiringSpell: 0
   pendingCriticalDamage: 0
@@ -1009,7 +1014,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23b0ac4a9ecdbbc478e2ef27ddc35797, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 2071326712483890757}
+  animator: {fileID: 2071326712483890757}
   canRotate: 1
   isPunch01: 0
 --- !u!114 &4840666812466357004

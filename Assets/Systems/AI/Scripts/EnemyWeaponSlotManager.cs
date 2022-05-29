@@ -2,22 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyWeaponSlotManager : MonoBehaviour
+public class EnemyWeaponSlotManager : CharacterWeaponSlotsManager
 {
     public WeaponItem rightHandWeapon;
     public WeaponItem leftHandWeapon;
 
-    WeaponHolderSlot rightHandSlot;
-    WeaponHolderSlot leftHandSlot;
-
-    DamageCollider leftHandDamageCollider;
-    DamageCollider rightHandDamageCollider;
-
-    EnemyStats enemyStats;
+    EnemyStatsManager enemyStatsManager;
 
     private void Awake()
     {
-        enemyStats = GetComponentInParent<EnemyStats>();
+        enemyStatsManager = GetComponentInParent<EnemyStatsManager>();
         LoadWeaponHolderSlots();
     }
 
@@ -116,24 +110,24 @@ public class EnemyWeaponSlotManager : MonoBehaviour
 
     public void EnableCombo()
     {
-        
+        //anim.SetBool("canCombo", true);
     }
 
     public void DisableCombo()
     {
-        
+        //anim.SetBool("canCombo", false);
     }
 
     #region Controlar O Bonus De Poise Da Arma
 
     public void GrantWeaponAttackingPoiseBonus()
     {
-        enemyStats.totalPoiseDefense = enemyStats.totalPoiseDefense + enemyStats.offensivePoiseBonus;
+        enemyStatsManager.totalPoiseDefense = enemyStatsManager.totalPoiseDefense + enemyStatsManager.offensivePoiseBonus;
     }
 
     public void ResetWeaponAttackingPoiseBonus()
     {
-        enemyStats.totalPoiseDefense = enemyStats.armorPoiseBonus;
+        enemyStatsManager.totalPoiseDefense = enemyStatsManager.armorPoiseBonus;
     }
 
     #endregion

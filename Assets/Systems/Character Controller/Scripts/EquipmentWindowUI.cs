@@ -14,13 +14,13 @@ public class EquipmentWindowUI : MonoBehaviour
     public HandEquipmentSlotUI[] handEquipmentSlotUI;
     public ConsumableEquipmentSlotUI[] consumableEquipmentSlotUI;
 
-    public void LoadWeaponOnEquipmentScreen(PlayerInventory playerInventory)
+    public void LoadWeaponOnEquipmentScreen(PlayerInventoryManager playerInventory)
     {
         for (int i = 0; i < handEquipmentSlotUI.Length; i++)
         {
             if (handEquipmentSlotUI[i].rightHandSlot01)
             {
-                handEquipmentSlotUI[i].AddItem(playerInventory.weaponsInLeftHandSlots[0]);
+                handEquipmentSlotUI[i].AddItem(playerInventory.weaponsInRightHandSlots[0]);
             }
             else if (handEquipmentSlotUI[i].rightHandSlot02)
             {
@@ -37,7 +37,7 @@ public class EquipmentWindowUI : MonoBehaviour
         }
     }
 
-    public void LoadConsumableOnEquipmentScreen(PlayerInventory playerInventory)
+    public void LoadConsumableOnEquipmentScreen(PlayerInventoryManager playerInventory)
     {
         for (int i = 0; i < consumableEquipmentSlotUI.Length; i++)
         {

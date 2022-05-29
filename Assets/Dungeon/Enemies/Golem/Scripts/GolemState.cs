@@ -4,5 +4,5 @@ using UnityEngine;
 
 public abstract class GolemState : MonoBehaviour
 {
-    public abstract GolemState Tick(GolemManager golemManager, GolemStats enemyStats, GolemAnimatorManager enemyAnimatorManager);
+    public abstract GolemState Tick(GolemManager golemManager, GolemStatsManager enemyStats, GolemAnimatorManager enemyAnimatorManager);
 }

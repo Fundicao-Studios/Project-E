@@ -20,10 +20,17 @@ public class ConsumableEquipmentSlotUI : MonoBehaviour
 
     public void AddItem(ConsumableItem newPotion)
     {
-        potion = newPotion;
-        icon.sprite = potion.itemIcon;
-        icon.enabled = true;
-        gameObject.SetActive(true);
+        if (newPotion != null)
+        {
+            potion = newPotion;
+            icon.sprite = potion.itemIcon;
+            icon.enabled = true;
+            gameObject.SetActive(true);
+        }
+        else
+        {
+            ClearItem();
+        }
     }
 
     public void ClearItem()
@@ -31,7 +38,6 @@ public class ConsumableEquipmentSlotUI : MonoBehaviour
         potion = null;
         icon.sprite = null;
         icon.enabled = false;
-        gameObject.SetActive(false);
     }
 
     public void SelectThisSlot()

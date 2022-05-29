@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-    public PlayerInventory playerInventory;
+    public PlayerInventoryManager playerInventory;
     public EquipmentWindowUI equipmentWindowUI;
     
     [Header("Janelas do UI")]
@@ -34,7 +34,7 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
-        playerInventory = FindObjectOfType<PlayerInventory>();
+        playerInventory = FindObjectOfType<PlayerInventoryManager>();
     }
 
     private void Start()

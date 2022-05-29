@@ -4,49 +4,78 @@ using UnityEngine;
 
 public class AnimatorHandler : MonoBehaviour
 {
-    public Animator anim;
+    public Animator animator;
+    protected CharacterManager characterManager;
+    protected CharacterStatsManager characterStatsManager;
     public bool canRotate;
+
+    protected virtual void Awake()
+    {
+        characterManager = GetComponentInParent<CharacterManager>();
+        characterStatsManager = GetComponentInParent<CharacterStatsManager>();
+    }
 
     public void PlayTargetAnimation(string targetAnim, bool isInteracting, bool canRotate = false)
     {
-        anim.applyRootMotion = isInteracting;
-        anim.SetBool("canRotate", canRotate);
-        anim.SetBool("isInteracting", isInteracting);
-        anim.CrossFade(targetAnim, 0.2f);
+        animator.applyRootMotion = isInteracting;
+        animator.SetBool("canRotate", canRotate);
+        animator.SetBool("isInteracting", isInteracting);
+        animator.CrossFade(targetAnim, 0.2f);
     }
 
-    public void EnableCombo()
+    public virtual void CanRotate()
     {
-        anim.SetBool("canDoCombo", true);
+        animator.SetBool("canRotate", true);
     }
 
-    public void DisableCombo()
+    public virtual void StopRotation()
     {
-        anim.SetBool("canDoCombo", false);
+        animator.SetBool("canRotate", false);
     }
 
-    public void CanRotate()
+    public virtual void EnableCombo()
     {
-        anim.SetBool("canRotate", true);
+        animator.SetBool("canDoCombo", true);
     }
 
-    public void StopRotation()
+    public virtual void DisableCombo()
     {
-        anim.SetBool("canRotate", false);
+        animator.SetBool("canDoCombo", false);
     }
 
-    public void EnableIsInvulnerable()
+    public virtual void EnableIsInvulnerable()
     {
-        anim.SetBool("isInvulnerable", true);
+        animator.SetBool("isInvulnerable", true);
     }
 
-    public void DisableIsInvulnerable()
+    public virtual void DisableIsInvulnerable()
     {
-        anim.SetBool("isInvulnerable", false);
+        animator.SetBool("isInvulnerable", false);
+    }
+
+    public virtual void EnableIsParrying()
+    {
+        characterManager.isParrying = true;
+    }
+
+    public virtual void DisableIsParrying()
+    {
+        characterManager.isParrying = false;
+    }
+
+    public virtual void EnableCanBeRiposted()
+    {
+        characterManager.canBeRiposted = true;
+    }
+
+    public virtual void DisableCanBeRiposted()
+    {
+        characterManager.canBeRiposted = false;
     }
 
     public virtual void TakeCriticalDamageAnimationEvent()
     {
-        
+        characterStatsManager.TakeDamageNoAnimation(characterManager.pendingCriticalDamage);
+        characterManager.pendingCriticalDamage = 0;
     }
 }

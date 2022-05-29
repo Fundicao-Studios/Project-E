@@ -86,7 +86,7 @@ Material:
     m_Floats:
     - Brightness_Rim: 2
     - Rim_Power: 5
-    - Toon_Ramp_Offset: 0.5
+    - Toon_Ramp_Offset: 1
     - Toon_Ramp_Smoothness: 0
     - _AlphaClip: 0
     - _Blend: 0

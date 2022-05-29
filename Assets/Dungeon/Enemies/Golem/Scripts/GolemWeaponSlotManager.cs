@@ -2,22 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GolemWeaponSlotManager : MonoBehaviour
+public class GolemWeaponSlotManager : CharacterWeaponSlotsManager
 {
     public WeaponItem rightHandWeapon;
     public WeaponItem leftHandWeapon;
 
-    WeaponHolderSlot rightHandSlot;
-    WeaponHolderSlot leftHandSlot;
-
-    DamageCollider leftHandDamageCollider;
-    DamageCollider rightHandDamageCollider;
-
-    GolemStats golemStats;
+    GolemStatsManager golemStatsManager;
 
     private void Awake()
     {
-        golemStats = GetComponentInParent<GolemStats>();
+        golemStatsManager = GetComponentInParent<GolemStatsManager>();
         LoadWeaponHolderSlots();
     }
 
@@ -116,24 +110,24 @@ public class GolemWeaponSlotManager : MonoBehaviour
 
     public void EnableCombo()
     {
-        
+        //anim.SetBool("canCombo", true);
     }
 
     public void DisableCombo()
     {
-        
+        //anim.SetBool("canCombo", false);
     }
 
     #region Controlar O Bonus De Poise Da Arma
 
     public void GrantWeaponAttackingPoiseBonus()
     {
-        golemStats.totalPoiseDefense = golemStats.totalPoiseDefense + golemStats.offensivePoiseBonus;
+        golemStatsManager.totalPoiseDefense = golemStatsManager.totalPoiseDefense + golemStatsManager.offensivePoiseBonus;
     }
 
     public void ResetWeaponAttackingPoiseBonus()
     {
-        golemStats.totalPoiseDefense = golemStats.armorPoiseBonus;
+        golemStatsManager.totalPoiseDefense = golemStatsManager.armorPoiseBonus;
     }
 
     #endregion

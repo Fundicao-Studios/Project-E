@@ -8,7 +8,7 @@ public class CrocCombatStanceSate : CrocState
     public EnemyAttackAction[] enemyAttacks;
     public CrocPursueTargetState golemPursueTargetState;
 
-    public override CrocState Tick(CrocManager golemManager, CrocStats enemyStats, CrocAnimatorManager enemyAnimatorManager)
+    public override CrocState Tick(CrocManager golemManager, CrocStatsManager enemyStats, CrocAnimatorManager enemyAnimatorManager)
     {
         float distanceFromTarget = Vector3.Distance(golemManager.currentTarget.transform.position, golemManager.transform.position);
         golemAttackState.hasPerformedAttack = false;
@@ -20,7 +20,7 @@ public class CrocCombatStanceSate : CrocState
 
         else if (distanceFromTarget > golemManager.maximumAggroRadius)
         {
-            enemyAnimatorManager.anim.SetBool("isWalking", true);
+            enemyAnimatorManager.animator.SetBool("isWalking", true);
             return golemPursueTargetState;
         }
 

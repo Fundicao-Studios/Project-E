@@ -5,25 +5,15 @@ using UnityEngine;
 public class PlayerManager : CharacterManager
 {
     InputManager inputManager;
-    Animator anim;
+    Animator animator;
     CameraManager cameraManager;
-    PlayerStats playerStats;
+    PlayerStatsManager playerStatsManager;
     PlayerAnimatorManager playerAnimatorManager;
-    PlayerLocomotion playerLocomotion;
+    PlayerLocomotionManager playerLocomotionManager;
 
     InteractableUI interactableUI;
     public GameObject interactableUIGameObject;
     public GameObject itemInteractableGameObject;
-
-    public bool isInteracting;
-
-    [Header("Flags do Jogador")]
-    public bool isSprinting;
-    public bool isInAir;
-    public bool isGrounded;
-    public bool canDoCombo;
-    public bool isUsingRightHand;
-    public bool isUsingLeftHand;
 
     private void Awake()
     {
@@ -31,35 +21,35 @@ public class PlayerManager : CharacterManager
         backStabCollider = GetComponentInChildren<CriticalDamageCollider>();
         inputManager = GetComponent<InputManager>();
         playerAnimatorManager = GetComponentInChildren<PlayerAnimatorManager>();
-        anim = GetComponentInChildren<Animator>();
-        playerStats = GetComponent<PlayerStats>();
-        playerLocomotion = GetComponent<PlayerLocomotion>();
-        interactableUI = FindObjectOfType<InteractableUI>();
+        animator = GetComponentInChildren<Animator>();
+        playerStatsManager = GetComponent<PlayerStatsManager>();
+        playerLocomotionManager = GetComponent<PlayerLocomotionManager>();
         interactableUIGameObject = GameObject.FindGameObjectWithTag("Pop-Up");
         itemInteractableGameObject = GameObject.FindGameObjectWithTag("Pop-Up 2");
         interactableUIGameObject.SetActive(false);
         itemInteractableGameObject.SetActive(false);
+        interactableUI = FindObjectOfType<InteractableUI>();
     }
 
     void Update()
     {
         float delta = Time.deltaTime;
         
-        isInteracting = anim.GetBool("isInteracting");
-        canDoCombo = anim.GetBool("canDoCombo");
-        isUsingRightHand = anim.GetBool("isUsingRightHand");
-        isUsingLeftHand = anim.GetBool("isUsingLeftHand");
-        isInvulnerable = anim.GetBool("isInvulnerable");
-        isFiringSpell = anim.GetBool("isFiringSpell");
-        anim.SetBool("isBlocking", isBlocking);
-        anim.SetBool("isInAir", isInAir);
-        anim.SetBool("isDead", playerStats.isDead);
+        isInteracting = animator.GetBool("isInteracting");
+        canDoCombo = animator.GetBool("canDoCombo");
+        isUsingRightHand = animator.GetBool("isUsingRightHand");
+        isUsingLeftHand = animator.GetBool("isUsingLeftHand");
+        isInvulnerable = animator.GetBool("isInvulnerable");
+        isFiringSpell = animator.GetBool("isFiringSpell");
+        animator.SetBool("isInAir", isInAir);
+        animator.SetBool("isDead", playerStatsManager.isDead);
+        animator.SetBool("isBlocking", isBlocking);
 
         inputManager.TickInput(delta);
-        playerAnimatorManager.canRotate = anim.GetBool("canRotate");
-        playerLocomotion.HandleRollingAndSprinting(delta);
-        playerLocomotion.HandleJumping();
-        playerStats.RegenerateStamina();
+        playerAnimatorManager.canRotate = animator.GetBool("canRotate");
+        playerLocomotionManager.HandleRollingAndSprinting(delta);
+        playerLocomotionManager.HandleJumping();
+        playerStatsManager.RegenerateStamina();
 
         CheckForInteractableObject();
     }
@@ -74,10 +64,10 @@ public class PlayerManager : CharacterManager
             cameraManager.HandleCameraRotaion(delta, inputManager.mouseX, inputManager.mouseY);
         }
 
-        playerLocomotion.HandleFalling(delta, playerLocomotion.moveDirection);
-        playerLocomotion.HandleMovement(delta);
-        playerLocomotion.HandleDance();
-        playerLocomotion.HandleRotation(delta);
+        playerLocomotionManager.HandleFalling(delta, playerLocomotionManager.moveDirection);
+        playerLocomotionManager.HandleMovement(delta);
+        playerLocomotionManager.HandleDance();
+        playerLocomotionManager.HandleRotation(delta);
     }
 
     private void LateUpdate()
@@ -97,7 +87,7 @@ public class PlayerManager : CharacterManager
 
         if (isInAir)
         {
-            playerLocomotion.inAirTimer = playerLocomotion.inAirTimer + Time.deltaTime;
+            playerLocomotionManager.inAirTimer = playerLocomotionManager.inAirTimer + Time.deltaTime;
         }
     }
 
@@ -142,7 +132,7 @@ public class PlayerManager : CharacterManager
 
     public void OpenChestInteraction(Transform playerStandsHereWhenOpeningChest)
     {
-        playerLocomotion.rigidbody.velocity = Vector3.zero; //Evitar o jogador de deslizar
+        playerLocomotionManager.rigidbody.velocity = Vector3.zero; //Evitar o jogador de deslizar
         transform.position = playerStandsHereWhenOpeningChest.transform.position;
         playerAnimatorManager.PlayTargetAnimation("Pick Up Item", true);
     }

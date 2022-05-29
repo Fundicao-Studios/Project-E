@@ -4,20 +4,18 @@ using UnityEngine;
 
 public class PlayerAnimatorManager : AnimatorHandler
 {
-    PlayerManager playerManager;
-    PlayerStats playerStats;
     InputManager inputManager;
-    PlayerLocomotion playerLocomotion;
+    PlayerLocomotionManager playerLocomotionManager
+    ;
     int vertical;
     int horizontal;
 
-    public void Initialize()
+    protected override void Awake()
     {
-        playerManager = GetComponentInParent<PlayerManager>();
-        playerStats = GetComponentInParent<PlayerStats>();
-        anim = GetComponent<Animator>();
+        base.Awake();
         inputManager = GetComponentInParent<InputManager>();
-        playerLocomotion = GetComponentInParent<PlayerLocomotion>();
+        animator = GetComponent<Animator>();
+        playerLocomotionManager = GetComponentInParent<PlayerLocomotionManager>();
         vertical = Animator.StringToHash("Vertical");
         horizontal = Animator.StringToHash("Horizontal");
     }
@@ -80,56 +78,32 @@ public class PlayerAnimatorManager : AnimatorHandler
             h = horizontalMovement;
         }
         
-        anim.SetFloat(vertical, v, 0.1f, Time.deltaTime);
-        anim.SetFloat(horizontal, h, 0.1f, Time.deltaTime);
+        animator.SetFloat(vertical, v, 0.1f, Time.deltaTime);
+        animator.SetFloat(horizontal, h, 0.1f, Time.deltaTime);
     }
 
-    public void EnableIsInvulnerable()
+    public void DisableCollision()
     {
-        anim.SetBool("isInvulnerable", true);
+        playerLocomotionManager.characterCollider.enabled = false;
+        playerLocomotionManager.characterCollisionBlockerCollider.enabled = false;
     }
 
-    public void DisableIsInvulnerable()
+    public void EnableCollision()
     {
-        anim.SetBool("isInvulnerable", false);
-    }
-
-    public void EnableIsParrying()
-    {
-        playerManager.isParrying = true;
-    }
-
-    public void DisableIsParrying()
-    {
-        playerManager.isParrying = false;
-    }
-
-    public void EnableCanBeRiposted()
-    {
-        playerManager.canBeRiposted = true;
-    }
-
-    public void DisableCanBeRiposted()
-    {
-        playerManager.canBeRiposted = false;
-    }
-
-    public override void TakeCriticalDamageAnimationEvent()
-    {
-        playerStats.TakeDamageNoAnimation(playerManager.pendingCriticalDamage);
-        playerManager.pendingCriticalDamage = 0;
+        playerLocomotionManager.characterCollider.enabled = true;
+        playerLocomotionManager.characterCollisionBlockerCollider.enabled = true;
     }
 
     private void OnAnimatorMove()
     {
-        if (playerManager.isInteracting == false)
+        if (characterManager.isInteracting == false)
             return;
 
         float delta = Time.deltaTime;
-        playerLocomotion.rigidbody.drag = 0;
-        Vector3 deltaPosition = anim.deltaPosition;
+        playerLocomotionManager.rigidbody.drag = 0;
+        Vector3 deltaPosition = animator.deltaPosition;
         deltaPosition.y = 0;
         Vector3 velocity = deltaPosition / delta;
-        playerLocomotion.rigidbody.velocity = velocity;
+        playerLocomotionManager.rigidbody.velocity = velocity;
     }
 }

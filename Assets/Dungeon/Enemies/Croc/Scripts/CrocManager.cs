@@ -13,12 +13,12 @@ public class CrocManager : MonoBehaviour
 
     public int pendingCriticalDamage;
 
-    CrocLocomotionManager enemyLocomotionManager;
-    CrocAnimatorManager enemyAnimatorManager;
-    CrocStats enemyStats;
+    CrocLocomotionManager crocLocomotionManager;
+    CrocAnimatorManager crocAnimatorManager;
+    CrocStatsManager crocStatsManager;
 
     public CrocState currentState;
-    public CharacterStats currentTarget;
+    public CharacterStatsManager currentTarget;
     public NavMeshAgent navmeshAgent;
     public Rigidbody enemyRigidBody;
 
@@ -45,9 +45,9 @@ public class CrocManager : MonoBehaviour
 
     private void Awake()
     {
-        enemyLocomotionManager = GetComponent<CrocLocomotionManager>();
-        enemyAnimatorManager = GetComponentInChildren<CrocAnimatorManager>();
-        enemyStats = GetComponent<CrocStats>();
+        crocLocomotionManager = GetComponent<CrocLocomotionManager>();
+        crocAnimatorManager = GetComponentInChildren<CrocAnimatorManager>();
+        crocStatsManager = GetComponent<CrocStatsManager>();
         enemyRigidBody = GetComponent<Rigidbody>();
         navmeshAgent = GetComponentInChildren<NavMeshAgent>();
     }
@@ -57,20 +57,20 @@ public class CrocManager : MonoBehaviour
         HandleRecoveryTimer();
         HandleStateMachine();
 
-        isInteracting = enemyAnimatorManager.anim.GetBool("isInteracting");
-        canDoCombo = enemyAnimatorManager.anim.GetBool("canDoCombo");
-        canRotate = enemyAnimatorManager.anim.GetBool("canRotate");
-        enemyAnimatorManager.anim.SetBool("isDead", enemyStats.isDead);
+        isInteracting = crocAnimatorManager.animator.GetBool("isInteracting");
+        canDoCombo = crocAnimatorManager.animator.GetBool("canDoCombo");
+        canRotate = crocAnimatorManager.animator.GetBool("canRotate");
+        crocAnimatorManager.animator.SetBool("isDead", crocStatsManager.isDead);
     }
 
     private void HandleStateMachine()
     {
-        if (enemyStats.isDead)
+        if (crocStatsManager.isDead)
             return;
 
         if (currentState != null)
         {
-            CrocState nextState = currentState.Tick(this, enemyStats, enemyAnimatorManager);
+            CrocState nextState = currentState.Tick(this, crocStatsManager, crocAnimatorManager);
 
             if (nextState != null)
             {

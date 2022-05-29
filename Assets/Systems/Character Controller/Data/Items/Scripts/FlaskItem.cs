@@ -17,10 +17,10 @@ public class FlaskItem : ConsumableItem
     [Header("VFX De Recuperação")]
     public GameObject recoveryFX;
 
-    public override void AttemptToConsumeItem(PlayerAnimatorManager playerAnimatorManager, WeaponSlotManager weaponSlotManager, PlayerEffectsManager playerEffectsManager)
+    public override void AttemptToConsumeItem(PlayerAnimatorManager playerAnimatorManager, PlayerWeaponSlotManager weaponSlotManager, PlayerEffectsManager playerEffectsManager)
     {
         base.AttemptToConsumeItem(playerAnimatorManager, weaponSlotManager, playerEffectsManager);
-        GameObject potion = Instantiate(itemModel, weaponSlotManager.rightHandSlot.transform);
+        GameObject potion = Instantiate(modelPrefab, weaponSlotManager.rightHandSlot.transform);
         playerEffectsManager.currentParticleFX = recoveryFX;
         playerEffectsManager.amountToBeHealed = healthRecoverAmount;
         playerEffectsManager.instantiadedFXModel = potion;

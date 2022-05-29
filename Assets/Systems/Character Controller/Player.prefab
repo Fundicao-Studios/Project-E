@@ -586,7 +586,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: d4dac419008e8e043a941eb0b2a88dd8, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2472,11 +2472,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01aad6c483878c949a4ddb52f2607bc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackingWeapon: {fileID: 0}
-  leftHandSlot: {fileID: 0}
-  rightHandSlot: {fileID: 0}
+  unarmedWeapon: {fileID: 11400000, guid: 782bb99688fc4a2498c552e0daba48ff, type: 2}
+  leftHandSlot: {fileID: 6481223738865752714}
+  rightHandSlot: {fileID: 1427192937700067361}
+  backSlot: {fileID: 0}
   leftHandDamageCollider: {fileID: 0}
   rightHandDamageCollider: {fileID: 0}
+  attackingWeapon: {fileID: 0}
 --- !u!114 &2455760648459744641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2489,6 +2491,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56c2f273eaf2fc04290f1fb09b724fe7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  emptyBottle: {fileID: 11400000, guid: 68aa08ed50953b349a1fc8c1942d2959, type: 2}
+  consumableHandSlot: {fileID: 1600274063}
 --- !u!114 &4214842334581123397
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2501,7 +2505,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 315f9ba17a296f94ba2ff6c42b2c54f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 0}
+  animator: {fileID: 0}
   canRotate: 1
 --- !u!114 &789804682964201984
 MonoBehaviour:
@@ -4157,24 +4161,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shockSpell: {fileID: 11400000, guid: 3a5f531ac413d5149a69620f85869ba5, type: 2}
   healSpell: {fileID: 11400000, guid: 3a510c85020e11247a3a89587c92f4ee, type: 2}
-  currentSpell: {fileID: 11400000, guid: 3a5f531ac413d5149a69620f85869ba5, type: 2}
-  rightWeapon: {fileID: 11400000, guid: fa947fd37624e5f47a360aac64682f63, type: 2}
-  leftWeapon: {fileID: 11400000, guid: 6ae7bf8fb0b272c489c1a7dd02bfb39e, type: 2}
+  currentSpell: {fileID: 0}
+  rightWeapon: {fileID: 0}
+  leftWeapon: {fileID: 0}
   currentConsumable: {fileID: 0}
   currentHelmetEquipment: {fileID: 11400000, guid: 0a4f4c91419f552428ca58b18c688665, type: 2}
   currentTorsoEquipment: {fileID: 11400000, guid: 2df88123954a42c47942e4c8218dac38, type: 2}
   currentFeetEquipment: {fileID: 11400000, guid: 45342372d80d74b40939e6a2c363e98a, type: 2}
   currentLegEquipment: {fileID: 11400000, guid: 2054ac2d952716b40af449ebdde0a555, type: 2}
-  unarmedWeapon: {fileID: 11400000, guid: 782bb99688fc4a2498c552e0daba48ff, type: 2}
   weaponsInRightHandSlots:
-  - {fileID: 11400000, guid: fa947fd37624e5f47a360aac64682f63, type: 2}
-  - {fileID: 11400000, guid: 1183b982eac1f1b4db04e9a68afbe683, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
   weaponsInLeftHandSlots:
-  - {fileID: 11400000, guid: d26efb1b3910b0247be1dfa87a122c43, type: 2}
-  - {fileID: 11400000, guid: 6ae7bf8fb0b272c489c1a7dd02bfb39e, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
   consumablesInSlots:
-  - {fileID: 11400000, guid: 68aa08ed50953b349a1fc8c1942d2959, type: 2}
-  - {fileID: 11400000, guid: 68aa08ed50953b349a1fc8c1942d2959, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
   currentRightWeaponIndex: 0
   currentLeftWeaponIndex: 0
   currentConsumableIndex: 0
@@ -4194,7 +4197,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveDirection: {x: 0, y: 0, z: 0}
   myTransform: {fileID: 0}
-  animatorManager: {fileID: 0}
+  playerAnimatorManager: {fileID: 0}
   rigidbody: {fileID: 0}
   normalCamera: {fileID: 0}
   groundDetectionRayStartPoint: 0.5
@@ -4260,23 +4263,23 @@ MonoBehaviour:
   lockOnTransform: {fileID: 578070327738531981}
   backStabCollider: {fileID: 6442359727271648554}
   riposteCollider: {fileID: 2927942220568659916}
+  isInteracting: 0
   canBeRiposted: 0
   canBeParried: 0
+  canDoCombo: 0
   isParrying: 0
   isBlocking: 0
   isInvulnerable: 0
+  isUsingRightHand: 0
+  isUsingLeftHand: 0
   canRotate: 0
+  isSprinting: 0
+  isInAir: 0
+  isGrounded: 1
   isFiringSpell: 0
   pendingCriticalDamage: 0
   interactableUIGameObject: {fileID: 6617243846279705121}
   itemInteractableGameObject: {fileID: 5822472731630174351}
-  isInteracting: 0
-  isSprinting: 0
-  isInAir: 0
-  isGrounded: 1
-  canDoCombo: 0
-  isUsingRightHand: 0
-  isUsingLeftHand: 0
 --- !u!114 &4126030345490669699
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6103,6 +6106,7 @@ GameObject:
   m_Component:
   - component: {fileID: 179779166987095859}
   - component: {fileID: 1427192937700067361}
+  - component: {fileID: 1600274063}
   m_Layer: 0
   m_Name: mixamorig:RightHand
   m_TagString: Untagged
@@ -6146,6 +6150,21 @@ MonoBehaviour:
   isRightHandSlot: 1
   isBackSlot: 0
   currentWeaponModel: {fileID: 0}
+--- !u!114 &1600274063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4495922530889358842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7800427111ef644469deeb2e37c42ffc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentOverride: {fileID: 179779166987095859}
+  currentConsumable: {fileID: 0}
+  currentConsumableModel: {fileID: 0}
 --- !u!1 &4574785706306953957
 GameObject:
   m_ObjectHideFlags: 0
@@ -8341,7 +8360,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0

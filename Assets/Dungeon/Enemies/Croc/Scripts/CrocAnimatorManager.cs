@@ -4,33 +4,34 @@ using UnityEngine;
 
 public class CrocAnimatorManager : AnimatorHandler
 {
-    CrocManager golemManager;
-    CrocStats enemyStats;
-    CrocWeaponSlotManager weaponSlotManager;
+    CrocManager crocManager;
+    CrocStatsManager crocStatsManager;
+    CrocWeaponSlotManager crocWeaponSlotManager;
 
     public CrocSpellItem spellItem; 
 
-    private void Awake()
+    protected override void Awake()
     {
-        anim = GetComponent<Animator>();
-        golemManager = GetComponentInParent<CrocManager>();
-        enemyStats = GetComponentInParent<CrocStats>();
-        weaponSlotManager = GetComponent<CrocWeaponSlotManager>();
+        base.Awake();
+        animator = GetComponent<Animator>();
+        crocManager = GetComponentInParent<CrocManager>();
+        crocStatsManager = GetComponentInParent<CrocStatsManager>();
+        crocWeaponSlotManager = GetComponent<CrocWeaponSlotManager>();
     }
 
     public override void TakeCriticalDamageAnimationEvent()
     {
-        enemyStats.TakeDamageNoAnimation(golemManager.pendingCriticalDamage);
-        golemManager.pendingCriticalDamage = 0;
+        crocStatsManager.TakeDamageNoAnimation(crocManager.pendingCriticalDamage);
+        crocManager.pendingCriticalDamage = 0;
     }
 
     private void AttemptToCastSpell()
     {
-        spellItem.AttemptToCastSpell(this, enemyStats, weaponSlotManager);
+        spellItem.AttemptToCastSpell(this, crocStatsManager, crocWeaponSlotManager);
     }
 
     private void SuccessfullyCastSpell()
     {
-        spellItem.SuccessfullyCastSpell(this, enemyStats, weaponSlotManager);
+        spellItem.SuccessfullyCastSpell(this, crocStatsManager, crocWeaponSlotManager);
     }
 }

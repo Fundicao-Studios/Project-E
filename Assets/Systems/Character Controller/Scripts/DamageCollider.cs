@@ -37,7 +37,7 @@ public class DamageCollider : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            PlayerStats playerStats = collision.GetComponent<PlayerStats>();
+            PlayerStatsManager playerStats = collision.GetComponent<PlayerStatsManager>();
             CharacterManager enemyCharacterManager = collision.GetComponent<CharacterManager>();
             BlockingCollider shield = collision.transform.GetComponentInChildren<BlockingCollider>();
 
@@ -79,10 +79,10 @@ public class DamageCollider : MonoBehaviour
 
         if (collision.tag == "Enemy")
         {
-            EnemyStats enemyStats = collision.GetComponent<EnemyStats>();
-            GolemStats golemStats = collision.GetComponent<GolemStats>();
-            CrocStats crocStats = collision.GetComponent<CrocStats>();
-            BossStats bossStats = collision.GetComponent<BossStats>();
+            EnemyStatsManager enemyStats = collision.GetComponent<EnemyStatsManager>();
+            GolemStatsManager golemStats = collision.GetComponent<GolemStatsManager>();
+            CrocStatsManager crocStats = collision.GetComponent<CrocStatsManager>();
+            BossStatsManager bossStats = collision.GetComponent<BossStatsManager>();
             CharacterManager enemyCharacterManager = collision.GetComponent<CharacterManager>();
 
             if (enemyCharacterManager != null)

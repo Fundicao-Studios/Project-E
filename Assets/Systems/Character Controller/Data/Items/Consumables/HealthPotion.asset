@@ -14,12 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 21300000, guid: 956e8bfa1d1f4344c8be6a2b228a5e6a, type: 3}
   itemName: Health Potion
-  CurrentItemAmount: 10
+  modelPrefab: {fileID: 996330675580770063, guid: 9bcc2dfcff9196846958c260723c08dd, type: 3}
+  isEmpty: 0
   maxItemAmount: 10
-  itemModel: {fileID: 1000012970591572, guid: 7cafb89b5a0f61f479d0a748962abbbc, type: 3}
   consumableAnimation: Drink
+  hand_idle: 
   isInteracting: 0
-  typeOfPotion: {fileID: 0}
+  typeOfPotion: {fileID: 11400000}
   lifePotion: 1
   manaPotion: 0
   emptyPotion: 0

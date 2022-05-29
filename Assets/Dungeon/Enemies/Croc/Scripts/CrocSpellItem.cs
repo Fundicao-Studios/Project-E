@@ -19,7 +19,7 @@ public class CrocSpellItem : Item
 
     public virtual void AttemptToCastSpell(
         CrocAnimatorManager animatorManage, 
-        CrocStats playerStats, 
+        CrocStatsManager playerStats, 
         CrocWeaponSlotManager weaponSlotManager)
     {
         Debug.Log("Tentou lançar uma magia!");
@@ -27,7 +27,7 @@ public class CrocSpellItem : Item
 
     public virtual void SuccessfullyCastSpell(
         CrocAnimatorManager animatorManager, 
-        CrocStats playerStats,
+        CrocStatsManager playerStats,
         CrocWeaponSlotManager weaponSlotManager)
     {
         Debug.Log("Conseguiu lançar uma magia com sucesso!");

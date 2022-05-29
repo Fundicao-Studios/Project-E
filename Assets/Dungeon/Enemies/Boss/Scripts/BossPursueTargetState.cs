@@ -6,7 +6,7 @@ public class BossPursueTargetState : BossState
 {
     public BossCombatStanceState golemCombatStanceSate;
 
-    public override BossState Tick(EnemyBossManager golemManager, BossStats enemyStats, BossAnimatorManager enemyAnimatorManager)
+    public override BossState Tick(BossManager golemManager, BossStatsManager enemyStats, BossAnimatorManager enemyAnimatorManager)
     {
         float distanceFromTarget = Vector3.Distance(golemManager.currentTarget.transform.position, golemManager.transform.position);
 

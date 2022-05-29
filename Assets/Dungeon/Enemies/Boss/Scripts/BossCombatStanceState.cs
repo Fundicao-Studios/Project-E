@@ -12,7 +12,7 @@ public class BossCombatStanceState : BossState
     public bool hasPhaseShifted;
     public EnemyAttackAction[] secondPhaseAttacks;
 
-    public override BossState Tick(EnemyBossManager golemManager, BossStats enemyStats, BossAnimatorManager enemyAnimatorManager)
+    public override BossState Tick(BossManager golemManager, BossStatsManager enemyStats, BossAnimatorManager enemyAnimatorManager)
     {
         float distanceFromTarget = Vector3.Distance(golemManager.currentTarget.transform.position, golemManager.transform.position);
         golemAttackState.hasPerformedAttack = false;
@@ -41,7 +41,7 @@ public class BossCombatStanceState : BossState
         return this;
     }
 
-    private void GetNewAttack(EnemyBossManager enemyManager)
+    private void GetNewAttack(BossManager enemyManager)
     {
         if (!hasPhaseShifted)
         {

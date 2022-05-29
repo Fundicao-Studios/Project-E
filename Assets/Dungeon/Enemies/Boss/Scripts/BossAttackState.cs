@@ -11,7 +11,7 @@ public class BossAttackState : BossState
     bool willDoComboOnNextAttack = false;
     public bool hasPerformedAttack = false;
 
-    public override BossState Tick(EnemyBossManager golemManager, BossStats enemyStats, BossAnimatorManager enemyAnimatorManager)
+    public override BossState Tick(BossManager golemManager, BossStatsManager enemyStats, BossAnimatorManager enemyAnimatorManager)
     {
         float distanceFromTarget = Vector3.Distance(golemManager.currentTarget.transform.position, golemManager.transform.position);
 
@@ -41,14 +41,14 @@ public class BossAttackState : BossState
         return golemCombatStanceSate;
     }
 
-    private void AttackTarget(BossAnimatorManager enemyAnimatorManager, EnemyBossManager golemManager)
+    private void AttackTarget(BossAnimatorManager enemyAnimatorManager, BossManager golemManager)
     {
         enemyAnimatorManager.PlayTargetAnimation(currentAttack.actionAnimation, true);
         golemManager.currentRecoveryTime = currentAttack.recoveryTime;
         hasPerformedAttack = true;
     }
 
-    private void AttackTargetWithCombo(BossAnimatorManager enemyAnimatorManager, EnemyBossManager golemManager)
+    private void AttackTargetWithCombo(BossAnimatorManager enemyAnimatorManager, BossManager golemManager)
     {
         willDoComboOnNextAttack = false;
         enemyAnimatorManager.PlayTargetAnimation(currentAttack.actionAnimation, true);
@@ -56,7 +56,7 @@ public class BossAttackState : BossState
         //currentAttack = null;
     }
 
-    private void RotateTowardsTargetWhilstAttacking(EnemyBossManager golemManager)
+    private void RotateTowardsTargetWhilstAttacking(BossManager golemManager)
     {
         //Rotacionar manualmente
         if (golemManager.canRotate && golemManager.isInteracting)
@@ -75,7 +75,7 @@ public class BossAttackState : BossState
         }
     }
 
-    private void RollForComboChance(EnemyBossManager golemManager)
+    private void RollForComboChance(BossManager golemManager)
     {
         float comboChance = Random.Range(0, 100);
 

@@ -2,22 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossWeaponSlotManager : MonoBehaviour
+public class BossWeaponSlotManager : CharacterWeaponSlotsManager
 {
     public WeaponItem rightHandWeapon;
     public WeaponItem leftHandWeapon;
 
-    WeaponHolderSlot rightHandSlot;
-    WeaponHolderSlot leftHandSlot;
-
-    DamageCollider leftHandDamageCollider;
-    DamageCollider rightHandDamageCollider;
-
-    BossStats bossStats;
+    BossStatsManager bossStatsManager;
 
     private void Awake()
     {
-        bossStats = GetComponentInParent<BossStats>();
+        bossStatsManager = GetComponentInParent<BossStatsManager>();
         LoadWeaponHolderSlots();
     }
 
@@ -116,24 +110,24 @@ public class BossWeaponSlotManager : MonoBehaviour
 
     public void EnableCombo()
     {
-        
+        //anim.SetBool("canCombo", true);
     }
 
     public void DisableCombo()
     {
-        
+        //anim.SetBool("canCombo", false);
     }
 
     #region Controlar O Bonus De Poise Da Arma
 
     public void GrantWeaponAttackingPoiseBonus()
     {
-        bossStats.totalPoiseDefense = bossStats.totalPoiseDefense + bossStats.offensivePoiseBonus;
+        bossStatsManager.totalPoiseDefense = bossStatsManager.totalPoiseDefense + bossStatsManager.offensivePoiseBonus;
     }
 
     public void ResetWeaponAttackingPoiseBonus()
     {
-        bossStats.totalPoiseDefense = bossStats.armorPoiseBonus;
+        bossStatsManager.totalPoiseDefense = bossStatsManager.armorPoiseBonus;
     }
 
     #endregion
