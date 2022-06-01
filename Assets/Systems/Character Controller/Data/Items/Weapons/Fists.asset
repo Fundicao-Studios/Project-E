@@ -16,8 +16,11 @@ MonoBehaviour:
   itemName: Fists
   modelPrefab: {fileID: 2936019544412626356, guid: 26fe296f19fb8624698712ef15e3e1bf, type: 3}
   isUnarmed: 0
-  baseDamage: 25
+  physicalDamage: 25
+  fireDamage: 0
   criticalDamageMultiplier: 4
+  poiseBreak: 0
+  offensivePoiseBonus: 0
   physicalDamageAbsorption: 0
   right_hand_idle: Right Arm Empty
   left_hand_idle: Left Arm Empty

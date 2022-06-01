@@ -864,6 +864,7 @@ GameObject:
   - component: {fileID: 8008451487092599276}
   - component: {fileID: 633782882393780007}
   - component: {fileID: 3297037536345848086}
+  - component: {fileID: 1716758643353141283}
   m_Layer: 0
   m_Name: Enemy Model
   m_TagString: Untagged
@@ -926,7 +927,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aebf2e4197dd2564b9c8b25b7c0573d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 8008451487092599276}
+  animator: {fileID: 0}
   canRotate: 1
   spellItem: {fileID: 11400000, guid: 3a40c0a1ac16a874bb9dffbc328e2794, type: 2}
 --- !u!114 &3297037536345848086
@@ -941,9 +942,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 040e95fc6d6e1834db6392aac477f965, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unarmedWeapon: {fileID: 0}
+  leftHandSlot: {fileID: 0}
+  rightHandSlot: {fileID: 0}
+  backSlot: {fileID: 0}
+  leftHandDamageCollider: {fileID: 0}
+  rightHandDamageCollider: {fileID: 0}
   mouthWeapon: {fileID: 11400000, guid: ca93d613a04d1dd4c933f78d5cde10a1, type: 2}
   spellCastFX: {fileID: 0}
   mouthWeaponSlot: {fileID: 0}
+--- !u!114 &1716758643353141283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3641230987294665004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d094ab74fbf96d4481e99782da7422f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bloodSplatterFX: {fileID: 7705372350664512171, guid: 1d348ce6c9e42b749a5421fa2430b0bb, type: 3}
+  defaultBurnParticleFX: {fileID: 2020005877335862076, guid: 96697a0421380114fbb7d1966623b2d3, type: 3}
+  buildUpTransform: {fileID: 1531356313189660889}
+  isBurning: 0
+  isInLava: 0
+  isLavaResistant: 1
+  burnBuildup: 0
+  burnAmount: 100
+  defaultBurnAmount: 0
+  burnTimer: 2
+  burnDamage: 1
+  lavaTimer: 0.5
+  lavaDamage: 1
 --- !u!1 &3879803531658016789
 GameObject:
   m_ObjectHideFlags: 0
@@ -1189,7 +1221,7 @@ GameObject:
   - component: {fileID: 8679580159842919713}
   m_Layer: 13
   m_Name: Croc
-  m_TagString: Enemy
+  m_TagString: Character
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1288,9 +1320,12 @@ MonoBehaviour:
   physicalDamageAbsorptionBody: 0
   physicalDamageAbsorptionLegs: 0
   physicalDamageAbsorptionFeet: 0
+  fireDamageAbsorptionHead: 0
+  fireDamageAbsorptionBody: 0
+  fireDamageAbsorptionLegs: 0
+  fireDamageAbsorptionFeet: 0
   isDead: 0
   enemyHealthBar: {fileID: 8887031981158597891}
-  isBoss: 0
 --- !u!114 &3702559930792520336
 MonoBehaviour:
   m_ObjectHideFlags: 0

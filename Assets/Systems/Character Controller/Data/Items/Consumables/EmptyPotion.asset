@@ -14,16 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 21300000, guid: f887ad5a48737254eb4d5cfbca648bf7, type: 3}
   itemName: Empty Potion
-  modelPrefab: {fileID: 5734172305934516502, guid: 7327f84ade89d09409120c65608465cf, type: 3}
-  isEmpty: 1
+  itemModel: {fileID: 5734172305934516502, guid: 7327f84ade89d09409120c65608465cf, type: 3}
   maxItemAmount: 1000
-  consumableAnimation: 
+  currentItemAmount: 1000
+  consumeAnimation: 
   hand_idle: Right_Arm_Idle_01
   isInteracting: 0
-  typeOfPotion: {fileID: 11400000}
   lifePotion: 0
   manaPotion: 0
   emptyPotion: 1
+  isEmpty: 1
   healthRecoverAmount: 0
   manaPointsRecoverAmount: 0
   recoveryFX: {fileID: 0}
+  typeOfPotion: {fileID: 11400000}

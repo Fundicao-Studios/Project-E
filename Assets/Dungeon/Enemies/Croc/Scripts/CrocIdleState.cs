@@ -7,31 +7,32 @@ public class CrocIdleState : CrocState
     public CrocPursueTargetState golemPursueTargetState;
     public LayerMask detectionLayer;
 
-    public override CrocState Tick(CrocManager golemManager, CrocStatsManager enemyStats, CrocAnimatorManager enemyAnimatorManager)
+    public override CrocState Tick(CrocManager crocManager, CrocStatsManager crocStatsManager, CrocAnimatorManager crocAnimatorManager)
     {
         #region Controlar A Deteção De Alvos Do Inimigo
-        Collider[] colliders = Physics.OverlapSphere(transform.position, golemManager.detectionRadius, detectionLayer);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, crocManager.detectionRadius, detectionLayer);
         for (int i = 0; i < colliders.Length; i++)
         {
             CharacterStatsManager characterStats = colliders[i].transform.GetComponent<CharacterStatsManager>();
 
             if (characterStats != null)
             {
-                //VERIFICAR PELO ID DE EQUIPA
+                if (characterStats.teamIDNumber == crocStatsManager.teamIDNumber)
+                    return this;
 
                 Vector3 targetDirection = characterStats.transform.position - transform.position;
                 float viewableAngle = Vector3.Angle(targetDirection, transform.forward);
 
-                if (viewableAngle > golemManager.minimumDetectionAngle && viewableAngle < golemManager.maximumDetectionAngle)
+                if (viewableAngle > crocManager.minimumDetectionAngle && viewableAngle < crocManager.maximumDetectionAngle)
                 {
-                    golemManager.currentTarget = characterStats;
+                    crocManager.currentTarget = characterStats;
                 }
             }
         }
         #endregion
 
         #region Controlar A Mudança Para O Próximo Estado
-        if (golemManager.currentTarget != null)
+        if (crocManager.currentTarget != null)
         {
             return golemPursueTargetState;
         }

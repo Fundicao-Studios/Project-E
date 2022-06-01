@@ -21,7 +21,7 @@ public class CrocAnimatorManager : AnimatorHandler
 
     public override void TakeCriticalDamageAnimationEvent()
     {
-        crocStatsManager.TakeDamageNoAnimation(crocManager.pendingCriticalDamage);
+        crocStatsManager.TakeDamageNoAnimation(crocManager.pendingCriticalDamage, 0);
         crocManager.pendingCriticalDamage = 0;
     }
 

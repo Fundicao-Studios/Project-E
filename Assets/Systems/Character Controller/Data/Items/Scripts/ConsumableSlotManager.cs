@@ -33,7 +33,7 @@ public class ConsumableSlotManager : MonoBehaviour
         {
             consumableHandSlot.currentConsumable = consumableItem;
             consumableHandSlot.LoadConsumableModel(consumableItem);
-            quickSlotsUI.UpdateConsumableQuickSlotsUI(consumableItem);
+            quickSlotsUI.UpdateCurrentConsumableIcon(consumableItem);
             animator.CrossFade(consumableItem.hand_idle, 0.2f);  
         }
         else
@@ -44,7 +44,7 @@ public class ConsumableSlotManager : MonoBehaviour
             playerInventoryManager.currentConsumable = emptyBottle;
             consumableHandSlot.currentConsumable = consumableItem;
             consumableHandSlot.LoadConsumableModel(consumableItem);
-            quickSlotsUI.UpdateConsumableQuickSlotsUI(consumableItem);
+            quickSlotsUI.UpdateCurrentConsumableIcon(consumableItem);
         }
     }
 }

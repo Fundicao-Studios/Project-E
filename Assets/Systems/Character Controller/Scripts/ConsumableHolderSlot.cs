@@ -34,7 +34,7 @@ public class ConsumableHolderSlot : MonoBehaviour
             return;
         }
 
-        GameObject model = Instantiate(consumableItem.modelPrefab) as GameObject;
+        GameObject model = Instantiate(consumableItem.itemModel) as GameObject;
         if(model != null)
         {
             if (parentOverride != null)

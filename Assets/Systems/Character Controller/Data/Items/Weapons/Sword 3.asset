@@ -16,7 +16,8 @@ MonoBehaviour:
   itemName: Sword 3
   modelPrefab: {fileID: 675233306986266649, guid: cc895ff23dae9924cbfc218a8be3836b, type: 3}
   isUnarmed: 0
-  baseDamage: 50
+  physicalDamage: 50
+  fireDamage: 0
   criticalDamageMultiplier: 4
   poiseBreak: 25
   offensivePoiseBonus: 75

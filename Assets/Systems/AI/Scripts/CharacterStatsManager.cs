@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class CharacterStatsManager : MonoBehaviour
 {
+    [Header("ID De Equipa")]
+    public int teamIDNumber = 0;
+
     public int healthLevel = 10;
     public int maxHealth;
     public int currentHealth;
@@ -29,6 +32,11 @@ public class CharacterStatsManager : MonoBehaviour
     public float physicalDamageAbsorptionLegs;
     public float physicalDamageAbsorptionFeet;
 
+    public float fireDamageAbsorptionHead;
+    public float fireDamageAbsorptionBody;
+    public float fireDamageAbsorptionLegs;
+    public float fireDamageAbsorptionFeet;
+
     //Absorção De Fogo
     //Absorção De Choque
     //Absorção De Água
@@ -46,7 +54,7 @@ public class CharacterStatsManager : MonoBehaviour
         totalPoiseDefense = armorPoiseBonus;
     }
 
-    public virtual void TakeDamage(int physicalDamage, string damageAnimation = "Damage_01")
+    public virtual void TakeDamage(int physicalDamage, int fireDamage, string damageAnimation = "Damage_01")
     {
         if (isDead)
             return;
@@ -59,13 +67,17 @@ public class CharacterStatsManager : MonoBehaviour
 
         physicalDamage = Mathf.RoundToInt(physicalDamage - (physicalDamage * totalPhysicalDamageAbsorption));
 
-        Debug.Log("Total De Absorção De Dano é " + totalPhysicalDamageAbsorption + "%");
+        float totalFireDamageAbsorption = 1 -
+            (1 - fireDamageAbsorptionHead / 100) *
+            (1 - fireDamageAbsorptionBody / 100) *
+            (1 - fireDamageAbsorptionLegs / 100) *
+            (1 - fireDamageAbsorptionFeet / 100);
 
-        float finalDamage = physicalDamage; //+ fireDamage + darkDamage + lightningDamage + waterDamage
+        fireDamage = Mathf.RoundToInt(fireDamage - (fireDamage * totalFireDamageAbsorption));
+
+        float finalDamage = physicalDamage + fireDamage; //+ darkDamage + lightningDamage + waterDamage
 
         currentHealth = Mathf.RoundToInt(currentHealth - finalDamage);
-
-        Debug.Log("Dano Total Foi " + finalDamage);
 
         if (currentHealth <= 0)
         {
@@ -74,7 +86,39 @@ public class CharacterStatsManager : MonoBehaviour
         }
     }
 
-    public virtual void TakeDamageNoAnimation(int damage)
+    public virtual void TakeDamageNoAnimation(int physicalDamage, int fireDamage)
+    {
+        if (isDead)
+            return;
+
+        float totalPhysicalDamageAbsorption = 1 - 
+            (1 - physicalDamageAbsorptionHead / 100) * 
+            (1 - physicalDamageAbsorptionBody / 100) * 
+            (1 - physicalDamageAbsorptionLegs / 100) *
+            (1 - physicalDamageAbsorptionFeet / 100);
+
+        physicalDamage = Mathf.RoundToInt(physicalDamage - (physicalDamage * totalPhysicalDamageAbsorption));
+
+        float totalFireDamageAbsorption = 1 -
+            (1 - fireDamageAbsorptionHead / 100) *
+            (1 - fireDamageAbsorptionBody / 100) *
+            (1 - fireDamageAbsorptionLegs / 100) *
+            (1 - fireDamageAbsorptionFeet / 100);
+
+        fireDamage = Mathf.RoundToInt(fireDamage - (fireDamage + totalFireDamageAbsorption));
+
+        float finalDamage = physicalDamage + fireDamage; //+ darkDamage + lightningDamage + waterDamage
+
+        currentHealth = Mathf.RoundToInt(currentHealth - finalDamage);
+
+        if (currentHealth <= 0)
+        {
+            currentHealth = 0;
+            isDead = true;
+        }
+    }
+
+    public virtual void TakeBurnDamage(int damage)
     {
         currentHealth = currentHealth - damage;
 

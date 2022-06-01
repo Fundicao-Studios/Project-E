@@ -335,7 +335,7 @@ GameObject:
   - component: {fileID: 7559881878443444540}
   - component: {fileID: 6036678777028301084}
   m_Layer: 0
-  m_Name: Bottle_Health_PickUp
+  m_Name: Bottle_Health_PIckUp
   m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -367,7 +367,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.25
+  m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6036678777028301084
 MonoBehaviour:
@@ -381,7 +381,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2948e426e8f94614887d059460dad688, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 0.6
+  radius: 1
   centerX: 0
   centerY: 0
   centerZ: 0

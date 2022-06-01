@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class GolemStatsManager : CharacterStatsManager
 {
-    GolemAnimatorManager enemyAnimatorManager;
+    GolemAnimatorManager golemAnimatorManager;
     GolemManager enemyManager;
     public UIEnemyHealthBar enemyHealthBar;
 
     private void Awake()
     {
-        enemyAnimatorManager = GetComponentInChildren<GolemAnimatorManager>();
+        golemAnimatorManager = GetComponentInChildren<GolemAnimatorManager>();
         enemyManager = GetComponent<GolemManager>();
         maxHealth = SetMaxHealthFromHealthLevel();
         currentHealth = maxHealth;
@@ -27,26 +27,26 @@ public class GolemStatsManager : CharacterStatsManager
         return maxHealth;
     }
 
-    public override void TakeDamageNoAnimation(int damage)
+    public override void TakeDamageNoAnimation(int physicalDamage, int fireDamage)
     {
-        base.TakeDamageNoAnimation(damage);
+        base.TakeDamageNoAnimation(physicalDamage, fireDamage);
         enemyHealthBar.SetHealth(currentHealth);
     }
 
     public void BreakGuard()
     {
-        enemyAnimatorManager.PlayTargetAnimation("Break Guard", true);
+        golemAnimatorManager.PlayTargetAnimation("Break Guard", true);
     }
 
-    public override void TakeDamage(int damage, string damageAnimation = "Damage_01")
+    public override void TakeDamage(int physicalDamage, int fireDamage, string damageAnimation = "Damage_01")
     {
-        base.TakeDamage(damage, damageAnimation = "Damage_01");
+        base.TakeDamage(physicalDamage, fireDamage, damageAnimation = "Damage_01");
 
         enemyHealthBar.SetHealth(currentHealth);
         
-        if (!enemyAnimatorManager.isPunch01)
+        if (!golemAnimatorManager.isPunch01)
         {
-            enemyAnimatorManager.PlayTargetAnimation(damageAnimation, true);
+            golemAnimatorManager.PlayTargetAnimation(damageAnimation, true);
         }
 
         if (currentHealth <= 0)
@@ -55,10 +55,26 @@ public class GolemStatsManager : CharacterStatsManager
         }
     }
 
+    public override void TakeBurnDamage(int damage)
+    {
+        if (isDead)
+            return;
+
+        base.TakeBurnDamage(damage);
+        enemyHealthBar.SetHealth(currentHealth);
+
+        if (currentHealth <= 0)
+        {
+            currentHealth = 0;
+            isDead = true;
+            golemAnimatorManager.PlayTargetAnimation("Dead_01", true);
+        }
+    }
+
     private void HandleDeath()
     {
         currentHealth = 0;
-        enemyAnimatorManager.PlayTargetAnimation("Dead_01", true);
+        golemAnimatorManager.PlayTargetAnimation("Dead_01", true);
         isDead = true;
     }
 }

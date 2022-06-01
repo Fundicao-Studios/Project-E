@@ -51,6 +51,7 @@ public class InputManager : MonoBehaviour
     PlayerStatsManager playerStatsManager;
     BlockingCollider blockingCollider;
     PlayerWeaponSlotManager playerWeaponSlotManager;
+    ConsumableSlotManager consumableSlotManager;
     CameraManager cameraManager;
     UIManager uiManager;
 
@@ -67,6 +68,7 @@ public class InputManager : MonoBehaviour
         consumableInventorySlot = GetComponentInChildren<ConsumableInventorySlot>();
         playerAnimatorManager = GetComponentInChildren<PlayerAnimatorManager>();
         playerWeaponSlotManager = GetComponentInChildren<PlayerWeaponSlotManager>();
+        consumableSlotManager = GetComponentInChildren<ConsumableSlotManager>();
         blockingCollider = GetComponentInChildren<BlockingCollider>();
         uiManager = FindObjectOfType<UIManager>();
         cameraManager = FindObjectOfType<CameraManager>();
@@ -321,8 +323,7 @@ public class InputManager : MonoBehaviour
                 return;
                 
             x_Input = false;
-            playerInventoryManager.currentConsumable.AttemptToConsumeItem(playerAnimatorManager, playerWeaponSlotManager, playerEffectsManager);
-            playerInventoryManager.currentConsumable = emptyBottle;
+            playerInventoryManager.currentConsumable.AttemptToConsumeItem(playerAnimatorManager, consumableSlotManager, playerEffectsManager);
         }
     }
 }

@@ -4,29 +4,22 @@ using UnityEngine;
 
 public class ConsumableItem : Item
 {
-    public GameObject modelPrefab;
-    public bool isEmpty;
+    public GameObject itemModel;
 
     [Header("Quantide De Items")]
     public int maxItemAmount;
+    public int currentItemAmount;
 
     [Header("Animações")]
-    public string consumableAnimation;
+    public string consumeAnimation;
     public string hand_idle;
     public bool isInteracting;
 
-    public FlaskItem typeOfPotion;
-
-    private void Awake()
+    public virtual void AttemptToConsumeItem(PlayerAnimatorManager playerAnimatorManager, ConsumableSlotManager consumableSlotManager, PlayerEffectsManager playerEffectsManager)
     {
-        typeOfPotion = FindObjectOfType<FlaskItem>();
-    }
-
-    public virtual void AttemptToConsumeItem(PlayerAnimatorManager playerAnimatorManager, PlayerWeaponSlotManager weaponSlotManager, PlayerEffectsManager playerEffectsManager)
-    {
-        if (maxItemAmount > 0)
+        if (currentItemAmount > 0)
         {
-            playerAnimatorManager.PlayTargetAnimation(consumableAnimation, isInteracting, true);
+            playerAnimatorManager.PlayTargetAnimation(consumeAnimation, isInteracting, true);
         }
         else
         {

@@ -37,10 +37,12 @@ public class SpellDamageCollider : DamageCollider
         if (!hasCollided)
         {
             spellTarget = collision.transform.GetComponent<CharacterStatsManager>();
+
             if (spellTarget != null)
             {
-                spellTarget.TakeDamage(currentWeaponDamage);
+                spellTarget.TakeDamage(physicalDamage, fireDamage);
             }
+
             hasCollided = true;
             impactParticles = Instantiate(impactParticles, transform.position, Quaternion.FromToRotation(Vector3.up, impactNormal));
 

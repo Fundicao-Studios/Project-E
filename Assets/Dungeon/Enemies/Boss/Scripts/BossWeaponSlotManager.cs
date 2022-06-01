@@ -70,11 +70,21 @@ public class BossWeaponSlotManager : CharacterWeaponSlotsManager
         {
             leftHandDamageCollider = leftHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
             leftHandDamageCollider.characterManager = GetComponentInParent<CharacterManager>();
+
+            leftHandDamageCollider.physicalDamage = leftHandWeapon.physicalDamage;
+            leftHandDamageCollider.fireDamage = leftHandWeapon.fireDamage;
+
+            leftHandDamageCollider.teamIDNumber = bossStatsManager.teamIDNumber;
         }
         else
         {
             rightHandDamageCollider = rightHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
             rightHandDamageCollider.characterManager = GetComponentInParent<CharacterManager>();
+
+            rightHandDamageCollider.physicalDamage = rightHandWeapon.physicalDamage;
+            rightHandDamageCollider.fireDamage = rightHandWeapon.fireDamage;
+
+            rightHandDamageCollider.teamIDNumber = bossStatsManager.teamIDNumber;
         }
     }
 

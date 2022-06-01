@@ -829,7 +829,7 @@ GameObject:
   - component: {fileID: -6284749265814447377}
   m_Layer: 13
   m_Name: Boss
-  m_TagString: Enemy
+  m_TagString: Character
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -918,12 +918,20 @@ MonoBehaviour:
   manaLevel: 10
   maxManaPoints: 0
   currentManaPoints: 0
+  totalPoiseDefense: 0
+  offensivePoiseBonus: 0
+  armorPoiseBonus: 0
+  totalPoiseResetTime: 15
+  poiseResetTimer: 0
   physicalDamageAbsorptionHead: 0
   physicalDamageAbsorptionBody: 0
   physicalDamageAbsorptionLegs: 0
   physicalDamageAbsorptionFeet: 0
+  fireDamageAbsorptionHead: 0
+  fireDamageAbsorptionBody: 0
+  fireDamageAbsorptionLegs: 0
+  fireDamageAbsorptionFeet: 0
   isDead: 0
-  isBoss: 1
 --- !u!114 &839944359154244999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -939,11 +947,19 @@ MonoBehaviour:
   lockOnTransform: {fileID: 805206920861086276}
   backStabCollider: {fileID: 8848468407157655059}
   riposteCollider: {fileID: 1457495702510638493}
+  isInteracting: 0
   canBeRiposted: 0
   canBeParried: 0
+  canDoCombo: 0
   isParrying: 0
   isBlocking: 0
+  isInvulnerable: 0
+  isUsingRightHand: 0
+  isUsingLeftHand: 0
   canRotate: 0
+  isSprinting: 0
+  isInAir: 0
+  isGrounded: 0
   isFiringSpell: 0
   pendingCriticalDamage: 0
   bossName: Guardian of the Temple
@@ -952,10 +968,8 @@ MonoBehaviour:
   navmeshAgent: {fileID: -6284749265814447377}
   enemyRigidBody: {fileID: 5361801132380374182}
   isPerformingAction: 0
-  isInteracting: 0
   rotationSpeed: 15
   maximumAggroRadius: 1.5
-  canDoCombo: 0
   detectionRadius: 20
   maximumDetectionAngle: 50
   minimumDetectionAngle: -50
@@ -963,6 +977,7 @@ MonoBehaviour:
   detectionDistance: 0
   currentRecoveryTime: 5
   allowAIToPerformCombos: 1
+  isPhaseShifting: 0
   comboLikelyHood: 50
   particleFX: {fileID: 3233673727160929213, guid: 6129cadce3c72de48a9a45a00f347d57, type: 3}
 --- !u!114 &9045505616924515121
@@ -1976,6 +1991,7 @@ GameObject:
   - component: {fileID: 2949806144420841547}
   - component: {fileID: 4454788520759358422}
   - component: {fileID: 2042158082764504284}
+  - component: {fileID: 6747421361509298106}
   m_Layer: 0
   m_Name: Enemy Model
   m_TagString: Untagged
@@ -2035,7 +2051,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 803706027688e5b4bb685e788e936307, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 2949806144420841547}
+  animator: {fileID: 0}
   canRotate: 1
   isPunch01: 0
 --- !u!114 &2042158082764504284
@@ -2050,8 +2066,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eefc31c65299fb4479d98faa57b544ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unarmedWeapon: {fileID: 0}
+  leftHandSlot: {fileID: 0}
+  rightHandSlot: {fileID: 0}
+  backSlot: {fileID: 0}
+  leftHandDamageCollider: {fileID: 0}
+  rightHandDamageCollider: {fileID: 0}
   rightHandWeapon: {fileID: 11400000, guid: 123d075ab5864ae40a0ec29ddc286ba7, type: 2}
   leftHandWeapon: {fileID: 11400000, guid: 123d075ab5864ae40a0ec29ddc286ba7, type: 2}
+--- !u!114 &6747421361509298106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8449928791550429323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 886c18c73f0fcd748853524d52f76ed1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bloodSplatterFX: {fileID: 7705372350664512171, guid: 1d348ce6c9e42b749a5421fa2430b0bb, type: 3}
+  defaultBurnParticleFX: {fileID: 2020005877335862076, guid: 96697a0421380114fbb7d1966623b2d3, type: 3}
+  buildUpTransform: {fileID: 805206920861086276}
+  isBurning: 0
+  isInLava: 0
+  isLavaResistant: 0
+  burnBuildup: 0
+  burnAmount: 100
+  defaultBurnAmount: 0
+  burnTimer: 2
+  burnDamage: 1
+  lavaTimer: 0.5
+  lavaDamage: 1
 --- !u!1 &8574588899595797995
 GameObject:
   m_ObjectHideFlags: 0

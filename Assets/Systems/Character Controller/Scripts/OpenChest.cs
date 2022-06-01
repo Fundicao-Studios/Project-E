@@ -39,13 +39,14 @@ public class OpenChest : Interactable
         {
             StartCoroutine(SpawnItemInChest());
 
-            for (int i = 0; i < itemSpawners.Length - 1; i++)
+            for (int i = 0; i < itemSpawners.Length; i++)
             {
                 WeaponPickup[] weaponPickups = itemSpawners[i].GetComponents<WeaponPickup>();
 
                 if (weaponPickups[i] != null)
                 {
                     weaponPickups[i].weapon = itemsInChest[i];
+                    return;
                 } 
             }
         }
@@ -60,6 +61,7 @@ public class OpenChest : Interactable
                 if (consumablePickups[i] != null)
                 {
                     consumablePickups[i].potion = consumableInChest[i];
+                    return;
                 } 
             }
         }

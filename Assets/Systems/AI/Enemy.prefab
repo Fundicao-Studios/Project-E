@@ -370,7 +370,7 @@ GameObject:
   - component: {fileID: -5150561689200376871}
   m_Layer: 13
   m_Name: Enemy
-  m_TagString: Enemy
+  m_TagString: Character
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -438,6 +438,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6170e203167839a4683a4edbb9d5d2f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  teamIDNumber: 1
   healthLevel: 10
   maxHealth: 0
   currentHealth: 0
@@ -456,6 +457,10 @@ MonoBehaviour:
   physicalDamageAbsorptionBody: 0
   physicalDamageAbsorptionLegs: 0
   physicalDamageAbsorptionFeet: 0
+  fireDamageAbsorptionHead: 0
+  fireDamageAbsorptionBody: 0
+  fireDamageAbsorptionLegs: 0
+  fireDamageAbsorptionFeet: 0
   isDead: 0
   enemyHealthBar: {fileID: 118552406227998933}
 --- !u!114 &8548448111644857291
@@ -473,12 +478,19 @@ MonoBehaviour:
   lockOnTransform: {fileID: 4575004975956311114}
   backStabCollider: {fileID: 5664708673163708445}
   riposteCollider: {fileID: 2335984172265855891}
+  isInteracting: 0
   canBeRiposted: 0
   canBeParried: 0
+  canDoCombo: 0
   isParrying: 0
   isBlocking: 0
   isInvulnerable: 0
+  isUsingRightHand: 0
+  isUsingLeftHand: 0
   canRotate: 0
+  isSprinting: 0
+  isInAir: 0
+  isGrounded: 0
   isFiringSpell: 0
   pendingCriticalDamage: 0
   currentState: {fileID: 361538472842513782}
@@ -486,10 +498,8 @@ MonoBehaviour:
   navmeshAgent: {fileID: 1805464059391418330}
   enemyRigidBody: {fileID: 0}
   isPerformingAction: 0
-  isInteracting: 0
   rotationSpeed: 50
   maximumAggroRadius: 1.5
-  canDoCombo: 0
   detectionRadius: 20
   maximumDetectionAngle: 50
   minimumDetectionAngle: -50
@@ -955,6 +965,7 @@ GameObject:
   - component: {fileID: 2071326712483890757}
   - component: {fileID: 739734654896117360}
   - component: {fileID: 4840666812466357004}
+  - component: {fileID: 5381020639410242000}
   m_Layer: 0
   m_Name: Enemy Model
   m_TagString: Untagged
@@ -1029,8 +1040,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70874ef396718764f9b719245d17d791, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unarmedWeapon: {fileID: 0}
+  leftHandSlot: {fileID: 0}
+  rightHandSlot: {fileID: 0}
+  backSlot: {fileID: 0}
+  leftHandDamageCollider: {fileID: 0}
+  rightHandDamageCollider: {fileID: 0}
   rightHandWeapon: {fileID: 11400000, guid: ec3ece0510760e24d880f14c59160ac4, type: 2}
   leftHandWeapon: {fileID: 11400000, guid: ec3ece0510760e24d880f14c59160ac4, type: 2}
+--- !u!114 &5381020639410242000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4689699476643563141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a8d5294efce476428976496bb79c17c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bloodSplatterFX: {fileID: 7705372350664512171, guid: 1d348ce6c9e42b749a5421fa2430b0bb, type: 3}
+  defaultBurnParticleFX: {fileID: 2020005877335862076, guid: 96697a0421380114fbb7d1966623b2d3, type: 3}
+  buildUpTransform: {fileID: 4575004975956311114}
+  isBurning: 0
+  isInLava: 0
+  isLavaResistant: 1
+  burnBuildup: 0
+  burnAmount: 100
+  defaultBurnAmount: 0
+  burnTimer: 2
+  burnDamage: 1
+  lavaTimer: 0.5
+  lavaDamage: 1
 --- !u!1 &4804789433334434789
 GameObject:
   m_ObjectHideFlags: 0

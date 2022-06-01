@@ -13,11 +13,11 @@ public class GolemAmbushState : GolemState
 
     public GolemPursueTargetState golemPursueTargetState;
 
-    public override GolemState Tick(GolemManager golemManager, GolemStatsManager enemyStats, GolemAnimatorManager enemyAnimatorManager)
+    public override GolemState Tick(GolemManager golemManager, GolemStatsManager golemStatsManager, GolemAnimatorManager golemAnimatorManager)
     {
         if (isSleeping && golemManager.isInteracting == false)
         {
-            enemyAnimatorManager.PlayTargetAnimation(sleepAnimation, true);
+            golemAnimatorManager.PlayTargetAnimation(sleepAnimation, true);
         }
 
         #region Controlar A Deteção Do Alvo
@@ -30,6 +30,9 @@ public class GolemAmbushState : GolemState
 
             if (characterStats != null)
             {
+                if (characterStats.teamIDNumber == golemStatsManager.teamIDNumber)
+                    return this;
+
                 Vector3 targetsDirection = characterStats.transform.position - golemManager.transform.position;
                 float viewableAngle = Vector3.Angle(targetsDirection, golemManager.transform.forward);
 
@@ -37,7 +40,7 @@ public class GolemAmbushState : GolemState
                     && viewableAngle < golemManager.maximumDetectionAngle)
                 {
                     golemManager.currentTarget = characterStats;
-                    enemyAnimatorManager.PlayTargetAnimation(wakeAnimation, true);
+                    golemAnimatorManager.PlayTargetAnimation(wakeAnimation, true);
                     isSleeping = false;
                 }
             }            

@@ -8,6 +8,7 @@ public class GolemManager : CharacterManager
     GolemLocomotionManager enemyLocomotionManager;
     GolemAnimatorManager enemyAnimatorManager;
     GolemStatsManager golemStatsManager;
+    GolemEffectsManager golemEffectsManager;
 
     public GolemState currentState;
     public CharacterStatsManager currentTarget;
@@ -36,6 +37,7 @@ public class GolemManager : CharacterManager
         enemyLocomotionManager = GetComponent<GolemLocomotionManager>();
         enemyAnimatorManager = GetComponentInChildren<GolemAnimatorManager>();
         golemStatsManager = GetComponent<GolemStatsManager>();
+        golemEffectsManager = GetComponentInChildren<GolemEffectsManager>();
         enemyRigidBody = GetComponent<Rigidbody>();
         navmeshAgent = GetComponentInChildren<NavMeshAgent>();
     }
@@ -49,6 +51,11 @@ public class GolemManager : CharacterManager
         canDoCombo = enemyAnimatorManager.animator.GetBool("canDoCombo");
         canRotate = enemyAnimatorManager.animator.GetBool("canRotate");
         enemyAnimatorManager.animator.SetBool("isDead", golemStatsManager.isDead);
+    }
+
+    private void FixedUpdate()
+    {
+        golemEffectsManager.HandleAllBuildUpEffects();
     }
 
     private void HandleStateMachine()

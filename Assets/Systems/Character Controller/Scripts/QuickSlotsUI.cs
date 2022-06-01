@@ -5,9 +5,10 @@ using UnityEngine.UI;
 
 public class QuickSlotsUI : MonoBehaviour
 {
+    public Image currentSpellIcon;
+    public Image currentConsumableIcon;
     public Image leftWeaponIcon;
     public Image rightWeaponIcon;
-    public Image consumableIcon;
 
     public void UpdateWeaponQuickSlotsUI(bool isLeft, WeaponItem weapon)
     {
@@ -39,17 +40,31 @@ public class QuickSlotsUI : MonoBehaviour
         }
     }
 
-    public void UpdateConsumableQuickSlotsUI(ConsumableItem potion)
+    public void UpdateCurrentSpellIcon(SpellItem spell)
     {
-        if (potion.itemIcon != null)
+        if (spell.itemIcon != null)
         {
-            consumableIcon.sprite = potion.itemIcon;
-            consumableIcon.enabled = true;
+            currentSpellIcon.sprite = spell.itemIcon;
+            currentSpellIcon.enabled = true;
         }
         else
         {
-            consumableIcon.sprite = null;
-            consumableIcon.enabled = false;
+            currentSpellIcon.sprite = null;
+            currentSpellIcon.enabled = false;
+        }
+    }
+
+    public void UpdateCurrentConsumableIcon(ConsumableItem consumable)
+    {
+        if (consumable.itemIcon != null)
+        {
+            currentConsumableIcon.sprite = consumable.itemIcon;
+            currentConsumableIcon.enabled = true;
+        }
+        else
+        {
+            currentConsumableIcon.sprite = null;
+            currentConsumableIcon.enabled = false;
         }
     }
 }

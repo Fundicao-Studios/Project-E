@@ -6,6 +6,7 @@ public class UIManager : MonoBehaviour
 {
     public PlayerInventoryManager playerInventory;
     public EquipmentWindowUI equipmentWindowUI;
+    QuickSlotsUI quickSlotsUI;
     
     [Header("Janelas do UI")]
     public GameObject hudWindow;
@@ -35,6 +36,7 @@ public class UIManager : MonoBehaviour
     private void Awake()
     {
         playerInventory = FindObjectOfType<PlayerInventoryManager>();
+        quickSlotsUI = GetComponentInChildren<QuickSlotsUI>();
     }
 
     private void Start()
@@ -42,6 +44,7 @@ public class UIManager : MonoBehaviour
         weaponInventorySlots = weaponInventorySlotsParent.GetComponentsInChildren<WeaponInventorySlot>();
         consumableInventorySlots = consumableInventorySlotsParent.GetComponentsInChildren<ConsumableInventorySlot>();
         equipmentWindowUI.LoadWeaponOnEquipmentScreen(playerInventory);
+        quickSlotsUI.UpdateCurrentSpellIcon(playerInventory.currentSpell);
     }
 
     public void UpdateUI()

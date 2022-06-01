@@ -11,11 +11,11 @@ public class CrocWeaponSlotManager : CharacterWeaponSlotsManager
 
     DamageCollider mouthDamageCollider;
 
-    CrocStatsManager crocStats;
+    CrocStatsManager crocStatsManager;
 
     private void Awake()
     {
-        crocStats = GetComponentInParent<CrocStatsManager>();
+        crocStatsManager = GetComponentInParent<CrocStatsManager>();
         LoadWeaponHolderSlots();
     }
 
@@ -49,6 +49,11 @@ public class CrocWeaponSlotManager : CharacterWeaponSlotsManager
     {
         mouthDamageCollider = mouthWeaponSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
         mouthDamageCollider.characterManager = GetComponentInParent<CharacterManager>();
+
+        mouthDamageCollider.physicalDamage = mouthWeapon.physicalDamage;
+        mouthDamageCollider.fireDamage = mouthWeapon.fireDamage;
+
+        mouthDamageCollider.teamIDNumber = crocStatsManager.teamIDNumber;
     }
 
     public void OpenDamageCollider()
@@ -85,12 +90,12 @@ public class CrocWeaponSlotManager : CharacterWeaponSlotsManager
 
     public void GrantWeaponAttackingPoiseBonus()
     {
-        crocStats.totalPoiseDefense = crocStats.totalPoiseDefense + crocStats.offensivePoiseBonus;
+        crocStatsManager.totalPoiseDefense = crocStatsManager.totalPoiseDefense + crocStatsManager.offensivePoiseBonus;
     }
 
     public void ResetWeaponAttackingPoiseBonus()
     {
-        crocStats.totalPoiseDefense = crocStats.armorPoiseBonus;
+        crocStatsManager.totalPoiseDefense = crocStatsManager.armorPoiseBonus;
     }
 
     #endregion

@@ -16,6 +16,7 @@ public class CrocManager : MonoBehaviour
     CrocLocomotionManager crocLocomotionManager;
     CrocAnimatorManager crocAnimatorManager;
     CrocStatsManager crocStatsManager;
+    CrocEffectsManager crocEffectsManager;
 
     public CrocState currentState;
     public CharacterStatsManager currentTarget;
@@ -48,6 +49,7 @@ public class CrocManager : MonoBehaviour
         crocLocomotionManager = GetComponent<CrocLocomotionManager>();
         crocAnimatorManager = GetComponentInChildren<CrocAnimatorManager>();
         crocStatsManager = GetComponent<CrocStatsManager>();
+        crocEffectsManager = GetComponentInChildren<CrocEffectsManager>();
         enemyRigidBody = GetComponent<Rigidbody>();
         navmeshAgent = GetComponentInChildren<NavMeshAgent>();
     }
@@ -61,6 +63,11 @@ public class CrocManager : MonoBehaviour
         canDoCombo = crocAnimatorManager.animator.GetBool("canDoCombo");
         canRotate = crocAnimatorManager.animator.GetBool("canRotate");
         crocAnimatorManager.animator.SetBool("isDead", crocStatsManager.isDead);
+    }
+
+    private void FixedUpdate()
+    {
+        crocEffectsManager.HandleAllBuildUpEffects();
     }
 
     private void HandleStateMachine()

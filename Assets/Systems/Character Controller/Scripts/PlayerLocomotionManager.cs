@@ -66,7 +66,7 @@ public class PlayerLocomotionManager : MonoBehaviour
         myTransform = transform;
 
         playerManager.isGrounded = true;
-        ignoreForGroundCheck = ~(1 << 8);
+        ignoreForGroundCheck = ~(1 << 8 | 1 << 21);
         Physics.IgnoreCollision(characterCollider, characterCollisionBlockerCollider, true);
     }
 

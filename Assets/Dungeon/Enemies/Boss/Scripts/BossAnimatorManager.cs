@@ -19,7 +19,7 @@ public class BossAnimatorManager : AnimatorHandler
 
     public override void TakeCriticalDamageAnimationEvent()
     {
-        bossStats.TakeDamageNoAnimation(bossManager.pendingCriticalDamage);
+        bossStats.TakeDamageNoAnimation(bossManager.pendingCriticalDamage, 0);
         bossManager.pendingCriticalDamage = 0;
     }
 

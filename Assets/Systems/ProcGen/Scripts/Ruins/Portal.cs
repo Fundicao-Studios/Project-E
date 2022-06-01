@@ -8,9 +8,9 @@ public class Portal : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Player")
+        if(other.tag == "Character")
         {
-            GameObject.Find("Player").transform.position = dungeonSpawnPoint.transform.position;
+            other.transform.position = dungeonSpawnPoint.transform.position;
         }
     }
 }

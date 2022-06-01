@@ -5,17 +5,24 @@ using UnityEngine;
 public class DamageCollider : MonoBehaviour
 {
     public CharacterManager characterManager;
-    Collider damageCollider;
+    protected Collider damageCollider;
     public bool enabledDamageColliderOnStartUp = false;
+
+    [Header("ID De Equipa")]
+    public int teamIDNumber = 0;
 
     [Header("Poise")]
     public float poiseBreak;
     public float offensivePoiseBonus;
 
     [Header("Dano")]
-    public int currentWeaponDamage = 25;
+    public int physicalDamage;
+    public int fireDamage;
+    public int shockDamage;
+    public int waterDamage;
+    public int darkDamage;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         damageCollider = GetComponent<Collider>();
         damageCollider.gameObject.SetActive(true);
@@ -35,124 +42,55 @@ public class DamageCollider : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.tag == "Player")
+        if (collision.tag == "Character")
         {
-            PlayerStatsManager playerStats = collision.GetComponent<PlayerStatsManager>();
-            CharacterManager enemyCharacterManager = collision.GetComponent<CharacterManager>();
+            CharacterStatsManager enemyStatsManager = collision.GetComponent<CharacterStatsManager>();
+            CharacterManager enemyManager = collision.GetComponent<CharacterManager>();
+            CharacterEffectsManager enemyEffectsManager = collision.GetComponentInChildren<CharacterEffectsManager>();
             BlockingCollider shield = collision.transform.GetComponentInChildren<BlockingCollider>();
 
-            if (enemyCharacterManager != null)
+            if (enemyManager != null)
             {
-                if (enemyCharacterManager.isParrying)
+                if (enemyStatsManager.teamIDNumber == teamIDNumber)
+                    return;
+
+                if (enemyManager.isParrying)
                 {
                     characterManager.GetComponentInChildren<AnimatorHandler>().PlayTargetAnimation("Parried", true);
                     return;
                 }
-                else if (shield != null && enemyCharacterManager.isBlocking)
+                else if (shield != null && enemyManager.isBlocking)
                 {
-                    float physicalDamageAfterBlock =
-                        currentWeaponDamage - (currentWeaponDamage * shield.blockingPhysicalDamageAbsorption) / 100;
-                    if (playerStats != null)
+                    float physicalDamageAfterBlock = physicalDamage - (physicalDamage * shield.blockingPhysicalDamageAbsorption) / 100;
+                    float fireDamageAfterBlock = fireDamage - (fireDamage * shield.blockingFireDamageAbsorption) / 100;
+
+                    if (enemyStatsManager != null)
                     {
-                        playerStats.TakeDamage(Mathf.RoundToInt(physicalDamageAfterBlock), "Block_Guard");
+                        enemyStatsManager.TakeDamage(Mathf.RoundToInt(physicalDamageAfterBlock), 0, "Block_Guard");
                         return;
                     }
                 }
             }
 
-            if (playerStats != null)
+            if (enemyStatsManager != null)
             {
-                playerStats.poiseResetTimer = playerStats.totalPoiseResetTime;
-                playerStats.totalPoiseDefense = playerStats.totalPoiseDefense - poiseBreak;
-                Debug.Log("Poise do jogador está atualmente em " + playerStats.totalPoiseDefense);
-
-                if (playerStats.totalPoiseDefense > poiseBreak)
-                {
-                    playerStats.TakeDamageNoAnimation(currentWeaponDamage);
-                }
-                else
-                {
-                    playerStats.TakeDamage(currentWeaponDamage);
-                }
-            }
-        }
-
-        if (collision.tag == "Enemy")
-        {
-            EnemyStatsManager enemyStats = collision.GetComponent<EnemyStatsManager>();
-            GolemStatsManager golemStats = collision.GetComponent<GolemStatsManager>();
-            CrocStatsManager crocStats = collision.GetComponent<CrocStatsManager>();
-            BossStatsManager bossStats = collision.GetComponent<BossStatsManager>();
-            CharacterManager enemyCharacterManager = collision.GetComponent<CharacterManager>();
-
-            if (enemyCharacterManager != null)
-            {
-                if (enemyCharacterManager.isParrying)
-                {
-                    characterManager.GetComponentInChildren<AnimatorHandler>().PlayTargetAnimation("Parried", true);
+                if (enemyStatsManager.teamIDNumber == teamIDNumber)
                     return;
-                }
-            }
+                    
+                enemyStatsManager.poiseResetTimer = enemyStatsManager.totalPoiseResetTime;
+                enemyStatsManager.totalPoiseDefense = enemyStatsManager.totalPoiseDefense - poiseBreak;
 
-            if (enemyStats != null)
-            {
-                enemyStats.poiseResetTimer = enemyStats.totalPoiseResetTime;
-                enemyStats.totalPoiseDefense = enemyStats.totalPoiseDefense - poiseBreak;
-                Debug.Log("Poise do inimigo está atualmente em " + enemyStats.totalPoiseDefense);
+                //DETETAR O PRIMEIRO CONTACTO DA ARMA COM O COLLIDER
+                Vector3 contactPoint = collision.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
+                enemyEffectsManager.PlayBloodSplatterFX(contactPoint);
 
-                if (enemyStats.totalPoiseDefense > poiseBreak)
+                if (enemyStatsManager.totalPoiseDefense > poiseBreak)
                 {
-                    enemyStats.TakeDamageNoAnimation(currentWeaponDamage);
+                    enemyStatsManager.TakeDamageNoAnimation(physicalDamage, 0);
                 }
                 else
                 {
-                    enemyStats.TakeDamage(currentWeaponDamage);
-                }
-            }
-            else if (golemStats != null)
-            {
-                golemStats.poiseResetTimer = golemStats.totalPoiseResetTime;
-                golemStats.totalPoiseDefense = golemStats.totalPoiseDefense - poiseBreak;
-                Debug.Log("Poise do golem está atualmente em " + golemStats.totalPoiseDefense);
-
-                if (golemStats.totalPoiseDefense > poiseBreak)
-                {
-                    golemStats.TakeDamageNoAnimation(currentWeaponDamage);
-                }
-                else
-                {
-                    golemStats.TakeDamage(currentWeaponDamage);
-                }
-            }
-            else if (crocStats != null)
-            {
-                crocStats.poiseResetTimer = crocStats.totalPoiseResetTime;
-                crocStats.totalPoiseDefense = crocStats.totalPoiseDefense - poiseBreak;
-                Debug.Log("Poise do crocodilo está atualmente em " + crocStats.totalPoiseDefense);
-
-                if (crocStats.totalPoiseDefense > poiseBreak)
-                {
-                    crocStats.TakeDamageNoAnimation(currentWeaponDamage);
-                }
-                else
-                {
-                    crocStats.TakeDamage(currentWeaponDamage);
-                }
-            }
-            else if (bossStats != null)
-            {
-                bossStats.poiseResetTimer = bossStats.totalPoiseResetTime;
-                bossStats.totalPoiseDefense = bossStats.totalPoiseDefense - poiseBreak;
-                Debug.Log("Poise do boss está atualmente em " + bossStats.totalPoiseDefense);
-
-                if (bossStats.totalPoiseDefense > poiseBreak)
-                {
-                    bossStats.TakeDamageNoAnimation(currentWeaponDamage);
-                }
-                else
-                {
-                    bossStats.TakeDamageNoAnimation(currentWeaponDamage);
-                    bossStats.BreakGuard();
+                    enemyStatsManager.TakeDamage(physicalDamage, 0);
                 }
             }
         }

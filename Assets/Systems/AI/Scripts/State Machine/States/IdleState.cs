@@ -7,7 +7,7 @@ public class IdleState : State
     public PursueTargetState pursueTargetState;
     public LayerMask detectionLayer;
 
-    public override State Tick(EnemyManager enemyManager, EnemyStatsManager enemyStats, EnemyAnimatorManager enemyAnimatorManager)
+    public override State Tick(EnemyManager enemyManager, EnemyStatsManager enemyStatsManager, EnemyAnimatorManager enemyAnimatorManager)
     {
         #region Controlar A Deteção De Alvos Do Inimigo
         Collider[] colliders = Physics.OverlapSphere(transform.position, enemyManager.detectionRadius, detectionLayer);
@@ -17,7 +17,8 @@ public class IdleState : State
 
             if (characterStats != null)
             {
-                //VERIFICAR PELO ID DE EQUIPA
+                if (characterStats.teamIDNumber == enemyStatsManager.teamIDNumber)
+                    return this;
 
                 Vector3 targetDirection = characterStats.transform.position - transform.position;
                 float viewableAngle = Vector3.Angle(targetDirection, transform.forward);

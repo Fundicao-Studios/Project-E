@@ -69,7 +69,7 @@ public class PlayerStatsManager : CharacterStatsManager
         return maxStamina;
     }
 
-    public override void TakeDamage(int damage, string damageAnimation = "Damage_01")
+    public override void TakeDamage(int physicalDamage, int fireDamage, string damageAnimation = "Damage_01")
     {
         if (playerManager.isInvulnerable)
             return;
@@ -77,7 +77,7 @@ public class PlayerStatsManager : CharacterStatsManager
         if (isDead)
             return;
 
-        base.TakeDamage(damage, damageAnimation = "Damage_01");
+        base.TakeDamage(physicalDamage, fireDamage, damageAnimation = "Damage_01");
         healthBar.SetCurrentHealth(currentHealth);
         playerAnimatorManager.PlayTargetAnimation(damageAnimation, true);
 
@@ -89,9 +89,25 @@ public class PlayerStatsManager : CharacterStatsManager
         }
     }
 
-    public override void TakeDamageNoAnimation(int damage)
+    public override void TakeBurnDamage(int damage)
     {
-        base.TakeDamageNoAnimation(damage);
+        if (isDead)
+            return;
+
+        base.TakeBurnDamage(damage);
+        healthBar.SetCurrentHealth(currentHealth);
+
+        if (currentHealth <= 0)
+        {
+            currentHealth = 0;
+            isDead = true;
+            playerAnimatorManager.PlayTargetAnimation("Dead_01", true);
+        }
+    }
+
+    public override void TakeDamageNoAnimation(int physicalDamage, int fireDamage)
+    {
+        base.TakeDamageNoAnimation(physicalDamage, fireDamage);
         healthBar.SetCurrentHealth(currentHealth);
     }
 

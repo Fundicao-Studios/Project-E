@@ -16,7 +16,8 @@ MonoBehaviour:
   itemName: Boss Fists
   modelPrefab: {fileID: 2936019544412626356, guid: dd710a340b4436941934e6988fc9d18f, type: 3}
   isUnarmed: 0
-  baseDamage: 25
+  physicalDamage: 50
+  fireDamage: 0
   criticalDamageMultiplier: 4
   poiseBreak: 0
   offensivePoiseBonus: 0

@@ -57,10 +57,13 @@ MonoBehaviour:
   itemSpawners:
   - {fileID: 6937524468354614976, guid: 2d7e3d18c033f0e4db131691c043d0a6, type: 3}
   - {fileID: 7023138659955534364, guid: 1c75f4d52ea9f514ca439bbf5521325e, type: 3}
-  - {fileID: 7023138659955534364, guid: 1c75f4d52ea9f514ca439bbf5521325e, type: 3}
+  - {fileID: 4430043294319130835, guid: e4cd8cd6e1002ba4facdf745af9e9794, type: 3}
+  - {fileID: 5913939138640916539, guid: 976415fe75b8404419eecf76a9a14f4a, type: 3}
   itemsInChest:
   - {fileID: 11400000, guid: 6ae7bf8fb0b272c489c1a7dd02bfb39e, type: 2}
   - {fileID: 11400000, guid: 1183b982eac1f1b4db04e9a68afbe683, type: 2}
+  - {fileID: 11400000, guid: fa947fd37624e5f47a360aac64682f63, type: 2}
+  - {fileID: 11400000, guid: d26efb1b3910b0247be1dfa87a122c43, type: 2}
   consumableSpawners:
   - {fileID: 8568879338158937565, guid: b60a0bf999e00044ca2825e18e5b2a2b, type: 3}
   consumableInChest:

@@ -381,6 +381,7 @@ GameObject:
   - component: {fileID: 852197909381045813}
   - component: {fileID: 2805080093374116810}
   - component: {fileID: 1470722458015858035}
+  - component: {fileID: 2833526769501204715}
   m_Layer: 0
   m_Name: Enemy Model
   m_TagString: Untagged
@@ -440,7 +441,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d914d9f65bd8f4445a819231d895fc33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 852197909381045813}
+  animator: {fileID: 0}
   canRotate: 1
   isPunch01: 0
 --- !u!114 &1470722458015858035
@@ -455,8 +456,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5a956c054a226e41ac49c51e9163d66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unarmedWeapon: {fileID: 0}
+  leftHandSlot: {fileID: 0}
+  rightHandSlot: {fileID: 0}
+  backSlot: {fileID: 0}
+  leftHandDamageCollider: {fileID: 0}
+  rightHandDamageCollider: {fileID: 0}
   rightHandWeapon: {fileID: 11400000, guid: ec3ece0510760e24d880f14c59160ac4, type: 2}
   leftHandWeapon: {fileID: 11400000, guid: ec3ece0510760e24d880f14c59160ac4, type: 2}
+--- !u!114 &2833526769501204715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1906103889535841280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe5f42f2b0910fa4fad0be1f7d835c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bloodSplatterFX: {fileID: 7705372350664512171, guid: 1d348ce6c9e42b749a5421fa2430b0bb, type: 3}
+  defaultBurnParticleFX: {fileID: 2020005877335862076, guid: 96697a0421380114fbb7d1966623b2d3, type: 3}
+  buildUpTransform: {fileID: 6146727115687684510}
+  isBurning: 0
+  isInLava: 0
+  isLavaResistant: 0
+  burnBuildup: 0
+  burnAmount: 100
+  defaultBurnAmount: 0
+  burnTimer: 2
+  burnDamage: 1
+  lavaTimer: 0.5
+  lavaDamage: 1
 --- !u!1 &2007053609778413082
 GameObject:
   m_ObjectHideFlags: 0
@@ -1217,7 +1249,7 @@ GameObject:
   - component: {fileID: 4816134863716688946}
   m_Layer: 13
   m_Name: Golem
-  m_TagString: Enemy
+  m_TagString: Character
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1271,12 +1303,19 @@ MonoBehaviour:
   lockOnTransform: {fileID: 6146727115687684510}
   backStabCollider: {fileID: 2642830066906111433}
   riposteCollider: {fileID: 5357933689495948871}
+  isInteracting: 0
   canBeRiposted: 0
   canBeParried: 0
+  canDoCombo: 0
   isParrying: 0
   isBlocking: 0
   isInvulnerable: 0
+  isUsingRightHand: 0
+  isUsingLeftHand: 0
   canRotate: 1
+  isSprinting: 0
+  isInAir: 0
+  isGrounded: 0
   isFiringSpell: 0
   pendingCriticalDamage: 0
   currentState: {fileID: 2989633771976918081}
@@ -1284,10 +1323,8 @@ MonoBehaviour:
   navmeshAgent: {fileID: 0}
   enemyRigidBody: {fileID: 0}
   isPerformingAction: 0
-  isInteracting: 0
   rotationSpeed: 15
   maximumAggroRadius: 1.5
-  canDoCombo: 0
   detectionRadius: 20
   maximumDetectionAngle: 50
   minimumDetectionAngle: -50
@@ -1317,13 +1354,21 @@ MonoBehaviour:
   manaLevel: 10
   maxManaPoints: 0
   currentManaPoints: 0
+  totalPoiseDefense: 0
+  offensivePoiseBonus: 0
+  armorPoiseBonus: 0
+  totalPoiseResetTime: 15
+  poiseResetTimer: 0
   physicalDamageAbsorptionHead: 0
   physicalDamageAbsorptionBody: 0
   physicalDamageAbsorptionLegs: 0
   physicalDamageAbsorptionFeet: 0
+  fireDamageAbsorptionHead: 0
+  fireDamageAbsorptionBody: 0
+  fireDamageAbsorptionLegs: 0
+  fireDamageAbsorptionFeet: 0
   isDead: 0
   enemyHealthBar: {fileID: 7752119646537026817}
-  isBoss: 0
 --- !u!114 &2187352647033812568
 MonoBehaviour:
   m_ObjectHideFlags: 0

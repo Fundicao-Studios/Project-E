@@ -76,7 +76,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterManager: {fileID: 0}
   enabledDamageColliderOnStartUp: 1
-  currentWeaponDamage: 50
+  teamIDNumber: 0
+  poiseBreak: 0
+  offensivePoiseBonus: 0
+  physicalDamage: 25
+  fireDamage: 0
+  shockDamage: 0
+  waterDamage: 0
+  darkDamage: 0
   impactParticles: {fileID: 4430043294319130835, guid: 77dbd48304a08d6498b3ed104362ea1d, type: 3}
   projectileParticles: {fileID: 4430043294319130835, guid: 230174f4aeba26240b67f5c111898624, type: 3}
   muzzleParticles: {fileID: 0}

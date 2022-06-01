@@ -8,6 +8,7 @@ public class PlayerManager : CharacterManager
     Animator animator;
     CameraManager cameraManager;
     PlayerStatsManager playerStatsManager;
+    PlayerEffectsManager playerEffectsManager;
     PlayerAnimatorManager playerAnimatorManager;
     PlayerLocomotionManager playerLocomotionManager;
 
@@ -23,6 +24,7 @@ public class PlayerManager : CharacterManager
         playerAnimatorManager = GetComponentInChildren<PlayerAnimatorManager>();
         animator = GetComponentInChildren<Animator>();
         playerStatsManager = GetComponent<PlayerStatsManager>();
+        playerEffectsManager = GetComponentInChildren<PlayerEffectsManager>();
         playerLocomotionManager = GetComponent<PlayerLocomotionManager>();
         interactableUIGameObject = GameObject.FindGameObjectWithTag("Pop-Up");
         itemInteractableGameObject = GameObject.FindGameObjectWithTag("Pop-Up 2");
@@ -68,6 +70,7 @@ public class PlayerManager : CharacterManager
         playerLocomotionManager.HandleMovement(delta);
         playerLocomotionManager.HandleDance();
         playerLocomotionManager.HandleRotation(delta);
+        playerEffectsManager.HandleAllBuildUpEffects();
     }
 
     private void LateUpdate()
@@ -97,7 +100,7 @@ public class PlayerManager : CharacterManager
     {
         RaycastHit hit;
 
-        if (Physics.SphereCast(transform.position, 0.5f, transform.forward, out hit, 2f, cameraManager.ignoreLayers))
+        if (Physics.SphereCast(transform.position, 0.3f, transform.forward, out hit, 1f))
         {
             if (hit.collider.tag == "Interactable")
             {

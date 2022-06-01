@@ -7,31 +7,32 @@ public class BossIdleState : BossState
     public BossPursueTargetState golemPursueTargetState;
     public LayerMask detectionLayer;
 
-    public override BossState Tick(BossManager golemManager, BossStatsManager enemyStats, BossAnimatorManager enemyAnimatorManager)
+    public override BossState Tick(BossManager bossManager, BossStatsManager bossStatsManager, BossAnimatorManager bossAnimatorManager)
     {
         #region Controlar A Deteção De Alvos Do Inimigo
-        Collider[] colliders = Physics.OverlapSphere(transform.position, golemManager.detectionRadius, detectionLayer);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, bossManager.detectionRadius, detectionLayer);
         for (int i = 0; i < colliders.Length; i++)
         {
             CharacterStatsManager characterStats = colliders[i].transform.GetComponent<CharacterStatsManager>();
 
             if (characterStats != null)
             {
-                //VERIFICAR PELO ID DE EQUIPA
+                if (characterStats.teamIDNumber != bossStatsManager.teamIDNumber)
+                    return this;
 
                 Vector3 targetDirection = characterStats.transform.position - transform.position;
                 float viewableAngle = Vector3.Angle(targetDirection, transform.forward);
 
-                if (viewableAngle > golemManager.minimumDetectionAngle && viewableAngle < golemManager.maximumDetectionAngle)
+                if (viewableAngle > bossManager.minimumDetectionAngle && viewableAngle < bossManager.maximumDetectionAngle)
                 {
-                    golemManager.currentTarget = characterStats;
+                    bossManager.currentTarget = characterStats;
                 }
             }
         }
         #endregion
 
         #region Controlar A Mudança Para O Próximo Estado
-        if (golemManager.currentTarget != null)
+        if (bossManager.currentTarget != null)
         {
             return golemPursueTargetState;
         }

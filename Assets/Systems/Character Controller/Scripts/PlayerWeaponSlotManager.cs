@@ -10,14 +10,18 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotsManager
     PlayerManager playerManager;
     PlayerInventoryManager playerInventoryManager;
     PlayerStatsManager playerStatsManager;
+    PlayerEffectsManager playerEffectsManager;
+    CameraManager cameraManager;
 
     [Header("Arma De Ataque")]
     public WeaponItem attackingWeapon;
 
     private void Awake()
     {
+        cameraManager = FindObjectOfType<CameraManager>();
         inputManager = GetComponentInParent<InputManager>();
         playerStatsManager = GetComponentInParent<PlayerStatsManager>();
+        playerEffectsManager = GetComponentInParent<PlayerEffectsManager>();
         playerManager = GetComponentInParent<PlayerManager>();
         playerInventoryManager = GetComponentInParent<PlayerInventoryManager>();
         animator = GetComponent<Animator>();
@@ -109,19 +113,46 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotsManager
         }
     }
 
+    public void SucessfullyThrowBomb()
+    {
+        Destroy(playerEffectsManager.instantiadedFXModel);
+        BombConsumableItem bombItem = playerInventoryManager.currentConsumable as BombConsumableItem;
+
+        GameObject activeModelBomb = Instantiate(bombItem.liveBombModel, rightHandSlot.transform.position, cameraManager.cameraPivotTransform.rotation);
+        activeModelBomb.transform.rotation = Quaternion.Euler(cameraManager.cameraPivotTransform.eulerAngles.x, playerManager.lockOnTransform.eulerAngles.y, 0);
+        BombDamageCollider damageCollider = activeModelBomb.GetComponentInChildren<BombDamageCollider>();
+        
+        damageCollider.explosionDamage = bombItem.baseDamage;
+        damageCollider.explosionSplashDamage = bombItem.explosiveDamage;
+        damageCollider.bombRigidBody.AddForce(activeModelBomb.transform.forward * bombItem.forwardVelocity);
+        damageCollider.bombRigidBody.AddForce(activeModelBomb.transform.up * bombItem.upwardVelocity);
+        damageCollider.teamIDNumber = playerStatsManager.teamIDNumber;
+        LoadWeaponOnSlot(playerInventoryManager.rightWeapon, false);
+    }
+
     #region Controlar os Damage Colliders das armas
 
     private void LoadLeftWeaponDamageCollider()
     {
         leftHandDamageCollider = leftHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
-        leftHandDamageCollider.currentWeaponDamage = playerInventoryManager.leftWeapon.baseDamage;
+
+        leftHandDamageCollider.physicalDamage = playerInventoryManager.leftWeapon.physicalDamage;
+        leftHandDamageCollider.fireDamage = playerInventoryManager.leftWeapon.fireDamage;
+
+        leftHandDamageCollider.teamIDNumber = playerStatsManager.teamIDNumber;
+
         leftHandDamageCollider.poiseBreak = playerInventoryManager.leftWeapon.poiseBreak;
     }
 
     private void LoadRightWeaponDamageCollider()
     {
         rightHandDamageCollider = rightHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
-        rightHandDamageCollider.currentWeaponDamage = playerInventoryManager.rightWeapon.baseDamage;
+
+        rightHandDamageCollider.physicalDamage = playerInventoryManager.rightWeapon.physicalDamage;
+        rightHandDamageCollider.fireDamage = playerInventoryManager.rightWeapon.fireDamage;
+
+        rightHandDamageCollider.teamIDNumber = playerStatsManager.teamIDNumber;
+
         rightHandDamageCollider.poiseBreak = playerInventoryManager.rightWeapon.poiseBreak;
     }
 

@@ -92,6 +92,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dungeonSpawnPoint: {fileID: 4790271215214166949, guid: c1fad2fac89fbae44865b43b7f78333d, type: 3}
+  player: {fileID: 5495935230247848036, guid: 493dfda992b65574ab0a74fba7f3e283, type: 3}
 --- !u!1 &2238511949299426655
 GameObject:
   m_ObjectHideFlags: 0

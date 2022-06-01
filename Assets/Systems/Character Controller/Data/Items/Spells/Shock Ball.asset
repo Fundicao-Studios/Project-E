@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffeea5f1a74e6ff41b4cb0f4dd6fc026, type: 3}
   m_Name: Shock Ball
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 0}
+  itemIcon: {fileID: -6285070063975550627, guid: 9061e98e3e59343abb561c58c425b8b8, type: 3}
   itemName: Shock Ball
   spellWarmUpFX: {fileID: 4430043294319130835, guid: 68ddfc28936458a4d9add0549f90472c, type: 3}
   spellCastFX: {fileID: 4430043294319130835, guid: e564a73c5755d9d4e936e18c8d7b66a7, type: 3}

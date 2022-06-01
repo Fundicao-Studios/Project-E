@@ -9,6 +9,7 @@ public class FlaskItem : ConsumableItem
     public bool lifePotion;
     public bool manaPotion;
     public bool emptyPotion;
+    public bool isEmpty;
 
     [Header("Quantidade De Recuperação")]
     public int healthRecoverAmount;
@@ -17,13 +18,20 @@ public class FlaskItem : ConsumableItem
     [Header("VFX De Recuperação")]
     public GameObject recoveryFX;
 
-    public override void AttemptToConsumeItem(PlayerAnimatorManager playerAnimatorManager, PlayerWeaponSlotManager weaponSlotManager, PlayerEffectsManager playerEffectsManager)
+    public FlaskItem typeOfPotion;
+
+    private void Awake()
     {
-        base.AttemptToConsumeItem(playerAnimatorManager, weaponSlotManager, playerEffectsManager);
-        GameObject potion = Instantiate(modelPrefab, weaponSlotManager.rightHandSlot.transform);
+        typeOfPotion = FindObjectOfType<FlaskItem>();
+    }
+
+    public override void AttemptToConsumeItem(PlayerAnimatorManager playerAnimatorManager, ConsumableSlotManager consumableSlotManager, PlayerEffectsManager playerEffectsManager)
+    {
+        base.AttemptToConsumeItem(playerAnimatorManager, consumableSlotManager, playerEffectsManager);
+        GameObject potion = Instantiate(itemModel, consumableSlotManager.consumableHandSlot.transform);
         playerEffectsManager.currentParticleFX = recoveryFX;
         playerEffectsManager.amountToBeHealed = healthRecoverAmount;
         playerEffectsManager.instantiadedFXModel = potion;
-        weaponSlotManager.rightHandSlot.UnloadWeapon();
+        consumableSlotManager.consumableHandSlot.UnloadConsumable();
     }
 }

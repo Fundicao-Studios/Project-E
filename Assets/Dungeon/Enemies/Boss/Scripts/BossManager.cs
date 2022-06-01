@@ -11,6 +11,7 @@ public class BossManager : CharacterManager
     BossAnimatorManager bossAnimatorManager;
     UIBossHealthBar bossHealthBar;
     BossStatsManager bossStats;
+    BossEffectsManager bossEffectsManager;
     BossCombatStanceState bossCombatStanceState;
 
     public BossState currentState;
@@ -45,6 +46,7 @@ public class BossManager : CharacterManager
         bossLocomotionManager = GetComponent<BossLocomotionManager>();
         bossAnimatorManager = GetComponentInChildren<BossAnimatorManager>();
         bossStats = GetComponent<BossStatsManager>();
+        bossEffectsManager = GetComponentInChildren<BossEffectsManager>();
         enemyRigidBody = GetComponent<Rigidbody>();
         navmeshAgent = GetComponentInChildren<NavMeshAgent>();
         bossCombatStanceState = GetComponentInChildren<BossCombatStanceState>();
@@ -67,6 +69,11 @@ public class BossManager : CharacterManager
         canDoCombo = bossAnimatorManager.animator.GetBool("canDoCombo");
         canRotate = bossAnimatorManager.animator.GetBool("canRotate");
         bossAnimatorManager.animator.SetBool("isDead", bossStats.isDead);
+    }
+
+    private void FixedUpdate()
+    {
+        bossEffectsManager.HandleAllBuildUpEffects();
     }
 
     public void UpdateBossHealthBar(int currentHealth, int maxHealth)

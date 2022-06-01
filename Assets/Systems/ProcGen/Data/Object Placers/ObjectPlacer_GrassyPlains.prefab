@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Objects:
-  - HasHeightLimits: 0
+  - HasHeightLimits: 1
     MinHeightToSpawn: 0
     MaxHeightToSpawn: 30
     CanGoInWater: 0

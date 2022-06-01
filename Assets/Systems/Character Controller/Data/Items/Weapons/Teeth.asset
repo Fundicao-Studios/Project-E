@@ -16,8 +16,11 @@ MonoBehaviour:
   itemName: 
   modelPrefab: {fileID: 2936019544412626356, guid: 1634025ef5744c94f8386b79486130a1, type: 3}
   isUnarmed: 0
-  baseDamage: 50
+  physicalDamage: 20
+  fireDamage: 0
   criticalDamageMultiplier: 4
+  poiseBreak: 0
+  offensivePoiseBonus: 0
   physicalDamageAbsorption: 0
   right_hand_idle: Right Arm Empty
   left_hand_idle: Left Arm Empty

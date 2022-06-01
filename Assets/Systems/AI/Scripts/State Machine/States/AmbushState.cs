@@ -13,7 +13,7 @@ public class AmbushState : State
 
     public PursueTargetState pursueTargetState;
 
-    public override State Tick(EnemyManager enemyManager, EnemyStatsManager enemyStats, EnemyAnimatorManager enemyAnimatorManager)
+    public override State Tick(EnemyManager enemyManager, EnemyStatsManager enemyStatsManager, EnemyAnimatorManager enemyAnimatorManager)
     {
         if (isSleeping && enemyManager.isInteracting == false)
         {
@@ -30,6 +30,9 @@ public class AmbushState : State
 
             if (characterStats != null)
             {
+                if (characterStats.teamIDNumber == enemyStatsManager.teamIDNumber)
+                    return this;
+
                 Vector3 targetsDirection = characterStats.transform.position - enemyManager.transform.position;
                 float viewableAngle = Vector3.Angle(targetsDirection, enemyManager.transform.forward);
 

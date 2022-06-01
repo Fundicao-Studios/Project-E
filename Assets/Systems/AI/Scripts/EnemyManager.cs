@@ -8,6 +8,7 @@ public class EnemyManager : CharacterManager
     EnemyLocomotionManager enemyLocomotionManager;
     EnemyAnimatorManager enemyAnimatorManager;
     EnemyStatsManager enemyStatsManager;
+    EnemyEffectsManager enemyEffectsManager;
 
     public State currentState;
     public CharacterStatsManager currentTarget;
@@ -36,6 +37,7 @@ public class EnemyManager : CharacterManager
         enemyLocomotionManager = GetComponent<EnemyLocomotionManager>();
         enemyAnimatorManager = GetComponentInChildren<EnemyAnimatorManager>();
         enemyStatsManager = GetComponent<EnemyStatsManager>();
+        enemyEffectsManager = GetComponentInChildren<EnemyEffectsManager>();
         enemyRigidBody = GetComponent<Rigidbody>();
         navmeshAgent = GetComponentInChildren<Navigation_CustomPathfinding>();
         navmeshAgent.enabled = false;
@@ -55,6 +57,11 @@ public class EnemyManager : CharacterManager
         canDoCombo = enemyAnimatorManager.animator.GetBool("canDoCombo");
         canRotate = enemyAnimatorManager.animator.GetBool("canRotate");
         enemyAnimatorManager.animator.SetBool("isDead", enemyStatsManager.isDead);
+    }
+
+    private void FixedUpdate()
+    {
+        enemyEffectsManager.HandleAllBuildUpEffects();
     }
 
     private void LateUpdate()
