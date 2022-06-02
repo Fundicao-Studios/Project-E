@@ -17,9 +17,9 @@ MonoBehaviour:
   spellWarmUpFX: {fileID: 6560506864141155035, guid: a06bcb1fcf1ff3b4ea9aeb01099d41ab, type: 3}
   spellCastFX: {fileID: 6560506864141155035, guid: d959d8a160ef58348bd5f4fd78312e26, type: 3}
   spellAnimation: FireBall_Attack
-  isShockSpell: 0
-  isFireSpell: 1
-  isWaterSpell: 0
+  spellController: {fileID: 22100000, guid: c7defbbed26eace45a7d8da40fe723f3, type: 2}
+  offHandIdleAnimation: Left_Arm_Idle_01
+  weaponType: 0
   spellDescription: 
   baseDamage: 50
   projectileForwardVelocity: 1000

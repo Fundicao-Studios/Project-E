@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAnimatorManager : AnimatorHandler
+public class PlayerAnimatorManager : CharacterAnimatorManager
 {
     InputManager inputManager;
     PlayerLocomotionManager playerLocomotionManager

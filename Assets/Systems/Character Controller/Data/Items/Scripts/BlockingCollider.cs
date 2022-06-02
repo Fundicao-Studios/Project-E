@@ -8,6 +8,7 @@ public class BlockingCollider : MonoBehaviour
 
     public float blockingPhysicalDamageAbsorption;
     public float blockingFireDamageAbsorption;
+    public float blockingShockDamageAbsorption;
 
     private void Awake()
     {
@@ -19,6 +20,8 @@ public class BlockingCollider : MonoBehaviour
         if (weapon != null)
         {
             blockingPhysicalDamageAbsorption = weapon.physicalDamageAbsorption;
+            blockingFireDamageAbsorption = weapon.fireDamageAbsorption;
+            blockingShockDamageAbsorption = weapon.shockDamageAbsorption;
         }
     }
 

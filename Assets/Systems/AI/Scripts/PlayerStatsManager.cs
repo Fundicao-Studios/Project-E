@@ -29,9 +29,9 @@ public class PlayerStatsManager : CharacterStatsManager
         healthBar.SetCurrentHealth(currentHealth);
 
         maxStamina = SetMaxStaminaFromStaminaLevel();
-        currenStamina = maxStamina;
+        currentStamina = maxStamina;
         staminaBar.SetMaxStamina(maxStamina);
-        staminaBar.SetCurrentStamina(currenStamina);
+        staminaBar.SetCurrentStamina(currentStamina);
 
         maxManaPoints = SetMaxManaPointsFromManaLevel();
         currentManaPoints = maxManaPoints;
@@ -69,7 +69,7 @@ public class PlayerStatsManager : CharacterStatsManager
         return maxStamina;
     }
 
-    public override void TakeDamage(int physicalDamage, int fireDamage, string damageAnimation = "Damage_01")
+    public override void TakeDamage(int physicalDamage, int fireDamage, int shockDamage, string damageAnimation = "Damage_01")
     {
         if (playerManager.isInvulnerable)
             return;
@@ -77,7 +77,7 @@ public class PlayerStatsManager : CharacterStatsManager
         if (isDead)
             return;
 
-        base.TakeDamage(physicalDamage, fireDamage, damageAnimation = "Damage_01");
+        base.TakeDamage(physicalDamage, fireDamage, shockDamage, damageAnimation);
         healthBar.SetCurrentHealth(currentHealth);
         playerAnimatorManager.PlayTargetAnimation(damageAnimation, true);
 
@@ -105,16 +105,16 @@ public class PlayerStatsManager : CharacterStatsManager
         }
     }
 
-    public override void TakeDamageNoAnimation(int physicalDamage, int fireDamage)
+    public override void TakeDamageNoAnimation(int physicalDamage, int fireDamage, int shockDamage)
     {
-        base.TakeDamageNoAnimation(physicalDamage, fireDamage);
+        base.TakeDamageNoAnimation(physicalDamage, fireDamage, shockDamage);
         healthBar.SetCurrentHealth(currentHealth);
     }
 
     public void TakeStaminaDamage(float damage)
     {
-        currenStamina = currenStamina - damage;
-        staminaBar.SetCurrentStamina(currenStamina);
+        currentStamina = currentStamina - damage;
+        staminaBar.SetCurrentStamina(currentStamina);
     }
 
     public void RegenerateStamina()
@@ -127,10 +127,10 @@ public class PlayerStatsManager : CharacterStatsManager
         {
             staminaRegenTimer += Time.deltaTime;
 
-            if (currenStamina < maxStamina && staminaRegenTimer > 1f)
+            if (currentStamina < maxStamina && staminaRegenTimer > 1f)
             {
-                currenStamina += staminaRegenerationAmount * Time.deltaTime;
-                staminaBar.SetCurrentStamina(Mathf.RoundToInt(currenStamina));
+                currentStamina += staminaRegenerationAmount * Time.deltaTime;
+                staminaBar.SetCurrentStamina(Mathf.RoundToInt(currentStamina));
             }
         }
     }

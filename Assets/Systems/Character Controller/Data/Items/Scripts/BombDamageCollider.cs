@@ -35,7 +35,7 @@ public class BombDamageCollider : DamageCollider
             {
                 if (character.teamIDNumber != teamIDNumber)
                 {
-                    character.TakeDamage(0, explosionDamage);
+                    character.TakeDamage(0, explosionDamage, 0);
                 }
             }
 
@@ -56,7 +56,7 @@ public class BombDamageCollider : DamageCollider
             {
                 if (character.teamIDNumber != teamIDNumber)
                 {
-                    character.TakeDamage(0, explosionSplashDamage);
+                    character.TakeDamage(0, explosionSplashDamage, 0);
                 }
             }
         }

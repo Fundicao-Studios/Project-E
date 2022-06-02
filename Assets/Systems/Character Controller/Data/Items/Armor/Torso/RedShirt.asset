@@ -15,4 +15,6 @@ MonoBehaviour:
   itemIcon: {fileID: 0}
   itemName: RedShirt
   physicalDefense: 12.5
+  fireDefense: 0
+  shockDefense: 0
   torsoModelName: FireArmor

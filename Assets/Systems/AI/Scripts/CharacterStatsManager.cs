@@ -13,7 +13,7 @@ public class CharacterStatsManager : MonoBehaviour
 
     public int staminaLevel = 10;
     public float maxStamina;
-    public float currenStamina;
+    public float currentStamina;
 
     public int manaLevel = 10;
     public float maxManaPoints;
@@ -37,8 +37,11 @@ public class CharacterStatsManager : MonoBehaviour
     public float fireDamageAbsorptionLegs;
     public float fireDamageAbsorptionFeet;
 
-    //Absorção De Fogo
-    //Absorção De Choque
+    public float shockDamageAbsorptionHead;
+    public float shockDamageAbsorptionBody;
+    public float shockDamageAbsorptionLegs;
+    public float shockDamageAbsorptionFeet;
+
     //Absorção De Água
     //Absorção De Escuridão
 
@@ -54,7 +57,7 @@ public class CharacterStatsManager : MonoBehaviour
         totalPoiseDefense = armorPoiseBonus;
     }
 
-    public virtual void TakeDamage(int physicalDamage, int fireDamage, string damageAnimation = "Damage_01")
+    public virtual void TakeDamage(int physicalDamage, int fireDamage, int shockDamage, string damageAnimation = "Damage_01")
     {
         if (isDead)
             return;
@@ -75,7 +78,15 @@ public class CharacterStatsManager : MonoBehaviour
 
         fireDamage = Mathf.RoundToInt(fireDamage - (fireDamage * totalFireDamageAbsorption));
 
-        float finalDamage = physicalDamage + fireDamage; //+ darkDamage + lightningDamage + waterDamage
+        float totalShockDamageAbsorption = 1 -
+            (1 - shockDamageAbsorptionHead / 100) *
+            (1 - shockDamageAbsorptionBody / 100) *
+            (1 - shockDamageAbsorptionLegs / 100) *
+            (1 - shockDamageAbsorptionFeet / 100);
+
+        shockDamage = Mathf.RoundToInt(shockDamage - (shockDamage * totalShockDamageAbsorption));
+
+        float finalDamage = physicalDamage + fireDamage + shockDamage; //+ darkDamage + waterDamage
 
         currentHealth = Mathf.RoundToInt(currentHealth - finalDamage);
 
@@ -86,7 +97,7 @@ public class CharacterStatsManager : MonoBehaviour
         }
     }
 
-    public virtual void TakeDamageNoAnimation(int physicalDamage, int fireDamage)
+    public virtual void TakeDamageNoAnimation(int physicalDamage, int fireDamage, int shockDamage)
     {
         if (isDead)
             return;
@@ -105,9 +116,17 @@ public class CharacterStatsManager : MonoBehaviour
             (1 - fireDamageAbsorptionLegs / 100) *
             (1 - fireDamageAbsorptionFeet / 100);
 
-        fireDamage = Mathf.RoundToInt(fireDamage - (fireDamage + totalFireDamageAbsorption));
+        fireDamage = Mathf.RoundToInt(fireDamage - (fireDamage * totalFireDamageAbsorption));
 
-        float finalDamage = physicalDamage + fireDamage; //+ darkDamage + lightningDamage + waterDamage
+        float totalShockDamageAbsorption = 1 -
+            (1 - shockDamageAbsorptionHead / 100) *
+            (1 - shockDamageAbsorptionBody / 100) *
+            (1 - shockDamageAbsorptionLegs / 100) *
+            (1 - shockDamageAbsorptionFeet / 100);
+
+        shockDamage = Mathf.RoundToInt(shockDamage - (shockDamage * totalShockDamageAbsorption));
+
+        float finalDamage = physicalDamage + fireDamage + shockDamage; //+ darkDamage + waterDamage
 
         currentHealth = Mathf.RoundToInt(currentHealth - finalDamage);
 

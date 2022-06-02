@@ -15,4 +15,6 @@ MonoBehaviour:
   itemIcon: {fileID: 0}
   itemName: BrownPants
   physicalDefense: 10
+  fireDefense: 0
+  shockDefense: 0
   legModelName: DefaultPants

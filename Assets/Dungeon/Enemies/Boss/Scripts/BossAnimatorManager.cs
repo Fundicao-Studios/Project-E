@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossAnimatorManager : AnimatorHandler
+public class BossAnimatorManager : CharacterAnimatorManager
 {
     BossManager bossManager;
     BossStatsManager bossStats;
@@ -19,7 +19,7 @@ public class BossAnimatorManager : AnimatorHandler
 
     public override void TakeCriticalDamageAnimationEvent()
     {
-        bossStats.TakeDamageNoAnimation(bossManager.pendingCriticalDamage, 0);
+        bossStats.TakeDamageNoAnimation(bossManager.pendingCriticalDamage, 0, 0);
         bossManager.pendingCriticalDamage = 0;
     }
 

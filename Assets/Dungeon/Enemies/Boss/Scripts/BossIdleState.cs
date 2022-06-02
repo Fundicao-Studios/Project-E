@@ -17,7 +17,7 @@ public class BossIdleState : BossState
 
             if (characterStats != null)
             {
-                if (characterStats.teamIDNumber != bossStatsManager.teamIDNumber)
+                if (characterStats.teamIDNumber == bossStatsManager.teamIDNumber)
                     return this;
 
                 Vector3 targetDirection = characterStats.transform.position - transform.position;

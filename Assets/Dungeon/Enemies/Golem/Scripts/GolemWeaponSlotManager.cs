@@ -33,6 +33,10 @@ public class GolemWeaponSlotManager : CharacterWeaponSlotsManager
             {
                 rightHandSlot = weaponSlot;
             }
+            else if (weaponSlot.isBackSlot)
+            {
+                backSlot = weaponSlot;
+            }
         }
     }
 
@@ -108,28 +112,6 @@ public class GolemWeaponSlotManager : CharacterWeaponSlotsManager
         leftHandDamageCollider.DisableDamageCollider();
     }
 
-    public void DrainStaminaLightAttack()
-    {
-        
-    }
-
-    public void DrainStaminaHeavyAttack()
-    {
-        
-    }
-
-    public void EnableCombo()
-    {
-        //anim.SetBool("canCombo", true);
-    }
-
-    public void DisableCombo()
-    {
-        //anim.SetBool("canCombo", false);
-    }
-
-    #region Controlar O Bonus De Poise Da Arma
-
     public void GrantWeaponAttackingPoiseBonus()
     {
         golemStatsManager.totalPoiseDefense = golemStatsManager.totalPoiseDefense + golemStatsManager.offensivePoiseBonus;
@@ -139,6 +121,4 @@ public class GolemWeaponSlotManager : CharacterWeaponSlotsManager
     {
         golemStatsManager.totalPoiseDefense = golemStatsManager.armorPoiseBonus;
     }
-
-    #endregion
 }

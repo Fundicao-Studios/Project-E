@@ -61,11 +61,11 @@ public class PlayerInventoryManager : MonoBehaviour
             rightWeapon = weaponsInRightHandSlots[currentRightWeaponIndex];
             playerWeaponSlotManager.LoadWeaponOnSlot(weaponsInRightHandSlots[currentRightWeaponIndex], false);
 
-            if (rightWeapon.isShockCaster)
+            if (rightWeapon.weaponType == WeaponType.ShockCaster)
             {
                 currentSpell = shockSpell;
             }
-            else if (rightWeapon.isWaterCaster)
+            else if (rightWeapon.weaponType == WeaponType.WaterCaster)
             {
                 currentSpell = healSpell;
             }
@@ -80,11 +80,11 @@ public class PlayerInventoryManager : MonoBehaviour
             rightWeapon = weaponsInRightHandSlots[currentRightWeaponIndex];
             playerWeaponSlotManager.LoadWeaponOnSlot(weaponsInRightHandSlots[currentRightWeaponIndex], false);
 
-            if (rightWeapon.isShockCaster)
+            if (rightWeapon.weaponType == WeaponType.ShockCaster)
             {
                 currentSpell = shockSpell;
             }
-            else if (rightWeapon.isWaterCaster)
+            else if (rightWeapon.weaponType == WeaponType.WaterCaster)
             {
                 currentSpell = healSpell;
             }
@@ -111,11 +111,11 @@ public class PlayerInventoryManager : MonoBehaviour
             leftWeapon = weaponsInLeftHandSlots[currentLeftWeaponIndex];
             playerWeaponSlotManager.LoadWeaponOnSlot(weaponsInLeftHandSlots[currentLeftWeaponIndex], true);
 
-            if (leftWeapon.isShockCaster)
+            if (leftWeapon.weaponType == WeaponType.ShockCaster)
             {
                 currentSpell = shockSpell;
             }
-            else if (leftWeapon.isWaterCaster)
+            else if (leftWeapon.weaponType == WeaponType.WaterCaster)
             {
                 currentSpell = healSpell;
             }
@@ -130,11 +130,11 @@ public class PlayerInventoryManager : MonoBehaviour
             leftWeapon = weaponsInLeftHandSlots[currentLeftWeaponIndex];
             playerWeaponSlotManager.LoadWeaponOnSlot(weaponsInLeftHandSlots[currentLeftWeaponIndex], true);
 
-            if (leftWeapon.isShockCaster)
+            if (leftWeapon.weaponType == WeaponType.ShockCaster)
             {
                 currentSpell = shockSpell;
             }
-            else if (leftWeapon.isWaterCaster)
+            else if (leftWeapon.weaponType == WeaponType.WaterCaster)
             {
                 currentSpell = healSpell;
             }

@@ -18,9 +18,9 @@ MonoBehaviour:
   spellCastFX: {fileID: 4430043294319130835, guid: e564a73c5755d9d4e936e18c8d7b66a7, type: 3}
   spellAnimation: Spell_Throw_Start
   manaPointCost: 35
-  isShockSpell: 1
-  isFireSpell: 0
-  isWaterSpell: 0
+  spellController: {fileID: 22100000, guid: c7defbbed26eace45a7d8da40fe723f3, type: 2}
+  offHandIdleAnimation: Left_Arm_Idle_01
+  weaponType: 2
   spellDescription: 
   baseDamage: 75
   projectileForwardVelocity: 500

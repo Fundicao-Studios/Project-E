@@ -79,9 +79,9 @@ MonoBehaviour:
   teamIDNumber: 0
   poiseBreak: 0
   offensivePoiseBonus: 0
-  physicalDamage: 25
+  physicalDamage: 0
   fireDamage: 0
-  shockDamage: 0
+  shockDamage: 50
   waterDamage: 0
   darkDamage: 0
   impactParticles: {fileID: 4430043294319130835, guid: 77dbd48304a08d6498b3ed104362ea1d, type: 3}

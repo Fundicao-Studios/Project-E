@@ -187,7 +187,7 @@ public class PlayerLocomotionManager : MonoBehaviour
         if (playerAnimatorManager.animator.GetBool("isInteracting"))
             return;
 
-        if (playerStatsManager.currenStamina <= 0)
+        if (playerStatsManager.currentStamina <= 0)
             return;
 
         if (inputManager.rollFlag)
@@ -297,7 +297,7 @@ public class PlayerLocomotionManager : MonoBehaviour
         if (playerManager.isInteracting)
             return;
 
-        if (playerStatsManager.currenStamina <= 0)
+        if (playerStatsManager.currentStamina <= 0)
             return;
 
         if (inputManager.jump_Input)

@@ -47,12 +47,16 @@ public class PlayerEquipmentManager : MonoBehaviour
             nakedHeadModel.SetActive(false);
             helmetModelChanger.EquipHelmetModelByName(playerInventoryManager.currentHelmetEquipment.helmetModelName);
             playerStatsManager.physicalDamageAbsorptionHead = playerInventoryManager.currentHelmetEquipment.physicalDefense;
-            Debug.Log("Absorção Na Cabeça Foi De " + playerStatsManager.physicalDamageAbsorptionHead + "%");
+            playerStatsManager.fireDamageAbsorptionBody = playerInventoryManager.currentHelmetEquipment.fireDefense;
+            playerStatsManager.shockDamageAbsorptionBody = playerInventoryManager.currentHelmetEquipment.shockDefense;
+            //Debug.Log("Absorção Na Cabeça Foi De " + playerStatsManager.physicalDamageAbsorptionHead + "%");
         }
         else
         {
             nakedHeadModel.SetActive(true);
             playerStatsManager.physicalDamageAbsorptionHead = 0;
+            playerStatsManager.fireDamageAbsorptionHead = 0;
+            playerStatsManager.shockDamageAbsorptionHead = 0;
         }
 
         torsoModelChanger.UnEquipAllTorsoModels();
@@ -61,12 +65,16 @@ public class PlayerEquipmentManager : MonoBehaviour
         {
             torsoModelChanger.EquipTorsoModelByName(playerInventoryManager.currentTorsoEquipment.torsoModelName);
             playerStatsManager.physicalDamageAbsorptionBody = playerInventoryManager.currentTorsoEquipment.physicalDefense;
-            Debug.Log("Absorção No Tronco Foi De " + playerStatsManager.physicalDamageAbsorptionBody + "%");
+            playerStatsManager.fireDamageAbsorptionBody = playerInventoryManager.currentTorsoEquipment.fireDefense;
+            playerStatsManager.shockDamageAbsorptionBody = playerInventoryManager.currentTorsoEquipment.shockDefense;
+            //Debug.Log("Absorção No Tronco Foi De " + playerStatsManager.physicalDamageAbsorptionBody + "%");
         }
         else
         {
             torsoModelChanger.UnEquipAllTorsoModels();
             playerStatsManager.physicalDamageAbsorptionBody = 0;
+            playerStatsManager.fireDamageAbsorptionBody = 0;
+            playerStatsManager.shockDamageAbsorptionBody = 0;
         }
 
         feetModelChanger.UnEquipAllFeetModels();
@@ -75,12 +83,16 @@ public class PlayerEquipmentManager : MonoBehaviour
         {
             feetModelChanger.EquipFeetModelByName(playerInventoryManager.currentFeetEquipment.feetModelName);
             playerStatsManager.physicalDamageAbsorptionFeet = playerInventoryManager.currentFeetEquipment.physicalDefense;
-            Debug.Log("Absorção Nos Pés Foi De " + playerStatsManager.physicalDamageAbsorptionFeet + "%");
+            playerStatsManager.fireDamageAbsorptionFeet = playerInventoryManager.currentFeetEquipment.fireDefense;
+            playerStatsManager.shockDamageAbsorptionFeet = playerInventoryManager.currentFeetEquipment.shockDefense;
+            //Debug.Log("Absorção Nos Pés Foi De " + playerStatsManager.physicalDamageAbsorptionFeet + "%");
         }
         else
         {
             feetModelChanger.EquipFeetModelByName(nakedFeetModel);
             playerStatsManager.physicalDamageAbsorptionFeet = 0;
+            playerStatsManager.fireDamageAbsorptionFeet = 0;
+            playerStatsManager.shockDamageAbsorptionFeet = 0;
         }
 
         legModelChanger.UnEquipAllLegModels();
@@ -89,12 +101,16 @@ public class PlayerEquipmentManager : MonoBehaviour
         {
             legModelChanger.EquipLegModelByName(playerInventoryManager.currentLegEquipment.legModelName);
             playerStatsManager.physicalDamageAbsorptionLegs = playerInventoryManager.currentLegEquipment.physicalDefense;
-            Debug.Log("Absorção Nas Pernas Foi De " + playerStatsManager.physicalDamageAbsorptionLegs + "%");
+            playerStatsManager.fireDamageAbsorptionLegs = playerInventoryManager.currentFeetEquipment.fireDefense;
+            playerStatsManager.shockDamageAbsorptionLegs = playerInventoryManager.currentFeetEquipment.shockDefense;
+            //Debug.Log("Absorção Nas Pernas Foi De " + playerStatsManager.physicalDamageAbsorptionLegs + "%");
         }
         else
         {
             legModelChanger.EquipLegModelByName(nakedLegsModel);
             playerStatsManager.physicalDamageAbsorptionLegs = 0;
+            playerStatsManager.fireDamageAbsorptionLegs = 0;
+            playerStatsManager.shockDamageAbsorptionLegs = 0;
         }
     }
 

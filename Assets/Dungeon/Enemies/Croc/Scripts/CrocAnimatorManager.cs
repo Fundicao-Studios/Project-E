@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CrocAnimatorManager : AnimatorHandler
+public class CrocAnimatorManager : CharacterAnimatorManager
 {
     CrocManager crocManager;
     CrocStatsManager crocStatsManager;
@@ -21,7 +21,7 @@ public class CrocAnimatorManager : AnimatorHandler
 
     public override void TakeCriticalDamageAnimationEvent()
     {
-        crocStatsManager.TakeDamageNoAnimation(crocManager.pendingCriticalDamage, 0);
+        crocStatsManager.TakeDamageNoAnimation(crocManager.pendingCriticalDamage, 0, 0);
         crocManager.pendingCriticalDamage = 0;
     }
 

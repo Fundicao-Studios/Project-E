@@ -16,23 +16,18 @@ MonoBehaviour:
   itemName: Staff
   modelPrefab: {fileID: 6368986386046958238, guid: 47b6ba87d9a45504d8776b7ddfccc84e, type: 3}
   isUnarmed: 0
-  baseDamage: 25
+  weaponController: {fileID: 22100000, guid: c7defbbed26eace45a7d8da40fe723f3, type: 2}
+  offHandIdleAnimation: Left_Arm_Idle_01
+  weaponType: 2
+  physicalDamage: 0
+  fireDamage: 0
+  shockDamage: 50
   criticalDamageMultiplier: 4
+  poiseBreak: 0
+  offensivePoiseBonus: 0
   physicalDamageAbsorption: 0
-  right_hand_idle: Right_Arm_Idle_01
-  left_hand_idle: Left_Arm_Idle_01
-  th_idle: TH_Idle_01
-  oh_light_attack_01: OH_Light_Attack_01
-  oh_light_attack_02: OH_Light_Attack_02
-  oh_heavy_attack_01: OH_Heavy_Attack_01
-  th_light_attack_01: TH_Sword_Attack_01
-  th_light_attack_02: TH_Sword_Attack_02
-  weapon_art: 
+  fireDamageAbsorption: 0
+  shockDamageAbsorption: 0
   baseStamina: 0
   lightAttackMultiplier: 0
   heavyAttackMultiplier: 0
-  isShockCaster: 1
-  isFireCaster: 0
-  isWaterCaster: 0
-  isMeleeWeapon: 0
-  isShieldWeapon: 0

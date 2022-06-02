@@ -909,6 +909,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f853894c88399364d8d29ac1b00465c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  teamIDNumber: 0
   healthLevel: 10
   maxHealth: 0
   currentHealth: 0
@@ -923,7 +924,7 @@ MonoBehaviour:
   armorPoiseBonus: 0
   totalPoiseResetTime: 15
   poiseResetTimer: 0
-  physicalDamageAbsorptionHead: 0
+  physicalDamageAbsorptionHead: 25
   physicalDamageAbsorptionBody: 0
   physicalDamageAbsorptionLegs: 0
   physicalDamageAbsorptionFeet: 0
@@ -931,6 +932,10 @@ MonoBehaviour:
   fireDamageAbsorptionBody: 0
   fireDamageAbsorptionLegs: 0
   fireDamageAbsorptionFeet: 0
+  shockDamageAbsorptionHead: 50
+  shockDamageAbsorptionBody: 0
+  shockDamageAbsorptionLegs: 0
+  shockDamageAbsorptionFeet: 0
   isDead: 0
 --- !u!114 &839944359154244999
 MonoBehaviour:
@@ -956,6 +961,7 @@ MonoBehaviour:
   isInvulnerable: 0
   isUsingRightHand: 0
   isUsingLeftHand: 0
+  isTwoHandingWeapon: 0
   canRotate: 0
   isSprinting: 0
   isInAir: 0
@@ -1089,6 +1095,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7261330559272262093}
+  - {fileID: 6686045023853918532}
   m_Father: {fileID: 197921478336709295}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1135,6 +1142,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98ecd3f05db4f0f4c86b0cf815cd17d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2953887253918536580
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6686045023853918532}
+  - component: {fileID: 4447002579110087433}
+  m_Layer: 0
+  m_Name: Backslot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6686045023853918532
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2953887253918536580}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2511700496646611395}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4447002579110087433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2953887253918536580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c09ec600d59ca5040b21940b51c9fcee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentOverride: {fileID: 6686045023853918532}
+  currentWeapon: {fileID: 0}
+  isLeftHandSlot: 0
+  isRightHandSlot: 0
+  isBackSlot: 1
+  currentWeaponModel: {fileID: 0}
 --- !u!1 &3026415994017996989
 GameObject:
   m_ObjectHideFlags: 0
@@ -2053,6 +2109,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
   canRotate: 1
+  leftHandConstraint: {fileID: 0}
+  rightHandConstraint: {fileID: 0}
   isPunch01: 0
 --- !u!114 &2042158082764504284
 MonoBehaviour:
@@ -2066,10 +2124,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eefc31c65299fb4479d98faa57b544ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unarmedWeapon: {fileID: 0}
-  leftHandSlot: {fileID: 0}
-  rightHandSlot: {fileID: 0}
-  backSlot: {fileID: 0}
+  unarmedWeapon: {fileID: 11400000, guid: 782bb99688fc4a2498c552e0daba48ff, type: 2}
+  leftHandSlot: {fileID: 3668173874626712789}
+  rightHandSlot: {fileID: 3899690575320122402}
+  backSlot: {fileID: 4447002579110087433}
   leftHandDamageCollider: {fileID: 0}
   rightHandDamageCollider: {fileID: 0}
   rightHandWeapon: {fileID: 11400000, guid: 123d075ab5864ae40a0ec29ddc286ba7, type: 2}

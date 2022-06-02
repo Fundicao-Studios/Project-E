@@ -18,8 +18,8 @@ MonoBehaviour:
   spellCastFX: {fileID: 4592591421982559658, guid: a8a0f524cbf0254449a0fcb571d1f934, type: 3}
   spellAnimation: SpellCast
   manaPointCost: 35
-  isShockSpell: 0
-  isFireSpell: 0
-  isWaterSpell: 1
+  spellController: {fileID: 22100000, guid: c7defbbed26eace45a7d8da40fe723f3, type: 2}
+  offHandIdleAnimation: Left_Arm_Idle_01
+  weaponType: 1
   spellDescription: 
   healAmount: 0

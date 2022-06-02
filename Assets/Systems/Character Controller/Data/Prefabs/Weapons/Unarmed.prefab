@@ -57,4 +57,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 240422f6a90d22c41b4436d87a846d95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentWeaponDamage: 0
+  characterManager: {fileID: 0}
+  enabledDamageColliderOnStartUp: 0
+  teamIDNumber: 0
+  poiseBreak: 0
+  offensivePoiseBonus: 0
+  physicalDamage: 1
+  fireDamage: 0
+  shockDamage: 0
+  waterDamage: 0
+  darkDamage: 0

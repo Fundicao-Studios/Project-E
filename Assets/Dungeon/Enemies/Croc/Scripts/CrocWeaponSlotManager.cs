@@ -66,28 +66,6 @@ public class CrocWeaponSlotManager : CharacterWeaponSlotsManager
         mouthDamageCollider.DisableDamageCollider();
     }
 
-    public void DrainStaminaLightAttack()
-    {
-        
-    }
-
-    public void DrainStaminaHeavyAttack()
-    {
-        
-    }
-
-    public void EnableCombo()
-    {
-        //anim.SetBool("canCombo", true);
-    }
-
-    public void DisableCombo()
-    {
-        //anim.SetBool("canCombo", true);
-    }
-
-    #region Controlar O Bonus De Poise Da Arma
-
     public void GrantWeaponAttackingPoiseBonus()
     {
         crocStatsManager.totalPoiseDefense = crocStatsManager.totalPoiseDefense + crocStatsManager.offensivePoiseBonus;
@@ -97,6 +75,4 @@ public class CrocWeaponSlotManager : CharacterWeaponSlotsManager
     {
         crocStatsManager.totalPoiseDefense = crocStatsManager.armorPoiseBonus;
     }
-
-    #endregion
 }

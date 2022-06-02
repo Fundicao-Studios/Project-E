@@ -80,7 +80,7 @@ MonoBehaviour:
   poiseBreak: 0
   offensivePoiseBonus: 0
   physicalDamage: 0
-  fireDamage: 25
+  fireDamage: 50
   shockDamage: 0
   waterDamage: 0
   darkDamage: 0

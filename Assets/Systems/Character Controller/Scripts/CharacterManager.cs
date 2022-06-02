@@ -23,6 +23,7 @@ public class CharacterManager : MonoBehaviour
     public bool isInvulnerable;
     public bool isUsingRightHand;
     public bool isUsingLeftHand;
+    public bool isTwoHandingWeapon;
 
     [Header("Flags De Movimento")]
     public bool canRotate;

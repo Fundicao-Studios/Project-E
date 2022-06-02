@@ -929,6 +929,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
   canRotate: 1
+  leftHandConstraint: {fileID: 0}
+  rightHandConstraint: {fileID: 0}
   spellItem: {fileID: 11400000, guid: 3a40c0a1ac16a874bb9dffbc328e2794, type: 2}
 --- !u!114 &3297037536345848086
 MonoBehaviour:
@@ -942,7 +944,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 040e95fc6d6e1834db6392aac477f965, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unarmedWeapon: {fileID: 0}
+  unarmedWeapon: {fileID: 11400000, guid: 782bb99688fc4a2498c552e0daba48ff, type: 2}
   leftHandSlot: {fileID: 0}
   rightHandSlot: {fileID: 0}
   backSlot: {fileID: 0}
@@ -950,7 +952,7 @@ MonoBehaviour:
   rightHandDamageCollider: {fileID: 0}
   mouthWeapon: {fileID: 11400000, guid: ca93d613a04d1dd4c933f78d5cde10a1, type: 2}
   spellCastFX: {fileID: 0}
-  mouthWeaponSlot: {fileID: 0}
+  mouthWeaponSlot: {fileID: 4188266163079453099}
 --- !u!114 &1716758643353141283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1302,6 +1304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a125b1f9a0879cf468e776107c873982, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  teamIDNumber: 1
   healthLevel: 5
   maxHealth: 0
   currentHealth: 0
@@ -1320,10 +1323,14 @@ MonoBehaviour:
   physicalDamageAbsorptionBody: 0
   physicalDamageAbsorptionLegs: 0
   physicalDamageAbsorptionFeet: 0
-  fireDamageAbsorptionHead: 0
+  fireDamageAbsorptionHead: 50
   fireDamageAbsorptionBody: 0
   fireDamageAbsorptionLegs: 0
   fireDamageAbsorptionFeet: 0
+  shockDamageAbsorptionHead: 0
+  shockDamageAbsorptionBody: 0
+  shockDamageAbsorptionLegs: 0
+  shockDamageAbsorptionFeet: 0
   isDead: 0
   enemyHealthBar: {fileID: 8887031981158597891}
 --- !u!114 &3702559930792520336

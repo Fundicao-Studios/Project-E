@@ -15,4 +15,6 @@ MonoBehaviour:
   itemIcon: {fileID: 0}
   itemName: BrownBoots
   physicalDefense: 6.5
+  fireDefense: 0
+  shockDefense: 0
   feetModelName: EarthBoots

@@ -13,6 +13,16 @@ public class PlayerCombatManager : MonoBehaviour
     PlayerInventoryManager playerInventoryManager;
     PlayerWeaponSlotManager playerWeaponSlotManager;
     
+    [Header("Animações De Ataque")]
+    string oh_light_attack_01 = "OH_Light_Attack_01";
+    string oh_light_attack_02 = "OH_Light_Attack_02";
+    string oh_heavy_attack_01 = "OH_Heavy_Attack_01";
+
+    string th_light_attack_01 = "TH_Light_Attack_01";
+    string th_light_attack_02 = "TH_Light_Attack_02";
+
+    string weapon_art = "Parry";
+
     public string lastAttack;
 
     LayerMask backStabLayer = 1 << 16;
@@ -30,71 +40,16 @@ public class PlayerCombatManager : MonoBehaviour
         inputManager = GetComponentInParent<InputManager>();
     }
 
-    public void HandleWeaponCombo(WeaponItem weapon)
-    {
-        if (playerStatsManager.currenStamina <= 0)
-            return;
-
-        if (inputManager.comboFlag)
-        {
-            playerAnimatorManager.animator.SetBool("canDoCombo", false);
-
-            if (lastAttack == weapon.oh_light_attack_01)
-            {
-                playerAnimatorManager.PlayTargetAnimation(weapon.oh_light_attack_02, true);
-            }
-            else if (lastAttack == weapon.th_light_attack_01)
-            {
-                playerAnimatorManager.PlayTargetAnimation(weapon.th_light_attack_02, true);
-            }
-        }
-    }
-
-    public void HandleLightAttack(WeaponItem weapon)
-    {
-        if (playerStatsManager.currenStamina <= 0)
-            return;
-
-        playerWeaponSlotManager.attackingWeapon = weapon;
-
-        if (inputManager.twoHandFlag)
-        {
-            playerAnimatorManager.PlayTargetAnimation(weapon.th_light_attack_01, true);
-            lastAttack = weapon.th_light_attack_01;
-        }
-        else
-        {
-            playerAnimatorManager.PlayTargetAnimation(weapon.oh_light_attack_01, true);
-            lastAttack = weapon.oh_light_attack_01;
-        }
-    }
-
-    public void HandleHeavyAttack(WeaponItem weapon)
-    {
-        if (playerStatsManager.currenStamina <= 0)
-            return;
-
-        playerWeaponSlotManager.attackingWeapon = weapon;
-
-        if (inputManager.twoHandFlag)
-        {
-
-        }
-        else
-        {
-            playerAnimatorManager.PlayTargetAnimation(weapon.oh_heavy_attack_01, true);
-            lastAttack = weapon.oh_heavy_attack_01;
-        }
-    }
-
-    #region Ações De Input
     public void HandleRBAction()
     {
-        if (playerInventoryManager.rightWeapon.isMeleeWeapon)
+        if (playerInventoryManager.rightWeapon.weaponType == WeaponType.StraightSword 
+            || playerInventoryManager.rightWeapon.weaponType == WeaponType.Unarmed)
         {
             PerformRBMeleeAction();
         }
-        else if (playerInventoryManager.rightWeapon.isShockCaster || playerInventoryManager.rightWeapon.isFireCaster || playerInventoryManager.rightWeapon.isWaterCaster)
+        else if (playerInventoryManager.rightWeapon.weaponType == WeaponType.ShockCaster 
+            || playerInventoryManager.rightWeapon.weaponType == WeaponType.FireCaster 
+            || playerInventoryManager.rightWeapon.weaponType == WeaponType.WaterCaster)
         {
             PerformRBMagicAction(playerInventoryManager.rightWeapon);
         }
@@ -107,19 +62,79 @@ public class PlayerCombatManager : MonoBehaviour
 
     public void HandleLTAction()
     {
-        if (playerInventoryManager.leftWeapon.isShieldWeapon)
+        if (playerInventoryManager.leftWeapon.weaponType == WeaponType.Shield 
+            || playerInventoryManager.rightWeapon.weaponType == WeaponType.Unarmed)
         {
             PerformLTWeaponArt(inputManager.twoHandFlag);
         }
-        else if (playerInventoryManager.leftWeapon.isMeleeWeapon)
+        else if (playerInventoryManager.leftWeapon.weaponType == WeaponType.StraightSword)
         {
             //Fazer um light attack
         }
 
     }
-    #endregion
 
-    #region Ações De Ataques
+
+
+    public void HandleWeaponCombo(WeaponItem weapon)
+    {
+        if (playerStatsManager.currentStamina <= 0)
+            return;
+
+        if (inputManager.comboFlag)
+        {
+            playerAnimatorManager.animator.SetBool("canDoCombo", false);
+
+            if (lastAttack == oh_light_attack_01)
+            {
+                playerAnimatorManager.PlayTargetAnimation(oh_light_attack_02, true);
+            }
+            else if (lastAttack == th_light_attack_01)
+            {
+                playerAnimatorManager.PlayTargetAnimation(th_light_attack_02, true);
+            }
+        }
+    }
+
+    public void HandleLightAttack(WeaponItem weapon)
+    {
+        if (playerStatsManager.currentStamina <= 0)
+            return;
+
+        playerWeaponSlotManager.attackingWeapon = weapon;
+
+        if (inputManager.twoHandFlag)
+        {
+            playerAnimatorManager.PlayTargetAnimation(th_light_attack_01, true);
+            lastAttack = th_light_attack_01;
+        }
+        else
+        {
+            playerAnimatorManager.PlayTargetAnimation(oh_light_attack_01, true);
+            lastAttack = oh_light_attack_01;
+        }
+    }
+
+    public void HandleHeavyAttack(WeaponItem weapon)
+    {
+        if (playerStatsManager.currentStamina <= 0)
+            return;
+
+        playerWeaponSlotManager.attackingWeapon = weapon;
+
+        if (inputManager.twoHandFlag)
+        {
+
+        }
+        else
+        {
+            playerAnimatorManager.PlayTargetAnimation(oh_heavy_attack_01, true);
+            lastAttack = oh_heavy_attack_01;
+        }
+    }
+
+
+
     private void PerformRBMeleeAction()
     {
         if (playerManager.canDoCombo)
@@ -141,14 +156,27 @@ public class PlayerCombatManager : MonoBehaviour
         }
     }
 
+    private void PerformLBBlockingAction()
+    {
+        if (playerManager.isInteracting)
+            return;
+
+        if (playerManager.isBlocking)
+            return;
+
+        playerAnimatorManager.PlayTargetAnimation("Block_Loop", false, true);
+        playerEquipmentManager.OpenBlockingCollider();
+        playerManager.isBlocking = true;
+    }
+
     private void PerformRBMagicAction(WeaponItem weapon)
     {
         if (playerManager.isInteracting)
             return;
             
-        if (weapon.isWaterCaster)
+        if (weapon.weaponType == WeaponType.WaterCaster)
         {
-            if (playerInventoryManager.currentSpell != null && playerInventoryManager.currentSpell.isWaterSpell)
+            if (playerInventoryManager.currentSpell != null && playerInventoryManager.currentSpell.weaponType == WeaponType.WaterCaster)
             {
                 if (playerStatsManager.currentManaPoints >= playerInventoryManager.currentSpell.manaPointCost)
                 {
@@ -160,9 +188,9 @@ public class PlayerCombatManager : MonoBehaviour
                 }
             }
         }
-        else if (weapon.isShockCaster)
+        else if (weapon.weaponType == WeaponType.ShockCaster)
         {
-            if (playerInventoryManager.currentSpell != null && playerInventoryManager.currentSpell.isShockSpell)
+            if (playerInventoryManager.currentSpell != null && playerInventoryManager.currentSpell.weaponType == WeaponType.ShockCaster)
             {
                 if (playerStatsManager.currentManaPoints >= playerInventoryManager.currentSpell.manaPointCost)
                 {
@@ -187,9 +215,11 @@ public class PlayerCombatManager : MonoBehaviour
         }
         else
         {
-            playerAnimatorManager.PlayTargetAnimation(playerInventoryManager.leftWeapon.weapon_art, true);
+            playerAnimatorManager.PlayTargetAnimation(weapon_art, true);
         }
     }
+
+
 
     private void SuccessfullyCastSpell()
     {
@@ -197,26 +227,9 @@ public class PlayerCombatManager : MonoBehaviour
         playerAnimatorManager.animator.SetBool("isFiringSpell", true);
     }
 
-    #endregion
-
-    #region Ações Defensivas
-    private void PerformLBBlockingAction()
-    {
-        if (playerManager.isInteracting)
-            return;
-
-        if (playerManager.isBlocking)
-            return;
-
-        playerAnimatorManager.PlayTargetAnimation("Block_Loop", false, true);
-        playerEquipmentManager.OpenBlockingCollider();
-        playerManager.isBlocking = true;
-    }
-    #endregion
-
     public void AttemptBackStabOrRiposte()
     {
-        if (playerStatsManager.currenStamina <= 0)
+        if (playerStatsManager.currentStamina <= 0)
             return;
 
         RaycastHit hit;
@@ -244,7 +257,7 @@ public class PlayerCombatManager : MonoBehaviour
                 enemyCharacterManager.pendingCriticalDamage = criticalDamage;
 
                 playerAnimatorManager.PlayTargetAnimation("Back Stab", true);
-                enemyCharacterManager.GetComponentInChildren<AnimatorHandler>().PlayTargetAnimation("Back Stabbed", true);
+                enemyCharacterManager.GetComponentInChildren<CharacterAnimatorManager>().PlayTargetAnimation("Back Stabbed", true);
                 //Dar dano
             }
         }
@@ -270,7 +283,7 @@ public class PlayerCombatManager : MonoBehaviour
                 enemyCharacterManager.pendingCriticalDamage = criticalDamage;
 
                 playerAnimatorManager.PlayTargetAnimation("Riposte", true);
-                enemyCharacterManager.GetComponentInChildren<AnimatorHandler>().PlayTargetAnimation("Riposte_Stabbed", true);
+                enemyCharacterManager.GetComponentInChildren<CharacterAnimatorManager>().PlayTargetAnimation("Riposte_Stabbed", true);
             }
         }
     }

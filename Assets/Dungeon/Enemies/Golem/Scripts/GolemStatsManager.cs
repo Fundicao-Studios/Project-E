@@ -27,9 +27,9 @@ public class GolemStatsManager : CharacterStatsManager
         return maxHealth;
     }
 
-    public override void TakeDamageNoAnimation(int physicalDamage, int fireDamage)
+    public override void TakeDamageNoAnimation(int physicalDamage, int fireDamage, int shockDamage)
     {
-        base.TakeDamageNoAnimation(physicalDamage, fireDamage);
+        base.TakeDamageNoAnimation(physicalDamage, fireDamage, shockDamage);
         enemyHealthBar.SetHealth(currentHealth);
     }
 
@@ -38,9 +38,9 @@ public class GolemStatsManager : CharacterStatsManager
         golemAnimatorManager.PlayTargetAnimation("Break Guard", true);
     }
 
-    public override void TakeDamage(int physicalDamage, int fireDamage, string damageAnimation = "Damage_01")
+    public override void TakeDamage(int physicalDamage, int fireDamage, int shockDamage, string damageAnimation = "Damage_01")
     {
-        base.TakeDamage(physicalDamage, fireDamage, damageAnimation = "Damage_01");
+        base.TakeDamage(physicalDamage, fireDamage, shockDamage, damageAnimation = "Damage_01");
 
         enemyHealthBar.SetHealth(currentHealth);
         

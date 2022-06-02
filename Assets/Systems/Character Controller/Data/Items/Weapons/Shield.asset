@@ -16,23 +16,18 @@ MonoBehaviour:
   itemName: Shield
   modelPrefab: {fileID: 5456396191935044809, guid: d230a73d60d24ba4aa194e9fff711774, type: 3}
   isUnarmed: 0
-  baseDamage: 25
+  weaponController: {fileID: 22100000, guid: c7defbbed26eace45a7d8da40fe723f3, type: 2}
+  offHandIdleAnimation: Left_Arm_Idle_01
+  weaponType: 7
+  physicalDamage: 0
+  fireDamage: 0
+  shockDamage: 0
   criticalDamageMultiplier: 4
+  poiseBreak: 0
+  offensivePoiseBonus: 0
   physicalDamageAbsorption: 50
-  right_hand_idle: Right_Arm_Idle_01
-  left_hand_idle: Left_Arm_Idle_01
-  th_idle: TH_Idle_01
-  oh_light_attack_01: 
-  oh_light_attack_02: 
-  oh_heavy_attack_01: 
-  th_light_attack_01: 
-  th_light_attack_02: 
-  weapon_art: Parry
+  fireDamageAbsorption: 0
+  shockDamageAbsorption: 0
   baseStamina: 0
   lightAttackMultiplier: 0
   heavyAttackMultiplier: 0
-  isShockCaster: 0
-  isFireCaster: 0
-  isWaterCaster: 0
-  isMeleeWeapon: 0
-  isShieldWeapon: 1

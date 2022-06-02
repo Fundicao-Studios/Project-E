@@ -121,4 +121,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterManager: {fileID: 0}
   enabledDamageColliderOnStartUp: 0
-  currentWeaponDamage: 20
+  teamIDNumber: 0
+  poiseBreak: 0
+  offensivePoiseBonus: 0
+  physicalDamage: 25
+  fireDamage: 25
+  shockDamage: 0
+  waterDamage: 0
+  darkDamage: 0

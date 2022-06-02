@@ -8,10 +8,12 @@ public class CrocSpellItem : Item
     public GameObject spellCastFX;
     public string spellAnimation;
 
-    [Header("Tipo De Magia")]
-    public bool isShockSpell;
-    public bool isFireSpell;
-    public bool isWaterSpell;
+    [Header("Substituidor De Animações")]
+    public AnimatorOverrideController spellController;
+    public string offHandIdleAnimation = "Left_Arm_Idle_01";
+
+    [Header("Tipos De Armas")]
+    public WeaponType weaponType;
 
     [Header("Descrição Da Magia")]
     [TextArea]

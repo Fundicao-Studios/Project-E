@@ -11,10 +11,16 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotsManager
     PlayerInventoryManager playerInventoryManager;
     PlayerStatsManager playerStatsManager;
     PlayerEffectsManager playerEffectsManager;
+    PlayerAnimatorManager playerAnimatorManager;
     CameraManager cameraManager;
 
-    [Header("Arma De Ataque")]
+    [Header("Arma De Ataque/Escudo Em Uso")]
     public WeaponItem attackingWeapon;
+    public WeaponItem usingShield;
+
+    [Header("Alvos De IK Das Mãos")]
+    RightHandIKTarget rightHandIKTarget;
+    LeftHandIKTarget leftHandIKTarget;
 
     private void Awake()
     {
@@ -22,6 +28,7 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotsManager
         inputManager = GetComponentInParent<InputManager>();
         playerStatsManager = GetComponentInParent<PlayerStatsManager>();
         playerEffectsManager = GetComponentInParent<PlayerEffectsManager>();
+        playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
         playerManager = GetComponentInParent<PlayerManager>();
         playerInventoryManager = GetComponentInParent<PlayerInventoryManager>();
         animator = GetComponent<Animator>();
@@ -65,7 +72,7 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotsManager
                 leftHandSlot.LoadWeaponModel(weaponItem);
                 LoadLeftWeaponDamageCollider();
                 quickSlotsUI.UpdateWeaponQuickSlotsUI(true, weaponItem);
-                animator.CrossFade(weaponItem.left_hand_idle, 0.2f);
+                playerAnimatorManager.PlayTargetAnimation(weaponItem.offHandIdleAnimation, false, true);
             }
             else
             {
@@ -73,19 +80,19 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotsManager
                 {
                     backSlot.LoadWeaponModel(leftHandSlot.currentWeapon);
                     leftHandSlot.UnloadWeaponAndDestroy();
-                    animator.CrossFade(weaponItem.th_idle, 0.2f);
+                    playerAnimatorManager.PlayTargetAnimation("Left Arm Empty", false, true);
                 }
                 else
                 {
-                    animator.CrossFade("Both Arms Empty", 0.2f);
                     backSlot.UnloadWeaponAndDestroy();
-                    animator.CrossFade(weaponItem.right_hand_idle, 0.2f);
                 }
 
                 rightHandSlot.currentWeapon = weaponItem;
                 rightHandSlot.LoadWeaponModel(weaponItem);
                 LoadRightWeaponDamageCollider();
+                //LoadTwoHandIKTargets(playerManager.isTwoHandingWeapon);
                 quickSlotsUI.UpdateWeaponQuickSlotsUI(false, weaponItem);
+                playerAnimatorManager.animator.runtimeAnimatorController = weaponItem.weaponController;
             }
         }
         else
@@ -94,23 +101,30 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotsManager
 
             if (isLeft)
             {
-                animator.CrossFade("Left Arm Empty", 0.2f);
                 playerInventoryManager.leftWeapon = unarmedWeapon;
                 leftHandSlot.currentWeapon = weaponItem;
                 leftHandSlot.LoadWeaponModel(weaponItem);
                 LoadLeftWeaponDamageCollider();
                 quickSlotsUI.UpdateWeaponQuickSlotsUI(true, weaponItem);
+                playerAnimatorManager.PlayTargetAnimation(weaponItem.offHandIdleAnimation, false, true);
             }
             else
             {
-                animator.CrossFade("Right Arm Empty", 0.2f);
                 playerInventoryManager.rightWeapon = unarmedWeapon;
                 rightHandSlot.currentWeapon = weaponItem;
                 rightHandSlot.LoadWeaponModel(weaponItem);
                 LoadRightWeaponDamageCollider();
                 quickSlotsUI.UpdateWeaponQuickSlotsUI(false, weaponItem);
+                playerAnimatorManager.animator.runtimeAnimatorController = weaponItem.weaponController;
             }
         }
+    }
+
+    public void LoadTwoHandIKTargets(bool isTwoHandingWeapon)
+    {
+        leftHandIKTarget = leftHandSlot.currentWeaponModel.GetComponentInChildren<LeftHandIKTarget>();
+        rightHandIKTarget = rightHandSlot.currentWeaponModel.GetComponentInChildren<RightHandIKTarget>();
+        playerAnimatorManager.SetHandIKForWeapon(rightHandIKTarget, leftHandIKTarget, playerManager.isTwoHandingWeapon);
     }
 
     public void SucessfullyThrowBomb()
@@ -181,14 +195,17 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotsManager
         }
     }
 
-    
-
     #endregion
 
     #region Controlar o gasto de Stamina
     public void DrainStaminaLightAttack()
     {
         playerStatsManager.TakeStaminaDamage(Mathf.RoundToInt(attackingWeapon.baseStamina * attackingWeapon.lightAttackMultiplier));
+    }
+
+    public void DrainStaminaBlock()
+    {
+        playerStatsManager.TakeStaminaDamage(50);
     }
 
     public void DrainStaminaHeavyAttack()

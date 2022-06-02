@@ -40,7 +40,7 @@ public class SpellDamageCollider : DamageCollider
 
             if (spellTarget != null)
             {
-                spellTarget.TakeDamage(physicalDamage, fireDamage);
+                spellTarget.TakeDamage(physicalDamage, fireDamage, shockDamage);
             }
 
             hasCollided = true;

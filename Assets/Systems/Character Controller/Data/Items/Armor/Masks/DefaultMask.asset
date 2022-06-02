@@ -15,4 +15,6 @@ MonoBehaviour:
   itemIcon: {fileID: 0}
   itemName: DefaultMask
   physicalDefense: 7
+  fireDefense: 0
+  shockDefense: 0
   helmetModelName: GoldenMask

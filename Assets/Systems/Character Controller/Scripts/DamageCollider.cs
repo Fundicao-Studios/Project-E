@@ -44,53 +44,61 @@ public class DamageCollider : MonoBehaviour
     {
         if (collision.tag == "Character")
         {
-            CharacterStatsManager enemyStatsManager = collision.GetComponent<CharacterStatsManager>();
+            CharacterStatsManager characterStatsManager = collision.GetComponent<CharacterStatsManager>();
             CharacterManager enemyManager = collision.GetComponent<CharacterManager>();
             CharacterEffectsManager enemyEffectsManager = collision.GetComponentInChildren<CharacterEffectsManager>();
             BlockingCollider shield = collision.transform.GetComponentInChildren<BlockingCollider>();
 
             if (enemyManager != null)
             {
-                if (enemyStatsManager.teamIDNumber == teamIDNumber)
+                if (characterStatsManager.teamIDNumber == teamIDNumber)
                     return;
 
                 if (enemyManager.isParrying)
                 {
-                    characterManager.GetComponentInChildren<AnimatorHandler>().PlayTargetAnimation("Parried", true);
+                    characterManager.GetComponentInChildren<CharacterAnimatorManager>().PlayTargetAnimation("Parried", true);
                     return;
                 }
                 else if (shield != null && enemyManager.isBlocking)
                 {
                     float physicalDamageAfterBlock = physicalDamage - (physicalDamage * shield.blockingPhysicalDamageAbsorption) / 100;
                     float fireDamageAfterBlock = fireDamage - (fireDamage * shield.blockingFireDamageAbsorption) / 100;
+                    float shockDamageAfterBlock = shockDamage - (shockDamage * shield.blockingShockDamageAbsorption) / 100;
 
-                    if (enemyStatsManager != null)
+                    if (characterStatsManager != null)
                     {
-                        enemyStatsManager.TakeDamage(Mathf.RoundToInt(physicalDamageAfterBlock), 0, "Block_Guard");
+                        if (characterStatsManager.currentStamina > 0)
+                        {
+                            characterStatsManager.TakeDamage(Mathf.RoundToInt(physicalDamageAfterBlock), Mathf.RoundToInt(fireDamageAfterBlock), Mathf.RoundToInt(shockDamageAfterBlock), "Block_Guard");
+                        }
+                        else
+                        {
+                            characterStatsManager.TakeDamage(physicalDamage, fireDamage, shockDamage, "Parried");
+                        }
                         return;
                     }
                 }
             }
 
-            if (enemyStatsManager != null)
+            if (characterStatsManager != null)
             {
-                if (enemyStatsManager.teamIDNumber == teamIDNumber)
+                if (characterStatsManager.teamIDNumber == teamIDNumber)
                     return;
                     
-                enemyStatsManager.poiseResetTimer = enemyStatsManager.totalPoiseResetTime;
-                enemyStatsManager.totalPoiseDefense = enemyStatsManager.totalPoiseDefense - poiseBreak;
+                characterStatsManager.poiseResetTimer = characterStatsManager.totalPoiseResetTime;
+                characterStatsManager.totalPoiseDefense = characterStatsManager.totalPoiseDefense - poiseBreak;
 
                 //DETETAR O PRIMEIRO CONTACTO DA ARMA COM O COLLIDER
                 Vector3 contactPoint = collision.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
                 enemyEffectsManager.PlayBloodSplatterFX(contactPoint);
 
-                if (enemyStatsManager.totalPoiseDefense > poiseBreak)
+                if (characterStatsManager.totalPoiseDefense > poiseBreak)
                 {
-                    enemyStatsManager.TakeDamageNoAnimation(physicalDamage, 0);
+                    characterStatsManager.TakeDamageNoAnimation(physicalDamage, fireDamage, shockDamage);
                 }
                 else
                 {
-                    enemyStatsManager.TakeDamage(physicalDamage, 0);
+                    characterStatsManager.TakeDamage(physicalDamage, fireDamage, shockDamage);
                 }
             }
         }

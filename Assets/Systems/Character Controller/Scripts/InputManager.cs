@@ -143,13 +143,13 @@ public class InputManager : MonoBehaviour
         {
             rollInputTimer += delta;
 
-            if (playerStatsManager.currenStamina <= 0)
+            if (playerStatsManager.currentStamina <= 0)
             {
                 b_Input = false;
                 sprintFlag = false;
             }
 
-            if (moveAmount > 0.5f && playerStatsManager.currenStamina > 0)
+            if (moveAmount > 0.5f && playerStatsManager.currentStamina > 0)
             {
                 sprintFlag = true;
             }
@@ -297,11 +297,13 @@ public class InputManager : MonoBehaviour
             if (twoHandFlag)
             {
                 playerWeaponSlotManager.LoadWeaponOnSlot(playerInventoryManager.rightWeapon, false);
+                playerManager.isTwoHandingWeapon = true;
             }
             else
             {
                 playerWeaponSlotManager.LoadWeaponOnSlot(playerInventoryManager.rightWeapon, false);
                 playerWeaponSlotManager.LoadWeaponOnSlot(playerInventoryManager.leftWeapon, true);
+                playerManager.isTwoHandingWeapon = false;
             }
         }
     }

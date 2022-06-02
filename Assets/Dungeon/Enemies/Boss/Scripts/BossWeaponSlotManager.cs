@@ -33,6 +33,10 @@ public class BossWeaponSlotManager : CharacterWeaponSlotsManager
             {
                 rightHandSlot = weaponSlot;
             }
+            else if (weaponSlot.isBackSlot)
+            {
+                backSlot = weaponSlot;
+            }
         }
     }
 
