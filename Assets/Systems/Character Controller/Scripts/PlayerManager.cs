@@ -20,6 +20,8 @@ public class PlayerManager : CharacterManager
     public PlayerWeaponSlotManager playerWeaponSlotManager;
     public PlayerEquipmentManager playerEquipmentManager;
     public UIManager uiManager;
+    float messageTimer = 0;
+    bool startTimerMessage = false;
 
     private void Awake()
     {
@@ -45,8 +47,13 @@ public class PlayerManager : CharacterManager
 
     void Update()
     {
-        float delta = Time.deltaTime;
+        float delta = Time.deltaTime; 
         
+        if (startTimerMessage)
+        {
+            messageTimer += Time.deltaTime;
+        }
+
         isInteracting = animator.GetBool("isInteracting");
         canDoCombo = animator.GetBool("canDoCombo");
         isUsingRightHand = animator.GetBool("isUsingRightHand");
@@ -155,15 +162,22 @@ public class PlayerManager : CharacterManager
                 interactableUIGameObjectMessage.SetActive(false);
             }
 
-            if (itemInteractableGameObject != null && inputManager.a_Input)
+            if (itemInteractableGameObject != null)
             {
-                itemInteractableGameObject.SetActive(false);
+                startTimerMessage = true;
+
+                if (messageTimer >= 8)
+                {
+                    itemInteractableGameObject.SetActive(false);
+                    messageTimer = 0;
+                }
             }
         }
     }
 
     public void OpenChestInteraction(Transform playerStandsHereWhenOpeningChest)
     {
+        interactableUIGameObject.SetActive(false);
         playerLocomotionManager.rigidbody.velocity = Vector3.zero; //Evitar o jogador de deslizar
         transform.position = playerStandsHereWhenOpeningChest.transform.position;
         playerAnimatorManager.PlayTargetAnimation("Pick Up Item", true);

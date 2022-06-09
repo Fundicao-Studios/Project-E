@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 6572662844431400588}
   - component: {fileID: 1030043756886308431}
   - component: {fileID: -4772526466720732009}
+  - component: {fileID: 928279853514297992}
+  - component: {fileID: 2821164971432544952}
   m_Layer: 0
   m_Name: ObjectPlacer_Swamp
   m_TagString: Untagged
@@ -167,6 +169,60 @@ MonoBehaviour:
   TargetDensity: 1
   MaxSpawnCount: 50
   MaxInvalidLocationSkips: 10
+  MaxPositionJitter: 0.15
+  NoiseScale: {x: 0.0078125, y: 0.0078125}
+  NoiseThreshold: 0.5
+--- !u!114 &928279853514297992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4917542237932615470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c2c4f873e385d440b8d2d7f16edc9f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Objects:
+  - HasHeightLimits: 1
+    MinHeightToSpawn: 0
+    MaxHeightToSpawn: 15
+    CanGoInWater: 1
+    CanGoAboveWater: 0
+    Weighting: 1
+    Prefabs:
+    - {fileID: 3820624193690544351, guid: a4566b14ee07d14469b5b5072dcd535f, type: 3}
+  TargetDensity: 0.1
+  MaxSpawnCount: 100
+  MaxInvalidLocationSkips: 1000
+  MaxPositionJitter: 0.15
+  NoiseScale: {x: 0.0078125, y: 0.0078125}
+  NoiseThreshold: 0.5
+--- !u!114 &2821164971432544952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4917542237932615470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c2c4f873e385d440b8d2d7f16edc9f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Objects:
+  - HasHeightLimits: 1
+    MinHeightToSpawn: 0
+    MaxHeightToSpawn: 14
+    CanGoInWater: 1
+    CanGoAboveWater: 0
+    Weighting: 1
+    Prefabs:
+    - {fileID: 8817069694078212127, guid: 62e0a92378a2f2147bf30de46c1937f3, type: 3}
+  TargetDensity: 0.1
+  MaxSpawnCount: 100
+  MaxInvalidLocationSkips: 1000
   MaxPositionJitter: 0.15
   NoiseScale: {x: 0.0078125, y: 0.0078125}
   NoiseThreshold: 0.5
