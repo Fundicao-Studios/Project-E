@@ -14,7 +14,12 @@ public class PlayerManager : CharacterManager
 
     InteractableUI interactableUI;
     public GameObject interactableUIGameObject;
+    public GameObject interactableUIGameObjectMessage;
     public GameObject itemInteractableGameObject;
+    public  PlayerInventoryManager playerInventoryManager;
+    public PlayerWeaponSlotManager playerWeaponSlotManager;
+    public PlayerEquipmentManager playerEquipmentManager;
+    public UIManager uiManager;
 
     private void Awake()
     {
@@ -26,9 +31,14 @@ public class PlayerManager : CharacterManager
         playerStatsManager = GetComponent<PlayerStatsManager>();
         playerEffectsManager = GetComponentInChildren<PlayerEffectsManager>();
         playerLocomotionManager = GetComponent<PlayerLocomotionManager>();
+        playerInventoryManager = GetComponent<PlayerInventoryManager>();
+        playerWeaponSlotManager = GetComponentInChildren<PlayerWeaponSlotManager>();
+        playerEquipmentManager = GetComponentInChildren<PlayerEquipmentManager>();
         interactableUIGameObject = GameObject.FindGameObjectWithTag("Pop-Up");
+        interactableUIGameObjectMessage = GameObject.FindGameObjectWithTag("Pop-Up-Message");
         itemInteractableGameObject = GameObject.FindGameObjectWithTag("Pop-Up 2");
         interactableUIGameObject.SetActive(false);
+        interactableUIGameObjectMessage.SetActive(false);
         itemInteractableGameObject.SetActive(false);
         interactableUI = FindObjectOfType<InteractableUI>();
     }
@@ -49,6 +59,7 @@ public class PlayerManager : CharacterManager
         animator.SetBool("isBlocking", isBlocking);
 
         inputManager.TickInput(delta);
+        playerLocomotionManager.rigidbody.AddForce(Vector3.up * 10);
         playerAnimatorManager.canRotate = animator.GetBool("canRotate");
         playerLocomotionManager.HandleRollingAndSprinting(delta);
         playerLocomotionManager.HandleJumping();
@@ -119,12 +130,29 @@ public class PlayerManager : CharacterManager
                     }
                 }
             }
+            else if (hit.collider.tag == "Message")
+            {
+                Interactable interactableObject = hit.collider.GetComponent<Interactable>();
+
+                if (interactableObject != null)
+                {
+                    string interactableTextMessage = interactableObject.interactableText;
+                    interactableUI.interactableTextMessage.text = interactableTextMessage;
+                    interactableUIGameObjectMessage.SetActive(true);
+
+                    if (inputManager.a_Input)
+                    {
+                        hit.collider.GetComponent<Interactable>().Interact(this);
+                    }
+                }
+            }
         }
         else
         {
-            if (interactableUIGameObject != null)
+            if (interactableUIGameObject != null || interactableUIGameObjectMessage != null)
             {
                 interactableUIGameObject.SetActive(false);
+                interactableUIGameObjectMessage.SetActive(false);
             }
 
             if (itemInteractableGameObject != null && inputManager.a_Input)

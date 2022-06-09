@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b5c80629cf6a4b4faf4a36e692c79ad, type: 3}
   m_Name: BrownBoots
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 0}
+  itemIcon: {fileID: 21300000, guid: c24da0b7691b044409e841394371303f, type: 3}
   itemName: BrownBoots
   physicalDefense: 6.5
   fireDefense: 0

@@ -464,9 +464,8 @@ MonoBehaviour:
   backSlot: {fileID: 0}
   leftHandDamageCollider: {fileID: 0}
   rightHandDamageCollider: {fileID: 0}
-  attackingWeapon: {fileID: 0}
-  rightHandWeapon: {fileID: 0}
-  leftHandWeapon: {fileID: 0}
+  rightHandWeapon: {fileID: 11400000, guid: ec3ece0510760e24d880f14c59160ac4, type: 2}
+  leftHandWeapon: {fileID: 11400000, guid: ec3ece0510760e24d880f14c59160ac4, type: 2}
 --- !u!114 &2833526769501204715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1350,13 +1349,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11c9b353f94b8f6499b3fce1b3eefbcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teamIDNumber: 0
+  teamIDNumber: 1
   healthLevel: 10
   maxHealth: 0
   currentHealth: 0
   staminaLevel: 10
   maxStamina: 0
-  currenStamina: 0
+  currentStamina: 0
   manaLevel: 10
   maxManaPoints: 0
   currentManaPoints: 0

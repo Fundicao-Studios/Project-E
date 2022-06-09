@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35c8abfbc3f385c4aa0fb4e41e7ff3d2, type: 3}
   m_Name: BrownPants
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 0}
+  itemIcon: {fileID: 21300000, guid: f774ec4a608f9df438540d096b01f80d, type: 3}
   itemName: BrownPants
   physicalDefense: 10
   fireDefense: 0

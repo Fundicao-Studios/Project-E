@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cea77ed55288fe24daf2beddafabeea3, type: 3}
   m_Name: Sword 2
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 21300000, guid: d4dac419008e8e043a941eb0b2a88dd8, type: 3}
+  itemIcon: {fileID: 21300000, guid: 01c4954cd4c27624680c6f9c5a1e0e71, type: 3}
   itemName: Sword 2
   modelPrefab: {fileID: 1551701404319969550, guid: 4630ec22cfaa58440aeca54a604024e5, type: 3}
   isUnarmed: 0
@@ -20,7 +20,7 @@ MonoBehaviour:
   offHandIdleAnimation: Left_Arm_Idle_01
   weaponType: 3
   physicalDamage: 25
-  fireDamage: 0
+  fireDamage: 25
   shockDamage: 0
   criticalDamageMultiplier: 4
   poiseBreak: 25
@@ -31,3 +31,4 @@ MonoBehaviour:
   baseStamina: 20
   lightAttackMultiplier: 1
   heavyAttackMultiplier: 2
+  shieldParryMultiplier: 0

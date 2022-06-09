@@ -35,10 +35,10 @@ public class PlayerEquipmentManager : MonoBehaviour
 
     private void Start()
     {
-        EquipAllEquipmentModelsOnStart();
+        EquipAllEquipmentModels();
     }
 
-    private void EquipAllEquipmentModelsOnStart()
+    public void EquipAllEquipmentModels()
     {
         helmetModelChanger.UnEquipAllHelmetModels();
 
@@ -61,12 +61,12 @@ public class PlayerEquipmentManager : MonoBehaviour
 
         torsoModelChanger.UnEquipAllTorsoModels();
 
-        if (playerInventoryManager.currentTorsoEquipment != null)
+        if (playerInventoryManager.currentBodyEquipment != null)
         {
-            torsoModelChanger.EquipTorsoModelByName(playerInventoryManager.currentTorsoEquipment.torsoModelName);
-            playerStatsManager.physicalDamageAbsorptionBody = playerInventoryManager.currentTorsoEquipment.physicalDefense;
-            playerStatsManager.fireDamageAbsorptionBody = playerInventoryManager.currentTorsoEquipment.fireDefense;
-            playerStatsManager.shockDamageAbsorptionBody = playerInventoryManager.currentTorsoEquipment.shockDefense;
+            torsoModelChanger.EquipTorsoModelByName(playerInventoryManager.currentBodyEquipment.torsoModelName);
+            playerStatsManager.physicalDamageAbsorptionBody = playerInventoryManager.currentBodyEquipment.physicalDefense;
+            playerStatsManager.fireDamageAbsorptionBody = playerInventoryManager.currentBodyEquipment.fireDefense;
+            playerStatsManager.shockDamageAbsorptionBody = playerInventoryManager.currentBodyEquipment.shockDefense;
             //Debug.Log("Absorção No Tronco Foi De " + playerStatsManager.physicalDamageAbsorptionBody + "%");
         }
         else

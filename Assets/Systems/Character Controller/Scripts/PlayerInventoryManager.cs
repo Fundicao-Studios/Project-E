@@ -19,14 +19,9 @@ public class PlayerInventoryManager : MonoBehaviour
 
     [Header("Armadura Equipada")]
     public HelmetEquipment currentHelmetEquipment;
-    public TorsoEquipment currentTorsoEquipment;
+    public BodyEquipment currentBodyEquipment;
     public FeetEquipment currentFeetEquipment;
     public LegEquipment currentLegEquipment;
-
-    [Header("Inventário De Equipamento")]
-    public WeaponItem[] weaponsInRightHandSlots = new WeaponItem[1];
-    public WeaponItem[] weaponsInLeftHandSlots = new WeaponItem[1];
-    public ConsumableItem[] consumablesInSlots = new ConsumableItem[1];
 
     public int currentRightWeaponIndex = 0;
     public int currentLeftWeaponIndex = 0;
@@ -35,6 +30,15 @@ public class PlayerInventoryManager : MonoBehaviour
     [Header("Inventários")]
     public List<WeaponItem> weaponsInventory;
     public List<ConsumableItem> consumablesInventory;
+
+    [Header("Inventários De Equipamento")]
+    public WeaponItem[] weaponsInRightHandSlots;
+    public WeaponItem[] weaponsInLeftHandSlots;
+    public ConsumableItem[] consumablesInSlots;
+    public List<HelmetEquipment> headEquipmentInventory;
+    public List<BodyEquipment> bodyEquipmentInventory;
+    public List<LegEquipment> legEquipmentInventory;
+    public List<FeetEquipment> feetEquipmentInventory;
 
     private void Awake()
     {

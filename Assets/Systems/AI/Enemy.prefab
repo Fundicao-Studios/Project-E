@@ -445,7 +445,7 @@ MonoBehaviour:
   currentHealth: 0
   staminaLevel: 10
   maxStamina: 0
-  currenStamina: 0
+  currentStamina: 0
   manaLevel: 10
   maxManaPoints: 0
   currentManaPoints: 0

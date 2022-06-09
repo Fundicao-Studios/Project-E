@@ -8,6 +8,8 @@ public class Interactable : MonoBehaviour
     public float centerX = 0f;
     public float centerY = 0f;
     public float centerZ = 0f;
+
+    [TextArea]
     public string interactableText;
 
     private void OnDrawGizmosSelected()

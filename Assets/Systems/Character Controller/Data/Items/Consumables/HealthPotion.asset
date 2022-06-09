@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbcc66f1889511d41ac557ae7bff1bb6, type: 3}
   m_Name: HealthPotion
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 21300000, guid: 956e8bfa1d1f4344c8be6a2b228a5e6a, type: 3}
+  itemIcon: {fileID: 21300000, guid: 63c4298a117f047478acc6ae814c5cdc, type: 3}
   itemName: Health Potion
   itemModel: {fileID: 1000012970591572, guid: 7cafb89b5a0f61f479d0a748962abbbc, type: 3}
   maxItemAmount: 10
@@ -27,4 +27,4 @@ MonoBehaviour:
   healthRecoverAmount: 250
   manaPointsRecoverAmount: 0
   recoveryFX: {fileID: 5647483091453839311, guid: 49bb34b1eca34ac4f9ffac15f079717d, type: 3}
-  typeOfPotion: {fileID: 11400000}
+  typeOfPotion: {fileID: 0}

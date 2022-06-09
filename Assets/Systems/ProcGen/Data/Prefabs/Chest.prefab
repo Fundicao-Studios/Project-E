@@ -66,10 +66,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d26efb1b3910b0247be1dfa87a122c43, type: 2}
   consumableSpawners:
   - {fileID: 8568879338158937565, guid: b60a0bf999e00044ca2825e18e5b2a2b, type: 3}
+  - {fileID: 8163558597429546390, guid: f74fd9313eb37bb429c5391ece3c2066, type: 3}
   consumableInChest:
   - {fileID: 11400000, guid: 2cf59693e98df454abdd9a15a4326912, type: 2}
-  consumableChance: 30
-  weaponChance: 70
+  - {fileID: 11400000, guid: c867cedb79ed59b409eef38c7d46d938, type: 2}
+  consumableChance: 40
+  weaponChance: 60
 --- !u!135 &-6365702914177062204
 SphereCollider:
   m_ObjectHideFlags: 0

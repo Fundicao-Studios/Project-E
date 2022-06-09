@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BossIdleState : BossState
 {
-    public BossPursueTargetState golemPursueTargetState;
+    public BossPursueTargetState bossPursueTargetState;
     public LayerMask detectionLayer;
 
     public override BossState Tick(BossManager bossManager, BossStatsManager bossStatsManager, BossAnimatorManager bossAnimatorManager)
@@ -34,7 +34,7 @@ public class BossIdleState : BossState
         #region Controlar A Mudança Para O Próximo Estado
         if (bossManager.currentTarget != null)
         {
-            return golemPursueTargetState;
+            return bossPursueTargetState;
         }
         else
         {

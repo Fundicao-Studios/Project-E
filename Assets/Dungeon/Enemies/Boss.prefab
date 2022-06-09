@@ -909,22 +909,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f853894c88399364d8d29ac1b00465c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teamIDNumber: 0
+  teamIDNumber: 1
   healthLevel: 10
   maxHealth: 0
   currentHealth: 0
   staminaLevel: 10
   maxStamina: 0
-  currenStamina: 0
+  currentStamina: 0
   manaLevel: 10
   maxManaPoints: 0
   currentManaPoints: 0
   totalPoiseDefense: 0
   offensivePoiseBonus: 0
-  armorPoiseBonus: 0
-  totalPoiseResetTime: 15
+  armorPoiseBonus: 500
+  totalPoiseResetTime: 5
   poiseResetTimer: 0
-  physicalDamageAbsorptionHead: 25
+  physicalDamageAbsorptionHead: 50
   physicalDamageAbsorptionBody: 0
   physicalDamageAbsorptionLegs: 0
   physicalDamageAbsorptionFeet: 0
@@ -1029,7 +1029,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 1.5
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -1849,7 +1849,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d6635ece0fab1b4899ec01f323bd252, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  golemPursueTargetState: {fileID: 1609323045348511616}
+  bossPursueTargetState: {fileID: 1609323045348511616}
   detectionLayer:
     serializedVersion: 2
     m_Bits: 512

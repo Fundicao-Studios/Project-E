@@ -112,5 +112,5 @@ MonoBehaviour:
   centerX: 0
   centerY: 0.3
   centerZ: 0
-  interactableText: Pick Up
+  interactableText: Pick Up Sword 2
   weapon: {fileID: 11400000, guid: 6ae7bf8fb0b272c489c1a7dd02bfb39e, type: 2}

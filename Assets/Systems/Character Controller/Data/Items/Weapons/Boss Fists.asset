@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cea77ed55288fe24daf2beddafabeea3, type: 3}
   m_Name: Boss Fists
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 0}
+  itemIcon: {fileID: 21300000, guid: 3a3d6fc5802fddd4e91b5829b22819e6, type: 3}
   itemName: Boss Fists
   modelPrefab: {fileID: 2936019544412626356, guid: dd710a340b4436941934e6988fc9d18f, type: 3}
   isUnarmed: 0
@@ -31,3 +31,4 @@ MonoBehaviour:
   baseStamina: 20
   lightAttackMultiplier: 1
   heavyAttackMultiplier: 2
+  shieldParryMultiplier: 0

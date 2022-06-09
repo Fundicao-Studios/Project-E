@@ -4,5 +4,5 @@ using UnityEngine;
 
 public abstract class BossState : MonoBehaviour
 {
-    public abstract BossState Tick(BossManager golemManager, BossStatsManager enemyStats, BossAnimatorManager enemyAnimatorManager);
+    public abstract BossState Tick(BossManager bossManager, BossStatsManager bossStatsManager, BossAnimatorManager bossAnimatorManager);
 }

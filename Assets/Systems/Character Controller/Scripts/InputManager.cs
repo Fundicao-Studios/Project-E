@@ -45,7 +45,7 @@ public class InputManager : MonoBehaviour
     PlayerControls inputActions;
     PlayerCombatManager playerCombatManager;
     PlayerInventoryManager playerInventoryManager;
-    PlayerManager playerManager;
+    PlayerManager player;
     PlayerAnimatorManager playerAnimatorManager;
     PlayerEffectsManager playerEffectsManager;
     PlayerStatsManager playerStatsManager;
@@ -53,7 +53,6 @@ public class InputManager : MonoBehaviour
     PlayerWeaponSlotManager playerWeaponSlotManager;
     ConsumableSlotManager consumableSlotManager;
     CameraManager cameraManager;
-    UIManager uiManager;
 
     Vector2 movementInput;
     Vector2 cameraInput;
@@ -62,7 +61,7 @@ public class InputManager : MonoBehaviour
     {
         playerCombatManager = GetComponentInChildren<PlayerCombatManager>();
         playerInventoryManager = GetComponent<PlayerInventoryManager>();
-        playerManager = GetComponent<PlayerManager>();
+        player = GetComponent<PlayerManager>();
         playerStatsManager = GetComponent<PlayerStatsManager>();
         playerEffectsManager = GetComponentInChildren<PlayerEffectsManager>();
         consumableInventorySlot = GetComponentInChildren<ConsumableInventorySlot>();
@@ -70,7 +69,6 @@ public class InputManager : MonoBehaviour
         playerWeaponSlotManager = GetComponentInChildren<PlayerWeaponSlotManager>();
         consumableSlotManager = GetComponentInChildren<ConsumableSlotManager>();
         blockingCollider = GetComponentInChildren<BlockingCollider>();
-        uiManager = FindObjectOfType<UIManager>();
         cameraManager = FindObjectOfType<CameraManager>();
     }
 
@@ -115,7 +113,7 @@ public class InputManager : MonoBehaviour
         if (playerStatsManager.isDead)
             return;
 
-        uiManager.UpdateUI();
+        player.uiManager.UpdateUI();
 
         HandleMoveInput(delta);
         HandleRollInput(delta);
@@ -197,7 +195,7 @@ public class InputManager : MonoBehaviour
         }
         else
         {
-            playerManager.isBlocking = false;
+            player.isBlocking = false;
 
             if (blockingCollider.blockingCollider.enabled)
             {
@@ -224,6 +222,11 @@ public class InputManager : MonoBehaviour
 
     private void HandleInventoryInput()
     {
+        if (inventoryFlag)
+        {
+            player.uiManager.UpdateUI();
+        }
+
         if (inventory_Input)
         {
             inventoryFlag = !inventoryFlag;
@@ -231,15 +234,15 @@ public class InputManager : MonoBehaviour
             if (inventoryFlag)
             {
                 Cursor.visible = true;
-                uiManager.OpenSelectWindow();
-                uiManager.hudWindow.SetActive(false);
+                player.uiManager.OpenInventories();
+                player.uiManager.hudWindow.SetActive(false);
             }
             else
             {
                 Cursor.visible = false;
-                uiManager.CloseSelectWindow();
-                uiManager.CloseAllInventoryWindows();
-                uiManager.hudWindow.SetActive(true);
+                player.uiManager.OpenInventories();
+                player.uiManager.CloseAllInventoryWindows();
+                player.uiManager.hudWindow.SetActive(true);
             }
         }
     }
@@ -297,13 +300,13 @@ public class InputManager : MonoBehaviour
             if (twoHandFlag)
             {
                 playerWeaponSlotManager.LoadWeaponOnSlot(playerInventoryManager.rightWeapon, false);
-                playerManager.isTwoHandingWeapon = true;
+                player.isTwoHandingWeapon = true;
             }
             else
             {
                 playerWeaponSlotManager.LoadWeaponOnSlot(playerInventoryManager.rightWeapon, false);
                 playerWeaponSlotManager.LoadWeaponOnSlot(playerInventoryManager.leftWeapon, true);
-                playerManager.isTwoHandingWeapon = false;
+                player.isTwoHandingWeapon = false;
             }
         }
     }

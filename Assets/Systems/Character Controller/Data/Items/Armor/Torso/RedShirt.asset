@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7372374559d614647b2280bc97c88dbc, type: 3}
   m_Name: RedShirt
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 0}
+  itemIcon: {fileID: 21300000, guid: 9757ea51046ab334ab14646c1a075a4d, type: 3}
   itemName: RedShirt
   physicalDefense: 12.5
   fireDefense: 0

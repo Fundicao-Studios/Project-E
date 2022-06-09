@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76f48bffe2250d84b92f1d496429278d, type: 3}
   m_Name: GreenMask
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 0}
-  itemName: GreenMask
+  itemIcon: {fileID: 21300000, guid: 6a927f6546ae2254a9191200750e3830, type: 3}
+  itemName: Earth Mask
   physicalDefense: 10
+  fireDefense: 0
+  shockDefense: 0
   helmetModelName: EarthMask

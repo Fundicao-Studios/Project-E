@@ -9,6 +9,7 @@ public class CharacterAnimatorManager : MonoBehaviour
     protected CharacterManager characterManager;
     protected CharacterStatsManager characterStatsManager;
     public bool canRotate;
+    PlayerManager playerManager;
 
     protected RigBuilder rigBuilder;
     public TwoBoneIKConstraint leftHandConstraint;
@@ -17,6 +18,7 @@ public class CharacterAnimatorManager : MonoBehaviour
     protected virtual void Awake()
     {
         characterManager = GetComponentInParent<CharacterManager>();
+        playerManager = GetComponentInParent<PlayerManager>();
         characterStatsManager = GetComponentInParent<CharacterStatsManager>();
         rigBuilder = GetComponent<RigBuilder>();
     }

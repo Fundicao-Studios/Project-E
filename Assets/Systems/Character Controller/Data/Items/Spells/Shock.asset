@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cea77ed55288fe24daf2beddafabeea3, type: 3}
   m_Name: Shock
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  itemIcon: {fileID: 21300000, guid: 669be8aded8b8db4bac49076e9d67d72, type: 3}
   itemName: Staff
   modelPrefab: {fileID: 6368986386046958238, guid: 47b6ba87d9a45504d8776b7ddfccc84e, type: 3}
   isUnarmed: 0
@@ -31,3 +31,4 @@ MonoBehaviour:
   baseStamina: 0
   lightAttackMultiplier: 0
   heavyAttackMultiplier: 0
+  shieldParryMultiplier: 0

@@ -10,8 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 7052678981333521424}
   - component: {fileID: -5294798315523199036}
-  - component: {fileID: -3884048398953725274}
   - component: {fileID: -3599835196056560607}
+  - component: {fileID: -3175012443272344289}
+  - component: {fileID: -4423247594764805506}
+  - component: {fileID: 6896370778368858043}
   m_Layer: 0
   m_Name: ObjectPlacer_GrassyPlains
   m_TagString: Untagged
@@ -60,33 +62,6 @@ MonoBehaviour:
   MaxPositionJitter: 0.15
   NoiseScale: {x: 0.0078125, y: 0.0078125}
   NoiseThreshold: 0.5
---- !u!114 &-3884048398953725274
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2282946500916013390}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c2c4f873e385d440b8d2d7f16edc9f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Objects:
-  - HasHeightLimits: 1
-    MinHeightToSpawn: 0
-    MaxHeightToSpawn: 30
-    CanGoInWater: 0
-    CanGoAboveWater: 1
-    Weighting: 1
-    Prefabs:
-    - {fileID: 4824397021466181147, guid: 27aedfc6d57635b418c62b2a8982b737, type: 3}
-  TargetDensity: 0.1
-  MaxSpawnCount: 250
-  MaxInvalidLocationSkips: 10
-  MaxPositionJitter: 0.15
-  NoiseScale: {x: 0.0078125, y: 0.0078125}
-  NoiseThreshold: 0.5
 --- !u!114 &-3599835196056560607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,7 +84,88 @@ MonoBehaviour:
     Prefabs:
     - {fileID: 3198856599290126635, guid: fab2c60b243d68a4aa8528ca3825784d, type: 3}
   TargetDensity: 0.1
-  MaxSpawnCount: 30
+  MaxSpawnCount: 50
+  MaxInvalidLocationSkips: 10
+  MaxPositionJitter: 0.15
+  NoiseScale: {x: 0.0078125, y: 0.0078125}
+  NoiseThreshold: 0.5
+--- !u!114 &-3175012443272344289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2282946500916013390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c2c4f873e385d440b8d2d7f16edc9f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Objects:
+  - HasHeightLimits: 1
+    MinHeightToSpawn: 0
+    MaxHeightToSpawn: 30
+    CanGoInWater: 1
+    CanGoAboveWater: 1
+    Weighting: 1
+    Prefabs:
+    - {fileID: 2897701130324229345, guid: d7ba4fe833670a140b9b6085652f0e26, type: 3}
+  TargetDensity: 1
+  MaxSpawnCount: 250
+  MaxInvalidLocationSkips: 10
+  MaxPositionJitter: 0.15
+  NoiseScale: {x: 0.0078125, y: 0.0078125}
+  NoiseThreshold: 0.5
+--- !u!114 &-4423247594764805506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2282946500916013390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c2c4f873e385d440b8d2d7f16edc9f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Objects:
+  - HasHeightLimits: 1
+    MinHeightToSpawn: 0
+    MaxHeightToSpawn: 30
+    CanGoInWater: 1
+    CanGoAboveWater: 1
+    Weighting: 1
+    Prefabs:
+    - {fileID: 5982902204796633703, guid: cb4f7b1f7a2a3d941ada1667d0ec5946, type: 3}
+  TargetDensity: 1
+  MaxSpawnCount: 250
+  MaxInvalidLocationSkips: 10
+  MaxPositionJitter: 0.15
+  NoiseScale: {x: 0.0078125, y: 0.0078125}
+  NoiseThreshold: 0.5
+--- !u!114 &6896370778368858043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2282946500916013390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c2c4f873e385d440b8d2d7f16edc9f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Objects:
+  - HasHeightLimits: 1
+    MinHeightToSpawn: 0
+    MaxHeightToSpawn: 30
+    CanGoInWater: 1
+    CanGoAboveWater: 1
+    Weighting: 1
+    Prefabs:
+    - {fileID: 8238551020897574325, guid: a7ab750105b600843970c6f2cbddad60, type: 3}
+  TargetDensity: 1
+  MaxSpawnCount: 15
   MaxInvalidLocationSkips: 10
   MaxPositionJitter: 0.15
   NoiseScale: {x: 0.0078125, y: 0.0078125}

@@ -66,6 +66,9 @@ public class CameraManager : MonoBehaviour
 
     public void HandleCameraRotaion(float delta, float mouseXInput, float mouseYInput)
     {
+        if (inputManager.inventoryFlag)
+            return;
+
         if (inputManager.lockOnFlag == false && currentLockOnTarget == null)
         {
             lookAngle += (mouseXInput * lookSpeed) / delta;

@@ -385,7 +385,7 @@ MonoBehaviour:
   centerX: 0
   centerY: 0
   centerZ: 0
-  interactableText: Pick Up
+  interactableText: Pick Up Health Potion
   potion: {fileID: 11400000, guid: 2cf59693e98df454abdd9a15a4326912, type: 2}
 --- !u!1 &9131050534547191728
 GameObject:

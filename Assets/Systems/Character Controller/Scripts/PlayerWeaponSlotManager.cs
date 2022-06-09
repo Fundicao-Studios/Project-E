@@ -208,6 +208,11 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotsManager
         playerStatsManager.TakeStaminaDamage(50);
     }
 
+    public void DrainStaminaParry()
+    {
+        playerStatsManager.TakeStaminaDamage(25);
+    }
+
     public void DrainStaminaHeavyAttack()
     {
         playerStatsManager.TakeStaminaDamage(Mathf.RoundToInt(attackingWeapon.baseStamina * attackingWeapon.heavyAttackMultiplier));

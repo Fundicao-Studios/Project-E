@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 60311435287715345}
   - component: {fileID: 7447122202035931831}
   - component: {fileID: 8062959539446777063}
+  - component: {fileID: -842063819702790241}
+  - component: {fileID: 4057659103776215423}
   m_Layer: 0
   m_Name: ObjectPlacer_Rainforest
   m_TagString: Untagged
@@ -109,7 +111,61 @@ MonoBehaviour:
     Prefabs:
     - {fileID: 3198856599290126635, guid: fab2c60b243d68a4aa8528ca3825784d, type: 3}
   TargetDensity: 0.1
-  MaxSpawnCount: 30
+  MaxSpawnCount: 50
+  MaxInvalidLocationSkips: 10
+  MaxPositionJitter: 0.15
+  NoiseScale: {x: 0.0078125, y: 0.0078125}
+  NoiseThreshold: 0.5
+--- !u!114 &-842063819702790241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7176466217255236742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c2c4f873e385d440b8d2d7f16edc9f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Objects:
+  - HasHeightLimits: 1
+    MinHeightToSpawn: 0
+    MaxHeightToSpawn: 30
+    CanGoInWater: 1
+    CanGoAboveWater: 1
+    Weighting: 1
+    Prefabs:
+    - {fileID: 2897701130324229345, guid: d7ba4fe833670a140b9b6085652f0e26, type: 3}
+  TargetDensity: 1
+  MaxSpawnCount: 50
+  MaxInvalidLocationSkips: 10
+  MaxPositionJitter: 0.15
+  NoiseScale: {x: 0.0078125, y: 0.0078125}
+  NoiseThreshold: 0.5
+--- !u!114 &4057659103776215423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7176466217255236742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c2c4f873e385d440b8d2d7f16edc9f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Objects:
+  - HasHeightLimits: 1
+    MinHeightToSpawn: 0
+    MaxHeightToSpawn: 30
+    CanGoInWater: 1
+    CanGoAboveWater: 1
+    Weighting: 1
+    Prefabs:
+    - {fileID: 5982902204796633703, guid: cb4f7b1f7a2a3d941ada1667d0ec5946, type: 3}
+  TargetDensity: 1
+  MaxSpawnCount: 50
   MaxInvalidLocationSkips: 10
   MaxPositionJitter: 0.15
   NoiseScale: {x: 0.0078125, y: 0.0078125}

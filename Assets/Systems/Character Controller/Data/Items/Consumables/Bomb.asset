@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1099a0711727963488416efeae7410d4, type: 3}
   m_Name: Bomb
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 21300000, guid: 953c9835d784f594f862e4e970e8a55a, type: 3}
+  itemIcon: {fileID: 21300000, guid: 4b416f9283c7ee24e85a7f6f19559994, type: 3}
   itemName: Bomb
   itemModel: {fileID: 4556622008253704222, guid: 24fab4a3650b7de4ebb50dd8497e7833, type: 3}
   maxItemAmount: 20

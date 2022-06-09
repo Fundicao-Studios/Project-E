@@ -4,35 +4,32 @@ using UnityEngine;
 
 public class EquipmentWindowUI : MonoBehaviour
 {
-    public bool rightHandSlot01Selected;
-    public bool rightHandSlot02Selected;
-    public bool leftHandSlot01Selected;
-    public bool leftHandSlot02Selected;
-    public bool consumableSlot01Selected;
-    public bool consumableSlot02Selected;
-
-    public HandEquipmentSlotUI[] handEquipmentSlotUI;
+    public WeaponEquipmentSlotUI[] weaponEquipmentSlotUI;
+    public HeadEquipmentSlotUI headEquipmentSlotUI;
+    public BodyEquipmentSlotUI bodyEquipmentSlotUI;
+    public LegEquipmentSlotUI legEquipmentSlotUI;
+    public FeetEquipmentSlotUI feetEquipmentSlotUI;
     public ConsumableEquipmentSlotUI[] consumableEquipmentSlotUI;
 
     public void LoadWeaponOnEquipmentScreen(PlayerInventoryManager playerInventory)
     {
-        for (int i = 0; i < handEquipmentSlotUI.Length; i++)
+        for (int i = 0; i < weaponEquipmentSlotUI.Length; i++)
         {
-            if (handEquipmentSlotUI[i].rightHandSlot01)
+            if (weaponEquipmentSlotUI[i].rightHandSlot01)
             {
-                handEquipmentSlotUI[i].AddItem(playerInventory.weaponsInRightHandSlots[0]);
+                weaponEquipmentSlotUI[i].AddItem(playerInventory.weaponsInRightHandSlots[0]);
             }
-            else if (handEquipmentSlotUI[i].rightHandSlot02)
+            else if (weaponEquipmentSlotUI[i].rightHandSlot02)
             {
-                handEquipmentSlotUI[i].AddItem(playerInventory.weaponsInRightHandSlots[1]);
+                weaponEquipmentSlotUI[i].AddItem(playerInventory.weaponsInRightHandSlots[1]);
             }
-            else if (handEquipmentSlotUI[i].leftHandSlot01)
+            else if (weaponEquipmentSlotUI[i].leftHandSlot01)
             {
-                handEquipmentSlotUI[i].AddItem(playerInventory.weaponsInLeftHandSlots[0]);
+                weaponEquipmentSlotUI[i].AddItem(playerInventory.weaponsInLeftHandSlots[0]);
             }
             else
             {
-                handEquipmentSlotUI[i].AddItem(playerInventory.weaponsInLeftHandSlots[1]);
+                weaponEquipmentSlotUI[i].AddItem(playerInventory.weaponsInLeftHandSlots[1]);
             }
         }
     }
@@ -52,33 +49,42 @@ public class EquipmentWindowUI : MonoBehaviour
         }
     }
 
-    public void SelectRightHandSlot01()
+    public void LoadArmorOnEquipmentScreen(PlayerInventoryManager playerInventoryManager)
     {
-        rightHandSlot01Selected = true;
-    }
+        if (playerInventoryManager.currentHelmetEquipment != null)
+        {
+            headEquipmentSlotUI.AddItem(playerInventoryManager.currentHelmetEquipment);
+        }
+        else
+        {
+            headEquipmentSlotUI.ClearItem();
+        }
 
-    public void SelectRightHandSlot02()
-    {
-        rightHandSlot02Selected = true;
-    }
+        if (playerInventoryManager.currentBodyEquipment != null)
+        {
+            bodyEquipmentSlotUI.AddItem(playerInventoryManager.currentBodyEquipment);
+        }
+        else
+        {
+            bodyEquipmentSlotUI.ClearItem();
+        }
 
-    public void SelectLeftHandSlot01()
-    {
-        leftHandSlot01Selected = true;
-    }
+        if (playerInventoryManager.currentLegEquipment != null)
+        {
+            legEquipmentSlotUI.AddItem(playerInventoryManager.currentLegEquipment);
+        }
+        else
+        {
+            legEquipmentSlotUI.ClearItem();
+        }
 
-    public void SelectLeftHandSlot02()
-    {
-        leftHandSlot02Selected = true;
-    }
-
-    public void SelectConsumableSlot01()
-    {
-        consumableSlot01Selected = true;
-    }
-
-    public void SelectConsumableSlot02()
-    {
-        consumableSlot02Selected = true;
+        if (playerInventoryManager.currentFeetEquipment != null)
+        {
+            feetEquipmentSlotUI.AddItem(playerInventoryManager.currentFeetEquipment);
+        }
+        else
+        {
+            feetEquipmentSlotUI.ClearItem();
+        }
     }
 }
