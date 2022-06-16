@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3802205240071555806}
   - component: {fileID: -6365702914177062204}
   - component: {fileID: 6810069439736303713}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: Chest
   m_TagString: Interactable
   m_Icon: {fileID: 0}
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c121cc727452cb45a2d640b67204934, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 1
+  radius: 2
   centerX: 0
   centerY: 0.6
   centerZ: 0
@@ -83,7 +83,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 2
   m_Center: {x: 0, y: 0.6, z: 0}
 --- !u!95 &6810069439736303713
 Animator:
@@ -116,7 +116,7 @@ GameObject:
   - component: {fileID: 33041698735035418}
   - component: {fileID: 23587325012811022}
   - component: {fileID: 6478492446618490263}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: Chest_01_Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -212,7 +212,7 @@ GameObject:
   - component: {fileID: 33045788438924006}
   - component: {fileID: 23965895473178156}
   - component: {fileID: 485670283870848644}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: Chest_01_Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -305,7 +305,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7863979607862064680}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: Player Standing Position
   m_TagString: Untagged
   m_Icon: {fileID: 0}

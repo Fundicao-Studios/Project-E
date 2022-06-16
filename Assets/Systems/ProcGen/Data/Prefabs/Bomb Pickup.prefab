@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4970012305339037236}
   - component: {fileID: 4843739815423314999}
   - component: {fileID: 1335984914774929626}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 6285547303885272954}
   - component: {fileID: 8163558597429546388}
   - component: {fileID: 8163558597429546391}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: Bomb Pickup
   m_TagString: Interactable
   m_Icon: {fileID: 0}
@@ -109,8 +109,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8163558597429546390}
   m_LocalRotation: {x: 0.5, y: -0.5, z: -0.5, w: -0.5}
-  m_LocalPosition: {x: 1006.892, y: 127.394, z: -387.226}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4970012305339037236}
   m_Father: {fileID: 0}
@@ -190,7 +190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2948e426e8f94614887d059460dad688, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 0.79
+  radius: 1
   centerX: 0
   centerY: 0
   centerZ: 0

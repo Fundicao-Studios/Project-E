@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7023138659953341660}
   - component: {fileID: 6087805568487980984}
   - component: {fileID: 5443582461854535772}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: Sword Pick Up 3
   m_TagString: Interactable
   m_Icon: {fileID: 0}

@@ -20,6 +20,7 @@ public class PlayerManager : CharacterManager
     public PlayerWeaponSlotManager playerWeaponSlotManager;
     public PlayerEquipmentManager playerEquipmentManager;
     public UIManager uiManager;
+    public LayerMask whatIsInteractable;
     float messageTimer = 0;
     bool startTimerMessage = false;
 
@@ -52,6 +53,13 @@ public class PlayerManager : CharacterManager
         if (startTimerMessage)
         {
             messageTimer += Time.deltaTime;
+        }
+        
+        if (messageTimer >= 8f)
+        {
+            startTimerMessage = false;
+            messageTimer = 0f;
+            itemInteractableGameObject.SetActive(false);
         }
 
         isInteracting = animator.GetBool("isInteracting");
@@ -117,59 +125,30 @@ public class PlayerManager : CharacterManager
 
     public void CheckForInteractableObject()
     {
-        RaycastHit hit;
+        Collider[] interactables = Physics.OverlapSphere(transform.position, 1.5f, whatIsInteractable);
 
-        if (Physics.SphereCast(transform.position, 0.3f, transform.forward, out hit, 1f))
+        for (int i = 0; i < interactables.Length; i++)
         {
-            if (hit.collider.tag == "Interactable")
+            Interactable interactableObject = interactables[i].GetComponent<Interactable>();
+
+            if (interactableObject != null)
             {
-                Interactable interactableObject = hit.collider.GetComponent<Interactable>();
+                string interactableText = interactableObject.interactableText;
+                interactableUI.interactableText.text = interactableText;
+                interactableUIGameObject.SetActive(true);
 
-                if (interactableObject != null)
+                if (inputManager.a_Input)
                 {
-                    string interactableText = interactableObject.interactableText;
-                    interactableUI.interactableText.text = interactableText;
-                    interactableUIGameObject.SetActive(true);
+                    interactables[i].GetComponent<Interactable>().Interact(this);
+                    interactableUIGameObject.SetActive(false);
+                }
 
+                if (itemInteractableGameObject != null)
+                {
                     if (inputManager.a_Input)
                     {
-                        hit.collider.GetComponent<Interactable>().Interact(this);
+                        startTimerMessage = true;
                     }
-                }
-            }
-            else if (hit.collider.tag == "Message")
-            {
-                Interactable interactableObject = hit.collider.GetComponent<Interactable>();
-
-                if (interactableObject != null)
-                {
-                    string interactableTextMessage = interactableObject.interactableText;
-                    interactableUI.interactableTextMessage.text = interactableTextMessage;
-                    interactableUIGameObjectMessage.SetActive(true);
-
-                    if (inputManager.a_Input)
-                    {
-                        hit.collider.GetComponent<Interactable>().Interact(this);
-                    }
-                }
-            }
-        }
-        else
-        {
-            if (interactableUIGameObject != null || interactableUIGameObjectMessage != null)
-            {
-                interactableUIGameObject.SetActive(false);
-                interactableUIGameObjectMessage.SetActive(false);
-            }
-
-            if (itemInteractableGameObject != null)
-            {
-                startTimerMessage = true;
-
-                if (messageTimer >= 8)
-                {
-                    itemInteractableGameObject.SetActive(false);
-                    messageTimer = 0;
                 }
             }
         }

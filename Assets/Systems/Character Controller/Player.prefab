@@ -6297,7 +6297,7 @@ CapsuleCollider:
   m_Radius: 0.3
   m_Height: 1.8
   m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 1.3, z: 0}
 --- !u!114 &6577309658771829334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6450,6 +6450,9 @@ MonoBehaviour:
   playerWeaponSlotManager: {fileID: 0}
   playerEquipmentManager: {fileID: 0}
   uiManager: {fileID: 3084252463438201177}
+  whatIsInteractable:
+    serializedVersion: 2
+    m_Bits: 4194304
 --- !u!114 &4126030345490669699
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10031,7 +10034,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8349772970402304413
 RectTransform:
   m_ObjectHideFlags: 0

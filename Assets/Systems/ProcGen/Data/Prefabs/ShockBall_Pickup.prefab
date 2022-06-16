@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7989515458696934813}
   - component: {fileID: 3087669777432253007}
   - component: {fileID: 5056958957589810084}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: Electricity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4823,7 +4823,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6457101854095602109}
   - component: {fileID: 5169110158277090478}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4917,7 +4917,7 @@ GameObject:
   - component: {fileID: 3685294501172270860}
   - component: {fileID: 3286829800249781059}
   - component: {fileID: 3237282260543529519}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: ShockBall_Pickup
   m_TagString: Interactable
   m_Icon: {fileID: 0}
@@ -4983,7 +4983,7 @@ GameObject:
   - component: {fileID: 1917114083063733765}
   - component: {fileID: 5995792668802577767}
   - component: {fileID: 513818379977411663}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: Beam
   m_TagString: Untagged
   m_Icon: {fileID: 0}

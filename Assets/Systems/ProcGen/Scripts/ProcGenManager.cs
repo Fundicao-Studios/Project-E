@@ -27,6 +27,8 @@ public class ProcGenManager : MonoBehaviour
     [SerializeField] Texture2D Output_SlopeMap;
     [SerializeField] PathdataManager navMesh;
 
+    public GameObject compassUI;
+
     ProcGenData WorkingData;
 
     [Header("Debugging")]
@@ -114,6 +116,7 @@ public class ProcGenManager : MonoBehaviour
 
         // gera a pathdata
         navMesh.Internal_BuildPathdata();
+        compassUI.SetActive(true);
 
         if (reportStatusFn != null) reportStatusFn.Invoke(8, 8, "Geração Concluída");
     }

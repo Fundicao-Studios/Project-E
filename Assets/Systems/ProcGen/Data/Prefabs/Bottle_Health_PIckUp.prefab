@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 630233247454785547}
   - component: {fileID: 8046810201121398754}
   - component: {fileID: 3530646577405630463}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: glasss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 7722057509234101170}
   - component: {fileID: 3301751916290822691}
   - component: {fileID: 5073950420887728204}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: liquid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -187,7 +187,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4747060617918650329}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: PotionHP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -222,7 +222,7 @@ GameObject:
   - component: {fileID: 2952525465269193682}
   - component: {fileID: 3737198309219014425}
   - component: {fileID: 3656729229675223372}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: cork
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -301,7 +301,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8567955524795893667}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: bottle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -334,7 +334,7 @@ GameObject:
   - component: {fileID: 8567955522258456085}
   - component: {fileID: 7559881878443444540}
   - component: {fileID: 6036678777028301084}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: Bottle_Health_PIckUp
   m_TagString: Interactable
   m_Icon: {fileID: 0}
@@ -396,7 +396,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9130408781987540088}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: Bottle_Health
   m_TagString: Untagged
   m_Icon: {fileID: 0}

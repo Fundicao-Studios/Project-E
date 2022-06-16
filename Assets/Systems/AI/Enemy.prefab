@@ -506,11 +506,11 @@ MonoBehaviour:
   isPerformingAction: 0
   rotationSpeed: 50
   maximumAggroRadius: 1.5
-  detectionRadius: 20
-  maximumDetectionAngle: 50
-  minimumDetectionAngle: -50
+  detectionRadius: 40
+  maximumDetectionAngle: 180
+  minimumDetectionAngle: -180
   viewableAngle: 0
-  detectionDistance: 20
+  detectionDistance: 40
   currentRecoveryTime: 0
   allowAIToPerformCombos: 1
   comboLikelyHood: 50

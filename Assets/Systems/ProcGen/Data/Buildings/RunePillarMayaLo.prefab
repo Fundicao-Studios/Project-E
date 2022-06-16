@@ -10,9 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2238511949299202429}
   - component: {fileID: -1018397653718795548}
-  - component: {fileID: 6250128191330795817}
-  - component: {fileID: 6589774091950111053}
-  - component: {fileID: 4062928752813926623}
+  - component: {fileID: -4042746277842622385}
   m_Layer: 7
   m_Name: RunePillarMayaLo
   m_TagString: Untagged
@@ -52,34 +50,7 @@ MonoBehaviour:
   SpawnPoints:
   - {fileID: 9145870056569947587}
   InitialPopulation: 1
---- !u!64 &6250128191330795817
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2238511949299426653}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
---- !u!65 &6589774091950111053
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2238511949299426653}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.8174744, y: 5.169794, z: 0.49065185}
-  m_Center: {x: -0.01612854, y: 2.0532427, z: -1.43}
---- !u!114 &4062928752813926623
+--- !u!114 &-4042746277842622385
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -88,11 +59,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2238511949299426653}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6635765ed5f50584fa6c4e4efd815a46, type: 3}
+  m_Script: {fileID: 11500000, guid: 85363b71368de5e4b8786a67f1dea578, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dungeonSpawnPoint: {fileID: 4790271215214166949, guid: c1fad2fac89fbae44865b43b7f78333d, type: 3}
-  player: {fileID: 5495935230247848036, guid: 493dfda992b65574ab0a74fba7f3e283, type: 3}
+  icon: {fileID: 21300000, guid: e7d29a79bc7fae248887c8a08a160303, type: 3}
+  image: {fileID: 0}
 --- !u!1 &2238511949299426655
 GameObject:
   m_ObjectHideFlags: 0
@@ -198,7 +169,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7931753679571490641}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.5, z: 4.57}
+  m_LocalPosition: {x: 0, y: 3.77, z: 1.46}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2238511949299202429}

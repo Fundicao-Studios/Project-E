@@ -108,12 +108,12 @@ MonoBehaviour:
     CanGoInWater: 0
     CanGoAboveWater: 1
   - HeightMap: {fileID: 2800000, guid: 01da28379e6cedd4c9997b2c955c9a1b, type: 3}
-    Prefab: {fileID: 844402074609839288, guid: adb8117d2e349b64198cb0abd38c62ad, type: 3}
-    Radius: 25
-    NumToSpawn: 2
+    Prefab: {fileID: 3030615203419789352, guid: 5db0f5ec7d344394d84f13e31e4d6b04, type: 3}
+    Radius: 50
+    NumToSpawn: 1
     HasHeightLimits: 1
-    MinHeightToSpawn: 100
-    MaxHeightToSpawn: 200
+    MinHeightToSpawn: 30
+    MaxHeightToSpawn: 100
     CanGoInWater: 0
     CanGoAboveWater: 1
   - HeightMap: {fileID: 2800000, guid: 01da28379e6cedd4c9997b2c955c9a1b, type: 3}

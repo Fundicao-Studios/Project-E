@@ -2,15 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Portal : MonoBehaviour
+public class Portal : Interactable
 {
     public GameObject dungeonSpawnPoint;
+    public Transform playerStandingPosition;
+    GameObject timeControllerObject;
+    TimeController timerController;
 
-    public void OnTriggerEnter(Collider other)
+    private void Awake()
     {
-        if(other.tag == "Character")
-        {
-            other.transform.position = dungeonSpawnPoint.transform.position;
-        }
+        timeControllerObject = GameObject.Find("TimeController");
+        timerController = timeControllerObject.GetComponent<TimeController>();
+    }
+
+    public override void Interact(PlayerManager playerManager)
+    {
+        Vector3 rotationDirection = transform.position - playerManager.transform.position;
+        rotationDirection.y = 0;
+        rotationDirection.Normalize();
+
+        Quaternion tr = Quaternion.LookRotation(rotationDirection);
+        Quaternion targetRotation = Quaternion.Slerp(playerManager.transform.rotation, tr, 300 * Time.deltaTime);
+        playerManager.transform.rotation = targetRotation;
+
+        playerManager.OpenChestInteraction(playerStandingPosition);
+
+        timerController.isInDungeon = true;
+        playerManager.transform.position = dungeonSpawnPoint.transform.position;
     }
 }

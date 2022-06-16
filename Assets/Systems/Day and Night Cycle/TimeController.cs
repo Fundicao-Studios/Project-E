@@ -19,6 +19,8 @@ public class TimeController : MonoBehaviour
     [SerializeField] Light moonLight;
     [SerializeField] float maxMoonLightIntensity;
 
+    public bool isInDungeon;
+
     DateTime currentTime;
     TimeSpan sunriseTime;
     TimeSpan sunsetTime;
@@ -37,9 +39,16 @@ public class TimeController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UpdateTimeOfDay();
-        RotateSun();
-        UpdateLightSettings();
+        if (!isInDungeon)
+        {
+            UpdateTimeOfDay();
+            RotateSun();
+            UpdateLightSettings();
+        }
+        else
+        {
+            SetLightSettingsInDungeon();
+        }
     }
 
     private void UpdateTimeOfDay()
@@ -98,6 +107,14 @@ public class TimeController : MonoBehaviour
         sunLight.intensity = Mathf.Lerp(0, maxSunLightIntensity, lightChangeCurve.Evaluate(dotProduct));
         moonLight.intensity = Mathf.Lerp(maxMoonLightIntensity, 0, lightChangeCurve.Evaluate(dotProduct));
         RenderSettings.ambientLight = Color.Lerp(nightAmbientLight, dayAmbientLight, lightChangeCurve.Evaluate(dotProduct));
+    }
+
+    private void SetLightSettingsInDungeon()
+    {
+        sunLight.intensity = 0;
+        moonLight.intensity = 0.5f;
+        RenderSettings.ambientLight = Color.black;
+        RenderSettings.reflectionIntensity = 0;
     }
 
     private TimeSpan CalculateTimeDifference(TimeSpan fromTime, TimeSpan toTime)
