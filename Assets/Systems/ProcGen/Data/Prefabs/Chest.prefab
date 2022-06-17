@@ -55,7 +55,7 @@ MonoBehaviour:
   interactableText: Open Chest
   playerStandingPosition: {fileID: 7863979607862064680}
   itemSpawners:
-  - {fileID: 6937524468354614976, guid: 2d7e3d18c033f0e4db131691c043d0a6, type: 3}
+  - {fileID: 2422588182534003017, guid: cc2de19dad8813941952018e055c586b, type: 3}
   - {fileID: 7023138659955534364, guid: 1c75f4d52ea9f514ca439bbf5521325e, type: 3}
   - {fileID: 4430043294319130835, guid: e4cd8cd6e1002ba4facdf745af9e9794, type: 3}
   - {fileID: 5913939138640916539, guid: 976415fe75b8404419eecf76a9a14f4a, type: 3}
