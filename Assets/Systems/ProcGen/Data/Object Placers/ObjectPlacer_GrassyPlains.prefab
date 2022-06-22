@@ -18,6 +18,8 @@ GameObject:
   - component: {fileID: 6876439183734343492}
   - component: {fileID: 1611897474495203620}
   - component: {fileID: -8948280433126055092}
+  - component: {fileID: -6617137748120736322}
+  - component: {fileID: -1217709752227269163}
   m_Layer: 0
   m_Name: ObjectPlacer_GrassyPlains
   m_TagString: Untagged
@@ -279,6 +281,60 @@ MonoBehaviour:
   TargetDensity: 1
   MaxSpawnCount: 1000
   MaxInvalidLocationSkips: 10000
+  MaxPositionJitter: 0.15
+  NoiseScale: {x: 0.0078125, y: 0.0078125}
+  NoiseThreshold: 0.5
+--- !u!114 &-6617137748120736322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2282946500916013390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c2c4f873e385d440b8d2d7f16edc9f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Objects:
+  - HasHeightLimits: 1
+    MinHeightToSpawn: 15
+    MaxHeightToSpawn: 30
+    CanGoInWater: 0
+    CanGoAboveWater: 1
+    Weighting: 1
+    Prefabs:
+    - {fileID: 5781250249745494062, guid: d797e5a95d274fe4d9a49837d7d5b66e, type: 3}
+  TargetDensity: 0.1
+  MaxSpawnCount: 300
+  MaxInvalidLocationSkips: 10000
+  MaxPositionJitter: 0.15
+  NoiseScale: {x: 0.0078125, y: 0.0078125}
+  NoiseThreshold: 0.5
+--- !u!114 &-1217709752227269163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2282946500916013390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c2c4f873e385d440b8d2d7f16edc9f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Objects:
+  - HasHeightLimits: 1
+    MinHeightToSpawn: 15
+    MaxHeightToSpawn: 40
+    CanGoInWater: 0
+    CanGoAboveWater: 1
+    Weighting: 1
+    Prefabs:
+    - {fileID: 3871478160114641497, guid: 0fa46a7df879bb54d9088e9efaa8df1f, type: 3}
+  TargetDensity: 0.1
+  MaxSpawnCount: 70
+  MaxInvalidLocationSkips: 1000000
   MaxPositionJitter: 0.15
   NoiseScale: {x: 0.0078125, y: 0.0078125}
   NoiseThreshold: 0.5
