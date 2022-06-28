@@ -6,11 +6,13 @@ public class BossStatsManager : CharacterStatsManager
 {
     BossAnimatorManager bossAnimatorManager;
     BossManager bossManager;
+    WorldEventManager worldEventManager;
 
     private void Awake()
     {
         bossAnimatorManager = GetComponentInChildren<BossAnimatorManager>();
         bossManager = GetComponent<BossManager>();
+        worldEventManager = FindObjectOfType<WorldEventManager>();
         maxHealth = SetMaxHealthFromHealthLevel();
         currentHealth = maxHealth;
     }
@@ -85,5 +87,6 @@ public class BossStatsManager : CharacterStatsManager
         currentHealth = 0;
         bossAnimatorManager.PlayTargetAnimation("Dead_01", true);
         isDead = true;
+        worldEventManager.BossHasBeenDefeated();
     }
 }

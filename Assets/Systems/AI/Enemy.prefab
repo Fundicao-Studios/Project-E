@@ -449,7 +449,7 @@ MonoBehaviour:
   manaLevel: 10
   maxManaPoints: 0
   currentManaPoints: 0
-  totalPoiseDefense: 0
+  totalPoiseDefense: 100
   offensivePoiseBonus: 0
   armorPoiseBonus: 0
   totalPoiseResetTime: 15

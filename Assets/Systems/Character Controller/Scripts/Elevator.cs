@@ -10,7 +10,7 @@ public class Elevator : MonoBehaviour
     {
         if (other.tag == "Character")
         {
-            animator.SetBool("isOnElevator", true);
+            animator.SetBool("isOnPressurePlate", true);
         }
     }
 }

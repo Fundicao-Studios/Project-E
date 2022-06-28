@@ -62,7 +62,7 @@ MonoBehaviour:
   teamIDNumber: 0
   poiseBreak: 0
   offensivePoiseBonus: 0
-  physicalDamage: 1
+  physicalDamage: 3
   fireDamage: 0
   shockDamage: 0
   waterDamage: 0

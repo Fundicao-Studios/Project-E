@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2238511949299202429}
-  - component: {fileID: -1018397653718795548}
   - component: {fileID: -4042746277842622385}
   m_Layer: 7
   m_Name: RunePillarMayaLo
@@ -34,22 +33,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-1018397653718795548
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2238511949299426653}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53672b865d638594184ce5fdf47c71b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EnemyPrefab: {fileID: 5495935230247848036, guid: 493dfda992b65574ab0a74fba7f3e283, type: 3}
-  SpawnPoints:
-  - {fileID: 9145870056569947587}
-  InitialPopulation: 1
 --- !u!114 &-4042746277842622385
 MonoBehaviour:
   m_ObjectHideFlags: 0

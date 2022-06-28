@@ -19,7 +19,7 @@ MonoBehaviour:
   weaponController: {fileID: 22100000, guid: c7defbbed26eace45a7d8da40fe723f3, type: 2}
   offHandIdleAnimation: Empty
   weaponType: 6
-  physicalDamage: 1
+  physicalDamage: 3
   fireDamage: 0
   shockDamage: 0
   criticalDamageMultiplier: 0
@@ -28,6 +28,7 @@ MonoBehaviour:
   physicalDamageAbsorption: 0
   fireDamageAbsorption: 0
   shockDamageAbsorption: 0
-  baseStamina: 0
-  lightAttackMultiplier: 0
-  heavyAttackMultiplier: 0
+  baseStamina: 10
+  lightAttackMultiplier: 1
+  heavyAttackMultiplier: 2
+  shieldParryMultiplier: 0

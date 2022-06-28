@@ -6359,9 +6359,9 @@ MonoBehaviour:
   minimumDistanceNeededToBeginFall: 10
   groundDirectionRayDistance: 0.2
   inAirTimer: 0
-  walkingSpeed: 1
-  movementSpeed: 5
-  sprintSpeed: 7
+  walkingSpeed: 3
+  movementSpeed: 6
+  sprintSpeed: 8.5
   rotationSpeed: 15
   fallingSpeed: 600
   rollStaminaCost: 15
@@ -14179,8 +14179,8 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 500
+  near clip plane: 0.01
+  far clip plane: 300
   field of view: 60
   orthographic: 0
   orthographic size: 5

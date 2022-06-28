@@ -24,6 +24,7 @@ public class BossCombatStanceState : BossState
 
         else if (distanceFromTarget > golemManager.maximumAggroRadius)
         {
+            enemyAnimatorManager.animator.SetBool("isWalking", true);
             return golemPursueTargetState;
         }
 
@@ -92,48 +93,49 @@ public class BossCombatStanceState : BossState
                 }
             }
         }
-        else
-        {
-            Vector3 targetsDirection2 = enemyManager.currentTarget.transform.position - enemyManager.transform.position;
-            float viewableAngle2 = Vector3.Angle(targetsDirection2, enemyManager.transform.forward);
-            float distanceFromTarget2 = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);
 
-            int maxScore2 = 0;
+        if(hasPhaseShifted)
+        {
+            Vector3 targetsDirection = enemyManager.currentTarget.transform.position - enemyManager.transform.position;
+            float viewableAngle = Vector3.Angle(targetsDirection, enemyManager.transform.forward);
+            float distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);
+
+            int maxScore = 0;
 
             for (int i = 0; i < secondPhaseAttacks.Length; i++)
             {
                 EnemyAttackAction enemyAttackAction = secondPhaseAttacks[i];
 
-                if (distanceFromTarget2 <= enemyAttackAction.maximumDistanceNeededToAttack 
-                    && distanceFromTarget2 >= enemyAttackAction.minimumDistanceNeededToAttack)
+                if (distanceFromTarget <= enemyAttackAction.maximumDistanceNeededToAttack 
+                    && distanceFromTarget >= enemyAttackAction.minimumDistanceNeededToAttack)
                 {
-                    if (viewableAngle2 <= enemyAttackAction.maximumAttackAngle
-                        && viewableAngle2 >= enemyAttackAction.minimumAttackAngle)
+                    if (viewableAngle <= enemyAttackAction.maximumAttackAngle
+                        && viewableAngle >= enemyAttackAction.minimumAttackAngle)
                     {
-                        maxScore2 += enemyAttackAction.attackScore;
+                        maxScore += enemyAttackAction.attackScore;
                     }
                 }
             }
 
-            int randomValue2 = Random.Range(0, maxScore2);
-            int temporaryScore2 = 0;
+            int randomValue = Random.Range(0, maxScore);
+            int temporaryScore = 0;
 
             for (int i = 0; i < secondPhaseAttacks.Length; i++)
             {
                 EnemyAttackAction enemyAttackAction = secondPhaseAttacks[i];
 
-                if (distanceFromTarget2 <= enemyAttackAction.maximumDistanceNeededToAttack 
-                    && distanceFromTarget2 >= enemyAttackAction.minimumDistanceNeededToAttack)
+                if (distanceFromTarget <= enemyAttackAction.maximumDistanceNeededToAttack 
+                    && distanceFromTarget >= enemyAttackAction.minimumDistanceNeededToAttack)
                 {
-                    if (viewableAngle2 <= enemyAttackAction.maximumAttackAngle
-                        && viewableAngle2 >= enemyAttackAction.minimumAttackAngle)
+                    if (viewableAngle <= enemyAttackAction.maximumAttackAngle
+                        && viewableAngle >= enemyAttackAction.minimumAttackAngle)
                     {
                         if (golemAttackState.currentAttack != null)
                             return;
 
-                        temporaryScore2 += enemyAttackAction.attackScore;
+                        temporaryScore += enemyAttackAction.attackScore;
 
-                        if (temporaryScore2 > randomValue2)
+                        if (temporaryScore > randomValue)
                         {
                             golemAttackState.currentAttack = enemyAttackAction;
                         }

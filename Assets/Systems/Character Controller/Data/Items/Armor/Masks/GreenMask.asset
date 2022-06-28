@@ -15,6 +15,6 @@ MonoBehaviour:
   itemIcon: {fileID: 21300000, guid: 6a927f6546ae2254a9191200750e3830, type: 3}
   itemName: Earth Mask
   physicalDefense: 10
-  fireDefense: 0
+  fireDefense: 100
   shockDefense: 0
   helmetModelName: EarthMask

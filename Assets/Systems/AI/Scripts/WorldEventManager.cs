@@ -6,6 +6,8 @@ public class WorldEventManager : MonoBehaviour
 {
     public UIBossHealthBar bossHealthBar;
     public BossManager boss;
+    public GameObject bossDoor;
+    public Animator bossDoorExitAnimation;
 
     public bool bossFightIsActive;   //Está atualmente a lutar contra o boss
     public bool bossHasBeenAwakened; //Acordou o boss/viu a cutscene mas morreu durante a luta
@@ -16,11 +18,14 @@ public class WorldEventManager : MonoBehaviour
         bossFightIsActive = true;
         bossHasBeenAwakened = true;
         bossHealthBar.SetUIHealthBarToActive();
+        bossDoor.SetActive(true);
     }
 
     public void BossHasBeenDefeated()
     {
         bossHasBeenDefeated = true;
         bossFightIsActive = false;
+        bossHealthBar.SetHealthBarToInactive();
+        bossDoorExitAnimation.SetBool("isBossDefeated", true);
     }
 }

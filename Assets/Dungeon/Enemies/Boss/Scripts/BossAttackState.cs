@@ -19,6 +19,7 @@ public class BossAttackState : BossState
 
         if (distanceFromTarget > golemManager.maximumAggroRadius)
         {
+            enemyAnimatorManager.animator.SetBool("isWalking", true);
             return golemPursueTargetState;
         }
 

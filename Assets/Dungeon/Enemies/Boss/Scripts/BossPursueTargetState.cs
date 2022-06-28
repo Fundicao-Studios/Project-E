@@ -10,8 +10,8 @@ public class BossPursueTargetState : BossState
     {
         float distanceFromTarget = Vector3.Distance(golemManager.currentTarget.transform.position, golemManager.transform.position);
 
-        enemyAnimatorManager.PlayTargetAnimation("WalkLoop", false);
         golemManager.navmeshAgent.SetDestination(golemManager.currentTarget.transform.position);
+        enemyAnimatorManager.animator.SetBool("isWalking", true);
         
         if (distanceFromTarget <= golemManager.maximumAggroRadius)
         {
