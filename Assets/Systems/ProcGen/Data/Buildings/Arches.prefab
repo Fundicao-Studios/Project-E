@@ -167,7 +167,6 @@ GameObject:
   - component: {fileID: 7633360559591980935}
   - component: {fileID: 7622918782185080795}
   - component: {fileID: 7601466814588425133}
-  - component: {fileID: -8142040505009819281}
   m_Layer: 7
   m_Name: Arches
   m_TagString: Untagged
@@ -255,22 +254,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 9f84499f74366414baceddf7077cabb4, type: 3}
---- !u!114 &-8142040505009819281
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7609812640147073183}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53672b865d638594184ce5fdf47c71b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EnemyPrefab: {fileID: 3198856599290126635, guid: fab2c60b243d68a4aa8528ca3825784d, type: 3}
-  SpawnPoints:
-  - {fileID: 2141425168855107096}
-  InitialPopulation: 1
 --- !u!1 &8198061176813650158
 GameObject:
   m_ObjectHideFlags: 0

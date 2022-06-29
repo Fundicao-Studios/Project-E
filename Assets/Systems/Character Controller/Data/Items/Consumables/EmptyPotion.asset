@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbcc66f1889511d41ac557ae7bff1bb6, type: 3}
   m_Name: EmptyPotion
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 21300000, guid: f887ad5a48737254eb4d5cfbca648bf7, type: 3}
+  itemIcon: {fileID: 21300000, guid: 216ca2c8458d9194ca0ad650f6c04a3d, type: 3}
   itemName: Empty Potion
   itemModel: {fileID: 5734172305934516502, guid: 7327f84ade89d09409120c65608465cf, type: 3}
   maxItemAmount: 1000
@@ -27,4 +27,4 @@ MonoBehaviour:
   healthRecoverAmount: 0
   manaPointsRecoverAmount: 0
   recoveryFX: {fileID: 0}
-  typeOfPotion: {fileID: 11400000}
+  typeOfPotion: {fileID: 0}

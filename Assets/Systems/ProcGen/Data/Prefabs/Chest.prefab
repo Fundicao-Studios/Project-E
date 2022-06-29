@@ -17,7 +17,7 @@ GameObject:
   m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4155270788060638
 Transform:
@@ -70,8 +70,11 @@ MonoBehaviour:
   consumableInChest:
   - {fileID: 11400000, guid: 2cf59693e98df454abdd9a15a4326912, type: 2}
   - {fileID: 11400000, guid: c867cedb79ed59b409eef38c7d46d938, type: 2}
+  helmetSpawners: []
+  helmetsInChest: []
   consumableChance: 40
   weaponChance: 60
+  helmetChance: 0
 --- !u!135 &-6365702914177062204
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -121,7 +124,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4965799236054888
 Transform:
@@ -217,7 +220,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4953448407553040
 Transform:
@@ -310,7 +313,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &7863979607862064680
 Transform:

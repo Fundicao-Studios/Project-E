@@ -12,8 +12,11 @@ public class OpenChest : Interactable
     public WeaponItem[] itemsInChest;
     public GameObject[] consumableSpawners;
     public ConsumableItem[] consumableInChest;
+    public GameObject[] helmetSpawners;
+    public HelmetEquipment[] helmetsInChest;
     public float consumableChance;
-    public float weaponChance; 
+    public float weaponChance;
+    public float helmetChance;
 
     public void Awake()
     {
@@ -50,7 +53,22 @@ public class OpenChest : Interactable
                 } 
             }
         }
-        else
+        else if (helmetChance >= favChance)
+        {
+            StartCoroutine(SpawnHelmetInChest());
+
+            for (int i = 0; i < helmetSpawners.Length; i++)
+            {
+                HeadPickup[] headPickups = helmetSpawners[i].GetComponents<HeadPickup>();
+
+                if (headPickups[i] != null)
+                {
+                    headPickups[i].helmet = helmetsInChest[i];
+                    return;
+                } 
+            }
+        }
+        else if (consumableChance >= favChance)
         {
             StartCoroutine(SpawnConsumableInChest());
 
@@ -84,6 +102,16 @@ public class OpenChest : Interactable
         
         yield return new WaitForSeconds(1f);
         Instantiate(consumableToSpawn, transform);
+        Destroy(openChest);
+    }
+
+    private IEnumerator SpawnHelmetInChest()
+    {
+        int helmetIndex = Random.Range(0, helmetSpawners.Length);
+        GameObject helmetToSpawn = helmetSpawners[helmetIndex];
+
+        yield return new WaitForSeconds(1f);
+        Instantiate(helmetToSpawn, transform);
         Destroy(openChest);
     }
 }

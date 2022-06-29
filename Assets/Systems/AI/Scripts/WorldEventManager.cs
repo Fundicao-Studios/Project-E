@@ -6,7 +6,7 @@ public class WorldEventManager : MonoBehaviour
 {
     public UIBossHealthBar bossHealthBar;
     public BossManager boss;
-    public GameObject bossDoor;
+    public Animator bossDoor;
     public Animator bossDoorExitAnimation;
 
     public bool bossFightIsActive;   //Está atualmente a lutar contra o boss
@@ -18,7 +18,7 @@ public class WorldEventManager : MonoBehaviour
         bossFightIsActive = true;
         bossHasBeenAwakened = true;
         bossHealthBar.SetUIHealthBarToActive();
-        bossDoor.SetActive(true);
+        bossDoor.SetBool("isInBossFight", true);
     }
 
     public void BossHasBeenDefeated()
